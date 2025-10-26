@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # ============================================================
-# PRODUCTION HEALTH CHECK & MONITORING
-# Server: https://n8n.alekarpy.uk/
+# VERIFICACION DE SALUD Y MONITOREO DE PRODUCCION
+# Servidor: https://n8n.alekarpy.uk/
 # ============================================================
 
 set -e
@@ -11,19 +11,19 @@ COMPOSE_FILE="docker-compose.production.yml"
 TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
 
 echo "============================================================"
-echo "  🏥 n8n Production Health Check"
-echo "  Time: $TIMESTAMP"
+echo "  🏥 Verificacion de Salud de n8n en Produccion"
+echo "  Hora: $TIMESTAMP"
 echo "============================================================"
 echo ""
 
-# Colors
+# Colores
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+NC='\033[0m' # Sin Color
 
 # ============================================================
-# Function: Check Service Health
+# Funcion: Verificar Salud del Servicio
 # ============================================================
 check_service() {
     local service=$1
@@ -33,130 +33,130 @@ check_service() {
         local health=$(docker inspect --format='{{.State.Health.Status}}' "$container" 2>/dev/null || echo "no-healthcheck")
         
         if [ "$health" = "healthy" ] || [ "$health" = "no-healthcheck" ]; then
-            echo -e "  ${GREEN}✅${NC} $service: Running"
+            echo -e "  ${GREEN}✅${NC} $service: En ejecucion"
             return 0
         else
-            echo -e "  ${RED}❌${NC} $service: Unhealthy (Status: $health)"
+            echo -e "  ${RED}❌${NC} $service: No saludable (Estado: $health)"
             return 1
         fi
     else
-        echo -e "  ${RED}❌${NC} $service: Not running"
+        echo -e "  ${RED}❌${NC} $service: No esta ejecutandose"
         return 1
     fi
 }
 
 # ============================================================
-# Check Docker Services
+# Verificar Servicios de Docker
 # ============================================================
-echo "📦 Docker Services:"
+echo "📦 Servicios de Docker:"
 check_service "PostgreSQL" "n8n-postgres-prod" && POSTGRES_OK=1 || POSTGRES_OK=0
 check_service "n8n" "n8n-app-prod" && N8N_OK=1 || N8N_OK=0
 check_service "Ollama" "n8n-ollama-prod" && OLLAMA_OK=1 || OLLAMA_OK=0
-check_service "Backup Service" "n8n-backup-prod" && BACKUP_OK=1 || BACKUP_OK=0
+check_service "Servicio de Respaldo" "n8n-backup-prod" && BACKUP_OK=1 || BACKUP_OK=0
 
 echo ""
 
 # ============================================================
-# Check Endpoints
+# Verificar Endpoints
 # ============================================================
-echo "🌐 Endpoint Health:"
+echo "🌐 Salud de Endpoints:"
 
-# n8n healthcheck
+# Verificacion de salud de n8n
 if curl -f -s -o /dev/null https://n8n.alekarpy.uk/healthz 2>/dev/null; then
     echo -e "  ${GREEN}✅${NC} https://n8n.alekarpy.uk/healthz"
     ENDPOINT_OK=1
 else
-    echo -e "  ${RED}❌${NC} https://n8n.alekarpy.uk/healthz (Unreachable)"
+    echo -e "  ${RED}❌${NC} https://n8n.alekarpy.uk/healthz (Inalcanzable)"
     ENDPOINT_OK=0
 fi
 
 echo ""
 
 # ============================================================
-# Check Database Connection
+# Verificar Conexion a Base de Datos
 # ============================================================
-echo "🗄️  Database:"
+echo "🗄️  Base de Datos:"
 
 if [ $POSTGRES_OK -eq 1 ]; then
     if docker exec n8n-postgres-prod pg_isready -U n8n_prod >/dev/null 2>&1; then
-        echo -e "  ${GREEN}✅${NC} PostgreSQL accepting connections"
+        echo -e "  ${GREEN}✅${NC} PostgreSQL aceptando conexiones"
         
-        # Get database size
+        # Obtener tamano de base de datos
         DB_SIZE=$(docker exec n8n-postgres-prod psql -U n8n_prod -d n8n_production -t -c "SELECT pg_size_pretty(pg_database_size('n8n_production'));" 2>/dev/null | xargs)
-        echo "  📊 Database size: $DB_SIZE"
+        echo "  📊 Tamano de base de datos: $DB_SIZE"
         
-        # Get table count
+        # Obtener cantidad de tablas
         TABLE_COUNT=$(docker exec n8n-postgres-prod psql -U n8n_prod -d n8n_production -t -c "SELECT count(*) FROM information_schema.tables WHERE table_schema='public';" 2>/dev/null | xargs)
-        echo "  📋 Tables: $TABLE_COUNT"
+        echo "  📋 Tablas: $TABLE_COUNT"
         
         DB_CONN_OK=1
     else
-        echo -e "  ${RED}❌${NC} PostgreSQL not accepting connections"
+        echo -e "  ${RED}❌${NC} PostgreSQL no acepta conexiones"
         DB_CONN_OK=0
     fi
 else
-    echo -e "  ${YELLOW}⏭️${NC}  PostgreSQL not running, skipping checks"
+    echo -e "  ${YELLOW}⏭️${NC}  PostgreSQL no esta ejecutandose, omitiendo verificaciones"
     DB_CONN_OK=0
 fi
 
 echo ""
 
 # ============================================================
-# Check Disk Usage
+# Verificar Uso de Disco
 # ============================================================
-echo "💾 Disk Usage:"
+echo "💾 Uso de Disco:"
 
-# Overall disk
+# Disco general
 DISK_USAGE=$(df -h / | awk 'NR==2 {print $5}' | sed 's/%//')
 if [ "$DISK_USAGE" -lt 80 ]; then
-    echo -e "  ${GREEN}✅${NC} Root partition: ${DISK_USAGE}% used"
+    echo -e "  ${GREEN}✅${NC} Particion raiz: ${DISK_USAGE}% usado"
 elif [ "$DISK_USAGE" -lt 90 ]; then
-    echo -e "  ${YELLOW}⚠️${NC}  Root partition: ${DISK_USAGE}% used (Warning)"
+    echo -e "  ${YELLOW}⚠️${NC}  Particion raiz: ${DISK_USAGE}% usado (Advertencia)"
 else
-    echo -e "  ${RED}❌${NC} Root partition: ${DISK_USAGE}% used (Critical!)"
+    echo -e "  ${RED}❌${NC} Particion raiz: ${DISK_USAGE}% usado (Critico!)"
 fi
 
-# Docker volumes
+# Volumenes de Docker
 if [ -d "volumes" ]; then
     VOLUMES_SIZE=$(du -sh volumes 2>/dev/null | awk '{print $1}')
-    echo "  📁 Volumes size: $VOLUMES_SIZE"
+    echo "  📁 Tamano de volumenes: $VOLUMES_SIZE"
 fi
 
-# Backups
+# Respaldos
 if [ -d "backups" ]; then
     BACKUP_SIZE=$(du -sh backups 2>/dev/null | awk '{print $1}')
     BACKUP_COUNT=$(find backups -name "*.sql" -type f 2>/dev/null | wc -l)
-    echo "  💾 Backups: $BACKUP_COUNT files ($BACKUP_SIZE)"
+    echo "  💾 Respaldos: $BACKUP_COUNT archivos ($BACKUP_SIZE)"
 fi
 
 echo ""
 
 # ============================================================
-# Check Memory Usage
+# Verificar Uso de Memoria
 # ============================================================
-echo "🧠 Memory Usage:"
+echo "🧠 Uso de Memoria:"
 
-# Get container memory usage
+# Obtener uso de memoria de contenedores
 if command -v docker &> /dev/null; then
-    docker stats --no-stream --format "table {{.Name}}\t{{.MemUsage}}" | grep -E "n8n-|NAME" || echo "  Unable to retrieve memory stats"
+    docker stats --no-stream --format "table {{.Name}}\t{{.MemUsage}}" | grep -E "n8n-|NAME" || echo "  No se puede obtener estadisticas de memoria"
 fi
 
 echo ""
 
 # ============================================================
-# Check Recent Logs for Errors
+# Verificar Logs Recientes en Busca de Errores
 # ============================================================
-echo "📝 Recent Errors (last 10 minutes):"
+echo "📝 Errores Recientes (ultimos 10 minutos):"
 
 ERROR_COUNT=0
 if [ $N8N_OK -eq 1 ]; then
     ERROR_COUNT=$(docker logs --since 10m n8n-app-prod 2>&1 | grep -i "error" | wc -l)
     if [ "$ERROR_COUNT" -eq 0 ]; then
-        echo -e "  ${GREEN}✅${NC} No errors in n8n logs"
+        echo -e "  ${GREEN}✅${NC} Sin errores en logs de n8n"
     else
-        echo -e "  ${YELLOW}⚠️${NC}  Found $ERROR_COUNT error(s) in n8n logs"
+        echo -e "  ${YELLOW}⚠️${NC}  Se encontraron $ERROR_COUNT error(es) en logs de n8n"
         echo ""
-        echo "  Recent errors:"
+        echo "  Errores recientes:"
         docker logs --since 10m n8n-app-prod 2>&1 | grep -i "error" | tail -3 | sed 's/^/    /'
     fi
 fi
@@ -164,9 +164,9 @@ fi
 echo ""
 
 # ============================================================
-# Check Last Backup
+# Verificar Ultimo Respaldo
 # ============================================================
-echo "💾 Backup Status:"
+echo "💾 Estado de Respaldos:"
 
 if [ -d "backups" ]; then
     LAST_BACKUP=$(find backups -name "*.sql" -type f -printf '%T@ %p\n' 2>/dev/null | sort -rn | head -1 | awk '{print $2}')
@@ -174,23 +174,23 @@ if [ -d "backups" ]; then
     if [ -n "$LAST_BACKUP" ]; then
         LAST_BACKUP_TIME=$(stat -c %y "$LAST_BACKUP" 2>/dev/null | cut -d'.' -f1)
         LAST_BACKUP_SIZE=$(du -h "$LAST_BACKUP" 2>/dev/null | awk '{print $1}')
-        echo -e "  ${GREEN}✅${NC} Last backup: $LAST_BACKUP_TIME"
-        echo "  📦 Size: $LAST_BACKUP_SIZE"
-        echo "  📄 File: $(basename "$LAST_BACKUP")"
+        echo -e "  ${GREEN}✅${NC} Ultimo respaldo: $LAST_BACKUP_TIME"
+        echo "  📦 Tamano: $LAST_BACKUP_SIZE"
+        echo "  📄 Archivo: $(basename "$LAST_BACKUP")"
     else
-        echo -e "  ${YELLOW}⚠️${NC}  No backups found"
+        echo -e "  ${YELLOW}⚠️${NC}  No se encontraron respaldos"
     fi
 else
-    echo -e "  ${RED}❌${NC} Backup directory not found"
+    echo -e "  ${RED}❌${NC} Directorio de respaldos no encontrado"
 fi
 
 echo ""
 
 # ============================================================
-# Overall Health Summary
+# Resumen General de Salud
 # ============================================================
 echo "============================================================"
-echo "  📊 OVERALL HEALTH SUMMARY"
+echo "  📊 RESUMEN GENERAL DE SALUD"
 echo "============================================================"
 
 TOTAL_CHECKS=6
@@ -206,17 +206,17 @@ PASSED_CHECKS=0
 HEALTH_PERCENT=$((PASSED_CHECKS * 100 / TOTAL_CHECKS))
 
 echo ""
-echo "  Health Score: $PASSED_CHECKS/$TOTAL_CHECKS ($HEALTH_PERCENT%)"
+echo "  Puntuacion de Salud: $PASSED_CHECKS/$TOTAL_CHECKS ($HEALTH_PERCENT%)"
 echo ""
 
 if [ $HEALTH_PERCENT -ge 80 ]; then
-    echo -e "  ${GREEN}✅ System Status: HEALTHY${NC}"
+    echo -e "  ${GREEN}✅ Estado del Sistema: SALUDABLE${NC}"
     EXIT_CODE=0
 elif [ $HEALTH_PERCENT -ge 50 ]; then
-    echo -e "  ${YELLOW}⚠️  System Status: DEGRADED${NC}"
+    echo -e "  ${YELLOW}⚠️  Estado del Sistema: DEGRADADO${NC}"
     EXIT_CODE=1
 else
-    echo -e "  ${RED}❌ System Status: CRITICAL${NC}"
+    echo -e "  ${RED}❌ Estado del Sistema: CRITICO${NC}"
     EXIT_CODE=2
 fi
 
@@ -225,16 +225,16 @@ echo "============================================================"
 echo ""
 
 # ============================================================
-# Quick Actions
+# Acciones Rapidas
 # ============================================================
 if [ $EXIT_CODE -gt 0 ]; then
-    echo "🔧 Suggested Actions:"
+    echo "🔧 Acciones Sugeridas:"
     
-    [ $POSTGRES_OK -eq 0 ] && echo "  - Restart PostgreSQL: docker-compose -f $COMPOSE_FILE restart postgres"
-    [ $N8N_OK -eq 0 ] && echo "  - Restart n8n: docker-compose -f $COMPOSE_FILE restart n8n"
-    [ $ENDPOINT_OK -eq 0 ] && echo "  - Check nginx/caddy configuration"
-    [ "$DISK_USAGE" -gt 80 ] && echo "  - Free up disk space: docker system prune -a"
-    [ "$ERROR_COUNT" -gt 10 ] && echo "  - Check logs: docker-compose -f $COMPOSE_FILE logs n8n"
+    [ $POSTGRES_OK -eq 0 ] && echo "  - Reiniciar PostgreSQL: docker-compose -f $COMPOSE_FILE restart postgres"
+    [ $N8N_OK -eq 0 ] && echo "  - Reiniciar n8n: docker-compose -f $COMPOSE_FILE restart n8n"
+    [ $ENDPOINT_OK -eq 0 ] && echo "  - Verificar configuracion de nginx/caddy"
+    [ "$DISK_USAGE" -gt 80 ] && echo "  - Liberar espacio en disco: docker system prune -a"
+    [ "$ERROR_COUNT" -gt 10 ] && echo "  - Verificar logs: docker-compose -f $COMPOSE_FILE logs n8n"
     
     echo ""
 fi

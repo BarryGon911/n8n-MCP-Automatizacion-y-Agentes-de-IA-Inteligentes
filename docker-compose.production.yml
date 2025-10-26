@@ -1,13 +1,13 @@
 version: '3.8'
 
 # ============================================================
-# PRODUCTION DOCKER COMPOSE CONFIGURATION
-# Server: https://n8n.alekarpy.uk/
+# CONFIGURACION DE DOCKER COMPOSE PARA PRODUCCION
+# Servidor: https://n8n.alekarpy.uk/
 # ============================================================
 
 services:
   # ============================================================
-  # PostgreSQL Database with pgvector (PRODUCTION)
+  # Base de Datos PostgreSQL con pgvector (PRODUCCION)
   # ============================================================
   postgres:
     image: postgres:15-alpine
@@ -35,19 +35,19 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    # No exponer puerto 5432 públicamente en producción
+    # No exponer puerto 5432 publicamente en produccion
     # ports:
     #   - "5432:5432"
 
   # ============================================================
-  # n8n Workflow Automation (PRODUCTION)
+  # n8n Automatizacion de Workflows (PRODUCCION)
   # ============================================================
   n8n:
     image: n8nio/n8n:latest
     container_name: n8n-app-prod
     restart: unless-stopped
     environment:
-      # Database
+      # Base de Datos
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_HOST=postgres
       - DB_POSTGRESDB_PORT=5432
@@ -56,21 +56,21 @@ services:
       - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD}
       - DB_POSTGRESDB_SCHEMA=public
       
-      # n8n Configuration
+      # Configuracion de n8n
       - N8N_HOST=${N8N_HOST:-n8n.alekarpy.uk}
       - N8N_PORT=5678
       - N8N_PROTOCOL=${N8N_PROTOCOL:-https}
       - WEBHOOK_URL=${WEBHOOK_URL:-https://n8n.alekarpy.uk}
       - N8N_EDITOR_BASE_URL=${N8N_EDITOR_BASE_URL:-https://n8n.alekarpy.uk}
       
-      # Security
+      # Seguridad
       - N8N_BASIC_AUTH_ACTIVE=true
       - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
       - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
       - N8N_USER_MANAGEMENT_JWT_SECRET=${N8N_JWT_SECRET}
       
-      # Performance
+      # Rendimiento
       - EXECUTIONS_PROCESS=main
       - EXECUTIONS_TIMEOUT=${EXECUTIONS_TIMEOUT:-300}
       - EXECUTIONS_TIMEOUT_MAX=${EXECUTIONS_TIMEOUT_MAX:-600}
@@ -78,11 +78,11 @@ services:
       - EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
       - EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS=true
       
-      # Timezone & Locale
+      # Zona Horaria y Localidad
       - GENERIC_TIMEZONE=${TIMEZONE:-America/Mexico_City}
       - TZ=${TIMEZONE:-America/Mexico_City}
       
-      # Environment
+      # Entorno
       - NODE_ENV=production
       
       # Logging
@@ -90,14 +90,14 @@ services:
       - N8N_LOG_OUTPUT=console,file
       - N8N_LOG_FILE_LOCATION=/home/node/.n8n/logs/
       
-      # Metrics
+      # Metricas
       - N8N_METRICS=true
       
       # CORS
       - N8N_CORS_ENABLED=true
       - N8N_CORS_ORIGIN=${N8N_HOST:-https://n8n.alekarpy.uk}
       
-      # API Keys (pasados desde .env.production)
+      # Claves API (pasadas desde .env.production)
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
@@ -136,7 +136,7 @@ services:
         max-file: "5"
 
   # ============================================================
-  # Ollama (Local AI Models) - PRODUCTION
+  # Ollama (Modelos de IA Locales) - PRODUCCION
   # ============================================================
   ollama:
     image: ollama/ollama:latest
@@ -166,7 +166,7 @@ services:
     #   - "11434:11434"
 
   # ============================================================
-  # Backup Service (Automated PostgreSQL Backups)
+  # Servicio de Respaldo (Respaldos Automatizados de PostgreSQL)
   # ============================================================
   postgres-backup:
     image: prodrigestivill/postgres-backup-local:15-alpine
@@ -196,7 +196,7 @@ services:
         max-file: "2"
 
 # ============================================================
-# Volumes (Persistent Storage)
+# Volumenes (Almacenamiento Persistente)
 # ============================================================
 volumes:
   postgres_data:
@@ -228,7 +228,7 @@ volumes:
       device: ${PWD}/volumes/ollama
 
 # ============================================================
-# Networks
+# Redes
 # ============================================================
 networks:
   n8n-network:

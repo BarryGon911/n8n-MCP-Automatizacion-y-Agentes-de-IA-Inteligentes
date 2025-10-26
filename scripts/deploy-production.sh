@@ -1,82 +1,82 @@
 #!/bin/bash
 
 # ============================================================
-# PRODUCTION DEPLOYMENT SCRIPT
-# Server: https://n8n.alekarpy.uk/
+# SCRIPT DE DESPLIEGUE EN PRODUCCION
+# Servidor: https://n8n.alekarpy.uk/
 # ============================================================
 
 set -e
 
 echo "============================================================"
-echo "  🚀 n8n Production Deployment"
-echo "  Server: https://n8n.alekarpy.uk/"
+echo "  🚀 Despliegue de n8n en Produccion"
+echo "  Servidor: https://n8n.alekarpy.uk/"
 echo "============================================================"
 echo ""
 
 # ============================================================
-# STEP 1: Pre-deployment Checks
+# PASO 1: Verificaciones previas al despliegue
 # ============================================================
-echo "📋 Step 1: Pre-deployment checks..."
+echo "📋 Paso 1: Verificaciones previas..."
 
-# Check if running as root or with sudo
+# Verificar si se ejecuta como root o con sudo
 if [[ $EUID -ne 0 ]]; then
-   echo "⚠️  Warning: Not running as root. Some operations may require sudo."
+   echo "⚠️  Advertencia: No se ejecuta como root. Algunas operaciones pueden requerir sudo."
 fi
 
-# Check Docker
+# Verificar Docker
 if ! command -v docker &> /dev/null; then
-    echo "❌ Error: Docker is not installed"
+    echo "❌ Error: Docker no esta instalado"
     exit 1
 fi
-echo "✅ Docker installed"
+echo "✅ Docker instalado"
 
-# Check Docker Compose
+# Verificar Docker Compose
 if ! command -v docker-compose &> /dev/null; then
-    echo "❌ Error: Docker Compose is not installed"
+    echo "❌ Error: Docker Compose no esta instalado"
     exit 1
 fi
-echo "✅ Docker Compose installed"
+echo "✅ Docker Compose instalado"
 
 # ============================================================
-# STEP 2: Environment Configuration
+# PASO 2: Configuracion del Entorno
 # ============================================================
 echo ""
-echo "📝 Step 2: Configuring environment..."
+echo "📝 Paso 2: Configurando entorno..."
 
 if [ ! -f .env.production ]; then
-    echo "❌ Error: .env.production file not found"
+    echo "❌ Error: archivo .env.production no encontrado"
     exit 1
 fi
 
-# Copy production env
+# Copiar entorno de produccion
 cp .env.production .env
-echo "✅ Environment configured"
+echo "✅ Entorno configurado"
 
 # ============================================================
-# STEP 3: Generate Security Keys
+# PASO 3: Generar Claves de Seguridad
 # ============================================================
 echo ""
-echo "🔐 Step 3: Generating security keys..."
+echo "🔐 Paso 3: Generando claves de seguridad..."
 
 if ! grep -q "generate_with_openssl" .env; then
-    echo "✅ Security keys already configured"
+    echo "✅ Claves de seguridad ya configuradas"
 else
-    echo "Generating N8N_ENCRYPTION_KEY..."
+    echo "Generando N8N_ENCRYPTION_KEY..."
     ENCRYPTION_KEY=$(openssl rand -base64 32)
     sed -i "s/N8N_ENCRYPTION_KEY=.*/N8N_ENCRYPTION_KEY=$ENCRYPTION_KEY/" .env
     
-    echo "Generating N8N_USER_MANAGEMENT_JWT_SECRET..."
+    echo "Generando N8N_USER_MANAGEMENT_JWT_SECRET..."
     JWT_SECRET=$(openssl rand -base64 32)
     sed -i "s/N8N_USER_MANAGEMENT_JWT_SECRET=.*/N8N_USER_MANAGEMENT_JWT_SECRET=$JWT_SECRET/" .env
     
-    echo "✅ Security keys generated"
+    echo "✅ Claves de seguridad generadas"
 fi
 
 # ============================================================
-# STEP 4: Create Required Directories
+# PASO 4: Crear Directorios Requeridos
 # ============================================================
 echo ""
-echo "📁 Step 4: Creating directories..."
+echo "📁 Paso 4: Creando directorios..."
 
 mkdir -p volumes/postgres
 mkdir -p volumes/n8n
@@ -88,136 +88,136 @@ mkdir -p credentials
 chmod 700 volumes/postgres
 chmod 755 volumes/n8n volumes/logs volumes/ollama backups
 
-echo "✅ Directories created"
+echo "✅ Directorios creados"
 
 # ============================================================
-# STEP 5: Database Initialization Check
+# PASO 5: Verificacion de Inicializacion de Base de Datos
 # ============================================================
 echo ""
-echo "🗄️  Step 5: Checking database..."
+echo "🗄️  Paso 5: Verificando base de datos..."
 
 if [ -d "volumes/postgres/base" ]; then
-    echo "✅ Database already initialized"
+    echo "✅ Base de datos ya inicializada"
 else
-    echo "🔄 Database will be initialized on first run"
+    echo "🔄 Base de datos se inicializara en el primer arranque"
 fi
 
 # ============================================================
-# STEP 6: Pull Latest Images
+# PASO 6: Descargar Ultimas Imagenes
 # ============================================================
 echo ""
-echo "📦 Step 6: Pulling Docker images..."
+echo "📦 Paso 6: Descargando imagenes de Docker..."
 
 docker-compose -f docker-compose.production.yml pull
 
-echo "✅ Images pulled"
+echo "✅ Imagenes descargadas"
 
 # ============================================================
-# STEP 7: Stop Existing Containers
+# PASO 7: Detener Contenedores Existentes
 # ============================================================
 echo ""
-echo "🛑 Step 7: Stopping existing containers..."
+echo "🛑 Paso 7: Deteniendo contenedores existentes..."
 
 docker-compose -f docker-compose.production.yml down
 
-echo "✅ Containers stopped"
+echo "✅ Contenedores detenidos"
 
 # ============================================================
-# STEP 8: Start Production Services
+# PASO 8: Iniciar Servicios de Produccion
 # ============================================================
 echo ""
-echo "🚀 Step 8: Starting production services..."
+echo "🚀 Paso 8: Iniciando servicios de produccion..."
 
 docker-compose -f docker-compose.production.yml up -d
 
-echo "✅ Services started"
+echo "✅ Servicios iniciados"
 
 # ============================================================
-# STEP 9: Wait for Services
+# PASO 9: Esperar a que los Servicios esten Listos
 # ============================================================
 echo ""
-echo "⏳ Step 9: Waiting for services to be ready..."
+echo "⏳ Paso 9: Esperando a que los servicios esten listos..."
 
-echo "Waiting for PostgreSQL..."
+echo "Esperando PostgreSQL..."
 sleep 10
 
-echo "Waiting for n8n..."
+echo "Esperando n8n..."
 for i in {1..30}; do
     if docker exec n8n-app-prod wget -q --spider http://localhost:5678/healthz 2>/dev/null; then
-        echo "✅ n8n is ready!"
+        echo "✅ n8n esta listo!"
         break
     fi
     if [ $i -eq 30 ]; then
-        echo "⚠️  Warning: n8n took longer than expected to start"
-        echo "Check logs with: docker-compose -f docker-compose.production.yml logs n8n"
+        echo "⚠️  Advertencia: n8n tardo mas de lo esperado en iniciar"
+        echo "Verificar logs con: docker-compose -f docker-compose.production.yml logs n8n"
     fi
-    echo "  Waiting... ($i/30)"
+    echo "  Esperando... ($i/30)"
     sleep 2
 done
 
 # ============================================================
-# STEP 10: Download Ollama Models
+# PASO 10: Descargar Modelos de Ollama
 # ============================================================
 echo ""
-echo "🤖 Step 10: Downloading Ollama models (optional)..."
+echo "🤖 Paso 10: Descargando modelos de Ollama (opcional)..."
 
-read -p "Download Ollama models now? (y/n) " -n 1 -r
+read -p "Descargar modelos de Ollama ahora? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "Downloading llama2..."
+    echo "Descargando llama2..."
     docker exec n8n-ollama-prod ollama pull llama2
-    echo "✅ Ollama models downloaded"
+    echo "✅ Modelos de Ollama descargados"
 else
-    echo "⏭️  Skipped. You can download later with:"
+    echo "⏭️  Omitido. Puedes descargar mas tarde con:"
     echo "   docker exec n8n-ollama-prod ollama pull llama2"
 fi
 
 # ============================================================
-# STEP 11: Display Information
+# PASO 11: Mostrar Informacion
 # ============================================================
 echo ""
 echo "============================================================"
-echo "  ✅ DEPLOYMENT COMPLETED SUCCESSFULLY!"
+echo "  ✅ DESPLIEGUE COMPLETADO EXITOSAMENTE!"
 echo "============================================================"
 echo ""
-echo "📊 Service Status:"
+echo "📊 Estado de Servicios:"
 docker-compose -f docker-compose.production.yml ps
 echo ""
-echo "🌐 Access Information:"
+echo "🌐 Informacion de Acceso:"
 echo "  URL:      https://n8n.alekarpy.uk/"
-echo "  Username: $(grep N8N_BASIC_AUTH_USER .env | cut -d '=' -f2)"
-echo "  Password: [Check .env file]"
+echo "  Usuario: $(grep N8N_BASIC_AUTH_USER .env | cut -d '=' -f2)"
+echo "  Contrasena: [Revisar archivo .env]"
 echo ""
-echo "📝 Important Next Steps:"
+echo "📝 Proximos Pasos Importantes:"
 echo ""
-echo "1. Configure API Keys in .env file:"
+echo "1. Configurar Claves API en archivo .env:"
 echo "   - OPENAI_API_KEY"
 echo "   - GEMINI_API_KEY"
 echo "   - TELEGRAM_BOT_TOKEN"
 echo "   - ELEVENLABS_API_KEY"
 echo "   - etc."
 echo ""
-echo "2. Restart services after updating .env:"
+echo "2. Reiniciar servicios despues de actualizar .env:"
 echo "   docker-compose -f docker-compose.production.yml restart n8n"
 echo ""
-echo "3. Import workflows:"
-echo "   - Access n8n at https://n8n.alekarpy.uk/"
-echo "   - Go to Workflows > Import"
-echo "   - Import from ./workflows/*.json"
+echo "3. Importar workflows:"
+echo "   - Acceder a n8n en https://n8n.alekarpy.uk/"
+echo "   - Ir a Workflows > Import"
+echo "   - Importar desde ./workflows/*.json"
 echo ""
-echo "4. Configure credentials in n8n UI:"
+echo "4. Configurar credenciales en interfaz de n8n:"
 echo "   - Settings > Credentials"
-echo "   - Add credentials for each service"
+echo "   - Agregar credenciales para cada servicio"
 echo ""
-echo "5. Monitor logs:"
+echo "5. Monitorear logs:"
 echo "   docker-compose -f docker-compose.production.yml logs -f n8n"
 echo ""
-echo "6. Create manual backup:"
+echo "6. Crear respaldo manual:"
 echo "   ./scripts/backup.sh"
 echo ""
-echo "📚 Documentation:"
-echo "   - Production Guide: docs/PRODUCTION.md"
-echo "   - Troubleshooting: docs/FAQ.md"
+echo "📚 Documentacion:"
+echo "   - Guia de Produccion: docs/PRODUCTION.md"
+echo "   - Solucion de Problemas: docs/FAQ.md"
 echo ""
 echo "============================================================"
 echo ""
