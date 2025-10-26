@@ -29,7 +29,7 @@ Si encuentras un error, por favor crea un issue con:
 1. **Haz fork del repositorio**
 
 ```bash
-git fork https://github.com/BarryGon911/n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes.git
+git fork https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes.git
 
 ```
 

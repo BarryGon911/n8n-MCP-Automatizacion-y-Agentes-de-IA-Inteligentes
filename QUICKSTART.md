@@ -16,7 +16,7 @@ Antes de comenzar, asegúrate de tener:
 ### Paso 1: Clonar el Repositorio
 
 ```bash
-git clone https://github.com/BarryGon911/n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes.git
+git clone https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes.git
 cd n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
 
 ```
@@ -180,7 +180,7 @@ En tu workflow de Telegram:
 Conecta a la base de datos:
 
 ```bash
-docker-compose exec postgres psql -U n8n -d rag_database
+docker-compose exec postgres psql -U n8n -d n8n
 
 ```
 
@@ -252,7 +252,7 @@ Necesitarás estas para funcionalidad completa:
 Connect to the database:
 
 ```bash
-docker-compose exec postgres psql -U n8n -d rag_database
+docker-compose exec postgres psql -U n8n -d n8n
 
 ```
 

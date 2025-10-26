@@ -21,7 +21,7 @@ Para base de datos RAG:
 
 ```yaml
 Host: postgres
-Database: rag_database
+Database: n8n
 User: n8n
 Password: [from .env: DB_POSTGRESDB_PASSWORD]
 Port: 5432

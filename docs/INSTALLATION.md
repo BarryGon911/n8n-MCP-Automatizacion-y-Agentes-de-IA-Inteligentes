@@ -21,7 +21,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 ### 1. Clonar el Repositorio
 
 ```bash
-git clone https://github.com/BarryGon911/n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes.git
+git clone https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes.git
 cd n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
 
 ```
