@@ -1,0 +1,302 @@
+{
+  "name": "AI Agent Task Executor",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 5
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "table": "agent_tasks",
+        "where": "status = 'pending'",
+        "limit": 5
+      },
+      "id": "get-pending-tasks",
+      "name": "Get Pending Tasks",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        450,
+        300
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "2",
+          "name": "PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "agent_tasks",
+        "updateKey": "id",
+        "columnsUi": {
+          "columnValues": [
+            {
+              "column": "status",
+              "value": "running"
+            },
+            {
+              "column": "started_at",
+              "value": "={{ new Date().toISOString() }}"
+            }
+          ]
+        }
+      },
+      "id": "mark-as-running",
+      "name": "Mark Task as Running",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        650,
+        300
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "2",
+          "name": "PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.task_type }}",
+              "operation": "equals",
+              "value2": "web_scraping"
+            }
+          ]
+        }
+      },
+      "id": "check-task-type",
+      "name": "Check Task Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "parameters": {
+        "mode": "rules",
+        "rules": {
+          "rules": [
+            {
+              "conditions": {
+                "string": [
+                  {
+                    "value1": "={{ $json.task_type }}",
+                    "value2": "web_scraping"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "web_scraping"
+            },
+            {
+              "conditions": {
+                "string": [
+                  {
+                    "value1": "={{ $json.task_type }}",
+                    "value2": "ai_analysis"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "ai_analysis"
+            },
+            {
+              "conditions": {
+                "string": [
+                  {
+                    "value1": "={{ $json.task_type }}",
+                    "value2": "notification"
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "notification"
+            }
+          ]
+        },
+        "fallbackOutput": "extra"
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.input_data.url }}",
+        "options": {}
+      },
+      "id": "execute-web-scraping",
+      "name": "Execute Web Scraping",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1050,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4",
+        "prompt": "={{ $json.input_data.prompt }}",
+        "options": {}
+      },
+      "id": "execute-ai-analysis",
+      "name": "Execute AI Analysis",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        400
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "3",
+          "name": "OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "agent_tasks",
+        "updateKey": "id",
+        "columnsUi": {
+          "columnValues": [
+            {
+              "column": "status",
+              "value": "completed"
+            },
+            {
+              "column": "output_data",
+              "value": "={{ JSON.stringify($json) }}"
+            },
+            {
+              "column": "completed_at",
+              "value": "={{ new Date().toISOString() }}"
+            }
+          ]
+        }
+      },
+      "id": "mark-as-completed",
+      "name": "Mark Task as Completed",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        1250,
+        300
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "2",
+          "name": "PostgreSQL"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Pending Tasks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Pending Tasks": {
+      "main": [
+        [
+          {
+            "node": "Mark Task as Running",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Task as Running": {
+      "main": [
+        [
+          {
+            "node": "Check Task Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Task Type": {
+      "main": [
+        [
+          {
+            "node": "Execute Web Scraping",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Execute AI Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Web Scraping": {
+      "main": [
+        [
+          {
+            "node": "Mark Task as Completed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute AI Analysis": {
+      "main": [
+        [
+          {
+            "node": "Mark Task as Completed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "ai-agent-executor",
+  "meta": {
+    "instanceId": "n8n-agent-executor"
+  },
+  "tags": []
+}

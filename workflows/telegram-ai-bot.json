@@ -1,0 +1,249 @@
+{
+  "name": "Telegram Bot with AI Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ]
+      },
+      "id": "telegram-trigger",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "telegram-webhook",
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "conversations",
+        "columns": "user_id,platform,message,created_at",
+        "values": "={{ $json.message.from.id }},telegram,={{ $json.message.text }},={{ new Date().toISOString() }}"
+      },
+      "id": "save-message",
+      "name": "Save User Message",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        450,
+        300
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "2",
+          "name": "PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "table": "documents",
+        "returnAll": true,
+        "where": "content ILIKE '%' || $('Telegram Trigger').item.json.message.text || '%'"
+      },
+      "id": "retrieve-context",
+      "name": "Retrieve Context (RAG)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        650,
+        200
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "2",
+          "name": "PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4",
+        "prompt": "=Context: {{ $json.content }}\n\nUser Question: {{ $('Telegram Trigger').item.json.message.text }}\n\nProvide a helpful and accurate response based on the context above.",
+        "options": {
+          "temperature": 0.7,
+          "maxTokens": 500
+        }
+      },
+      "id": "openai-response",
+      "name": "Generate AI Response (OpenAI)",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        850,
+        200
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "3",
+          "name": "OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama2",
+        "prompt": "=User: {{ $('Telegram Trigger').item.json.message.text }}\n\nAssistant:",
+        "options": {}
+      },
+      "id": "ollama-response",
+      "name": "Generate AI Response (Ollama)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        850,
+        400
+      ],
+      "parameters": {
+        "url": "http://ollama:11434/api/generate",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "llama2"
+            },
+            {
+              "name": "prompt",
+              "value": "={{ $('Telegram Trigger').item.json.message.text }}"
+            },
+            {
+              "name": "stream",
+              "value": false
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "conversations",
+        "updateKey": "id",
+        "columnsUi": {
+          "columnValues": [
+            {
+              "column": "response",
+              "value": "={{ $json.choices[0].message.content }}"
+            }
+          ]
+        }
+      },
+      "id": "save-response",
+      "name": "Save AI Response",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        1050,
+        300
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "2",
+          "name": "PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.choices[0].message.content }}",
+        "additionalFields": {}
+      },
+      "id": "send-telegram-reply",
+      "name": "Send Telegram Reply",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        1250,
+        300
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "1",
+          "name": "Telegram Bot"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Save User Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save User Message": {
+      "main": [
+        [
+          {
+            "node": "Retrieve Context (RAG)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retrieve Context (RAG)": {
+      "main": [
+        [
+          {
+            "node": "Generate AI Response (OpenAI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate AI Response (OpenAI)": {
+      "main": [
+        [
+          {
+            "node": "Save AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save AI Response": {
+      "main": [
+        [
+          {
+            "node": "Send Telegram Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "telegram-ai-bot",
+  "meta": {
+    "instanceId": "n8n-telegram-bot"
+  },
+  "tags": []
+}

@@ -1,0 +1,260 @@
+{
+  "name": "WhatsApp Bot with AI Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "whatsapp-webhook",
+      "name": "WhatsApp Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "whatsapp-webhook"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.object }}",
+              "value2": "whatsapp_business_account"
+            }
+          ]
+        }
+      },
+      "id": "validate-webhook",
+      "name": "Validate WhatsApp Webhook",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const webhookData = $input.item.json.body;\nconst entry = webhookData.entry[0];\nconst changes = entry.changes[0];\nconst value = changes.value;\n\nif (value.messages && value.messages.length > 0) {\n  const message = value.messages[0];\n  return {\n    from: message.from,\n    message_id: message.id,\n    text: message.text?.body || '',\n    timestamp: message.timestamp,\n    type: message.type\n  };\n}\n\nreturn {};"
+      },
+      "id": "extract-message",
+      "name": "Extract Message Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        650,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "conversations",
+        "columns": "user_id,platform,message,created_at",
+        "values": "={{ $json.from }},whatsapp,={{ $json.text }},={{ new Date().toISOString() }}"
+      },
+      "id": "save-whatsapp-message",
+      "name": "Save WhatsApp Message",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        850,
+        200
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "2",
+          "name": "PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gemini-pro",
+        "prompt": "=You are a helpful AI assistant. User message: {{ $json.text }}\n\nProvide a helpful and concise response.",
+        "options": {}
+      },
+      "id": "gemini-response",
+      "name": "Generate Response (Gemini)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1050,
+        200
+      ],
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent",
+        "method": "POST",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "contents",
+              "value": "={{ [{\"parts\": [{\"text\": $('Extract Message Data').item.json.text}]}] }}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.facebook.com/v18.0/{{ $env.WHATSAPP_PHONE_NUMBER_ID }}/messages",
+        "method": "POST",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.WHATSAPP_ACCESS_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "messaging_product",
+              "value": "whatsapp"
+            },
+            {
+              "name": "to",
+              "value": "={{ $('Extract Message Data').item.json.from }}"
+            },
+            {
+              "name": "type",
+              "value": "text"
+            },
+            {
+              "name": "text",
+              "value": "={{ {\"body\": $json.candidates[0].content.parts[0].text} }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "send-whatsapp-message",
+      "name": "Send WhatsApp Reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1250,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"success\" } }}"
+      },
+      "id": "webhook-response",
+      "name": "Webhook Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        200
+      ]
+    }
+  ],
+  "connections": {
+    "WhatsApp Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate WhatsApp Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate WhatsApp Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extract Message Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Message Data": {
+      "main": [
+        [
+          {
+            "node": "Save WhatsApp Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save WhatsApp Message": {
+      "main": [
+        [
+          {
+            "node": "Generate Response (Gemini)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Response (Gemini)": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send WhatsApp Reply": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "whatsapp-ai-bot",
+  "meta": {
+    "instanceId": "n8n-whatsapp-bot"
+  },
+  "tags": []
+}

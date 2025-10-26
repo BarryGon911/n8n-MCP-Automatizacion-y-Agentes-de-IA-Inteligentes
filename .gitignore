@@ -26,3 +26,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Backups
+/backups/
+*.sql
+
+# Credentials directory (except documentation)
+/credentials/*.json
+/credentials/*.key
+/credentials/*.pem
