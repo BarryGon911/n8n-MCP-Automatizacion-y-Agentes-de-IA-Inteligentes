@@ -1,0 +1,18 @@
+{
+  "default": true,
+  "MD033": false,
+  "MD025": false,
+  "MD036": false,
+  "MD045": false,
+  "MD029": {
+    "style": "ordered"
+  },
+  "MD050": {
+    "style": "asterisk"
+  },
+  "MD022": {
+    "lines_above": 1,
+    "lines_below": 1
+  },
+  "MD058": true
+}
