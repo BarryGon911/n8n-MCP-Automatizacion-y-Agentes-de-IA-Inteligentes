@@ -1,23 +1,21 @@
-# Angular specific
+# Build outputs
 /dist/
 /out-tsc/
 /tmp/
 /coverage/
-/e2e/test-output/
-/.angular/
-.angular/
+/build/
 
-# Node modules and dependency files
+# Dependencies
 /node_modules/
 /package-lock.json
 /yarn.lock
+/.pnp
+.pnp.js
 
 # Environment files
 /.env
-
-# Angular CLI and build artefacts
-/.angular-cli.json
-/.ng/
+.env.local
+.env.*.local
 
 # TypeScript cache
 *.tsbuildinfo
@@ -26,3 +24,38 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# WhatsApp session data
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Credentials and secrets
+credentials/*.json
+!credentials/README.md
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Docker volumes
+postgres-data/
+n8n-data/
+ollama-data/
+
+# Backup files
+*.backup
+*.bak
+backups/
