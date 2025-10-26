@@ -245,7 +245,7 @@ Necesitarás estas para funcionalidad completa:
 
 | Servicio | Para qué es | Consíguelo aquí |
 
-## 📚 Add Knowledge to Your Bot (RAG)
+## 📚 Agregar Conocimiento a tu Bot (RAG)
 
 ### 1. Add Sample Documents
 
@@ -284,7 +284,7 @@ The bot will use your knowledge base to answer!
 
 ## 🎯 Next Steps
 
-### Explore More Features
+### Explorar Mas Funcionalidades
 
 1. **WhatsApp Bot**: Set up business messaging
 
@@ -304,7 +304,7 @@ The bot will use your knowledge base to answer!
 
    - Import `workflows/ai-agent-executor.json`
 
-### Learn More
+### Aprender Mas
 
 - **[Full Installation Guide](docs/INSTALLATION.md)** - Detailed setup
 - **[Usage Guide](docs/USAGE.md)** - How to use all features

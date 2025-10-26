@@ -89,7 +89,7 @@ The WhatsApp bot provides similar AI capabilities through WhatsApp Business API.
 - Verified WhatsApp Business number
 - Webhook configured to point to your n8n instance
 
-### Activating the Bot
+### Activando el Bot
 
 1. Abre el workflow "WhatsApp Bot with AI Agent"
 2. Configura tus credenciales de WhatsApp en las variables de entorno

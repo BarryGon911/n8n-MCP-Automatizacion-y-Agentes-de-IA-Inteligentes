@@ -115,7 +115,7 @@ Este comando:
 - Iniciará la plataforma de automatización n8n
 - Iniciará el servicio de modelos AI Ollama
 
-### 3. Start the Services
+### 3. Iniciar los Servicios
 
 Launch all services using Docker Compose:
 
@@ -128,7 +128,7 @@ This command will:
 
 - Download all required Docker images
 - Create and configure the PostgreSQL database
-- Start the n8n workflow automation platform
+- Iniciar la plataforma de automatizacion de workflows n8n
 - Iniciará el servicio de modelos AI Ollama
 
 ### 4. Verificar Instalación
@@ -165,7 +165,7 @@ Inicia sesión con las credenciales que configuraste en el archivo `.env`:
 Para usar Ollama para inferencia de IA local, necesitas descargar los modelos:
 
 ```bash
-# Pull the llama2 model
+# Descargar el modelo llama2
 docker exec -it n8n-mcp-automatizaci-n---agentes-de-ia-inteligentes-ollama-1 ollama pull llama2
 
 # Optional: Pull other models
@@ -286,7 +286,7 @@ docker-compose up -d
 # Check Ollama service
 docker-compose logs ollama
 
-# Verify model is pulled
+# Verificar que el modelo esta descargado
 docker exec -it n8n-mcp-automatizaci-n---agentes-de-ia-inteligentes-ollama-1 ollama list
 
 ```
@@ -307,7 +307,7 @@ Para actualizar a la última versión:
 # Pull latest changes
 git pull
 
-# Rebuild and restart services
+# Reconstruir y reiniciar servicios
 docker-compose down
 docker-compose pull
 docker-compose up -d
@@ -319,13 +319,13 @@ docker-compose up -d
 Para eliminar completamente el proyecto:
 
 ```bash
-# Stop and remove containers
+# Detener y eliminar contenedores
 docker-compose down
 
 # Remove volumes (WARNING: This deletes all data)
 docker-compose down -v
 
-# Remove the project directory
+# Eliminar el directorio del proyecto
 cd ..
 rm -rf n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
 
