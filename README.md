@@ -21,7 +21,7 @@
 
 ---
 
-## ✨ ¿Qué aprenderás? （3†README.md）
+## ✨ ¿Qué aprenderás?
 - Diseñar y automatizar **flujos de trabajo completos** en **n8n** integrando **Google Sheets, Gmail, APIs externas y bases de datos**.  
 - Construir **agentes de IA con MCP**, conectados a **herramientas personalizadas** y servicios como **Google Calendar**, correo y **modelos**.  
 - Implementar **casos prácticos avanzados**: **chatbots**, **scraping**, **bots de Telegram/WhatsApp** y **agentes de voz** con datos en tiempo real.  
@@ -31,7 +31,7 @@
 
 ---
 
-## 🧩 Casos de uso (reales y vendibles) （3†README.md）
+## 🧩 Casos de uso (reales y vendibles)
 | Caso | Descripción | Stack recomendado |
 |---|---|---|
 | Chatbot FAQ empresarial | Responde políticas, soporte y ventas | n8n + RAG (PostgreSQL/Drive) + OpenAI/Ollama |
