@@ -71,7 +71,7 @@ Una plataforma integral de automatización construida con n8n, que incluye agent
 1. **Clonar el repositorio**
 
 ```bash
-git clone https://github.com/BarryGon911/n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes.git
+git clone https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes.git
 cd n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
 
 
