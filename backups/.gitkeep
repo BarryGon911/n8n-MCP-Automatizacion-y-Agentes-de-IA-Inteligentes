@@ -19,7 +19,8 @@
 docker-compose -f docker-compose.production.yml stop n8n
 
 # Restore
-cat backups/n8n_backup_YYYYMMDD_HHMMSS.sql | docker exec -i n8n-postgres-prod psql -U n8n_prod n8n_production
+cat backups/n8n_backup_YYYYMMDD_HHMMSS.sql | \
+  docker exec -i n8n-postgres-prod psql -U n8n_prod n8n_production
 
 # Restart
 docker-compose -f docker-compose.production.yml start n8n

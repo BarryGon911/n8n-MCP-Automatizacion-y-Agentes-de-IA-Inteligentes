@@ -58,26 +58,44 @@ Una plataforma integral de automatización construida con n8n, que incluye agent
 - Perfilado y preferencias de usuarios
 - Registros de ejecución de workflows
 
-## 🚀 Inicio Rápido
+## 🚀 Inicio Rapido
+
+### Opciones de Deployment
+
+Elige el tipo de deployment que necesitas:
+
+| Tipo | Descripcion | Guia Completa | Tiempo Estimado |
+|------|-------------|---------------|-----------------|
+| **🏠 Local** | Desarrollo en tu computadora | [DEPLOYMENT_LOCAL.md](docs/DEPLOYMENT_LOCAL.md) | 30 minutos |
+| **☁️ Cloud** | Produccion en servidor remoto | [DEPLOYMENT_CLOUD.md](docs/DEPLOYMENT_CLOUD.md) | 1-2 horas |
 
 ### Requisitos Previos
 
-- Docker (versión 20.10+)
-- Docker Compose (versión 2.0+)
+**Para Deployment Local:**
+- Docker Desktop (version 20.10+)
+- Docker Compose (version 2.0+)
 - Git
+- 8GB RAM minimo
 
-### Instalación
+**Para Deployment en Cloud:**
+- Servidor VPS/Cloud (AWS, DigitalOcean, GCP, etc.)
+- Ubuntu 22.04 LTS
+- 4GB RAM minimo (8GB recomendado)
+- Dominio configurado (ejemplo: n8n.alekarpy.uk)
+- Certificado SSL (Let's Encrypt gratis)
+
+### Inicio Rapido - Local (5 Minutos)
 
 1. **Clonar el repositorio**
 
 ```bash
 git clone https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes.git
-cd n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
+cd n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes
 
 
 ```
 
-2. **Ejecutar el script de configuración**
+2. **Ejecutar el script de configuracion**
 
 ```bash
 ./scripts/setup.sh
@@ -109,15 +127,50 @@ docker-compose up -d
    Credenciales por defecto:
 
    - Usuario: `admin`
-   - Contraseña: `admin` (cámbiala en `.env`)
+   - Contrasena: `admin` (cambiala en `.env`)
 
-Para instrucciones detalladas de instalación, consulta [docs/INSTALLATION.md](docs/INSTALLATION.md).
+### Guias Completas de Deployment
 
-## 📖 Documentación
+**📖 Deployment Local (Desarrollo):**
+- [Guia Completa de Deployment Local](docs/DEPLOYMENT_LOCAL.md)
+  - Instalacion paso a paso
+  - Configuracion de APIs
+  - Importacion de workflows
+  - Solucion de problemas comunes
 
-- **[Guía de Instalación](docs/INSTALLATION.md)** - Instrucciones completas de configuración
-- **[Guía de Uso](docs/USAGE.md)** - Cómo usar los workflows y funciones
-- **[Documentación de Workflows](workflows/README.md)** - Explicaciones detalladas de workflows
+**🌐 Deployment en Cloud (Produccion):**
+- [Guia Completa de Deployment en Cloud](docs/DEPLOYMENT_CLOUD.md)
+  - Preparacion de servidor (AWS, DigitalOcean, GCP)
+  - Configuracion de DNS y SSL/HTTPS
+  - Seguridad y firewall
+  - Backups automaticos
+  - Monitoreo y mantenimiento
+
+**🔒 Seguridad en Produccion:**
+- [Guia de Seguridad](docs/SECURITY_PRODUCTION.md)
+  - Hardening del servidor
+  - Configuracion de firewall (UFW)
+  - Fail2ban contra ataques
+  - Rotacion de credenciales
+
+Para mas detalles, consulta [docs/INSTALLATION.md](docs/INSTALLATION.md).
+
+## 📖 Documentacion
+
+### Guias de Deployment
+
+- **[🏠 Deployment Local](docs/DEPLOYMENT_LOCAL.md)** - Instalacion en tu computadora (desarrollo)
+- **[☁️ Deployment en Cloud](docs/DEPLOYMENT_CLOUD.md)** - Instalacion en servidor remoto (produccion)
+
+### Documentacion Tecnica
+
+- **[📋 Guia de Instalacion](docs/INSTALLATION.md)** - Instrucciones completas de configuracion
+- **[🎯 Guia de Uso](docs/USAGE.md)** - Como usar los workflows y funciones
+- **[🔒 Seguridad en Produccion](docs/SECURITY_PRODUCTION.md)** - Hardening y mejores practicas
+- **[⚙️ Workflows](workflows/README.md)** - Explicaciones detalladas de workflows
+- **[🗄️ Base de Datos](database/README.md)** - Esquema y documentacion de BD
+- **[❓ FAQ](docs/FAQ.md)** - Preguntas frecuentes
+- **[🏗️ Arquitectura](docs/ARCHITECTURE.md)** - Diseno del sistema
 
 ## 🏗️ Arquitectura
 
