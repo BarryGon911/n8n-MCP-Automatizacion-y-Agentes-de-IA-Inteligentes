@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Backup script for n8n database
-# Creates a timestamped backup of the PostgreSQL database
+# Script de respaldo para base de datos n8n
+# Crea un respaldo con marca de tiempo de la base de datos PostgreSQL
 
 set -e
 
@@ -9,17 +9,17 @@ BACKUP_DIR="./backups"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 BACKUP_FILE="$BACKUP_DIR/n8n_backup_$TIMESTAMP.sql"
 
-# Create backup directory if it doesn't exist
+# Crear directorio de respaldo si no existe
 mkdir -p "$BACKUP_DIR"
 
-echo "Creating backup of n8n database..."
+echo "Creando respaldo de base de datos n8n..."
 
-# Backup n8n database (includes all tables: n8n workflows + RAG data)
+# Respaldar base de datos n8n (incluye todas las tablas: workflows n8n + datos RAG)
 docker-compose exec -T postgres pg_dump -U n8n n8n > "$BACKUP_FILE"
 
-echo "Backup completed successfully!"
-echo "File saved to: $BACKUP_FILE"
+echo "Respaldo completado exitosamente!"
+echo "Archivo guardado en: $BACKUP_FILE"
 
-# Remove backups older than 30 days
+# Eliminar respaldos mayores a 30 dias
 find "$BACKUP_DIR" -name "*.sql" -mtime +30 -delete
-echo "Old backups (>30 days) removed"
+echo "Respaldos antiguos (>30 dias) eliminados"
