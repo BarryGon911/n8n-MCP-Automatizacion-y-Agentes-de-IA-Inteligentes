@@ -1,7 +1,7 @@
 <!-- Banner centrado -->
 <div align="center">
 
-# 🚀 n8n + MCP — Automatización y Agentes de IA Inteligentes
+# 🚀 n8n + MCP - Automatización y Agentes de IA Inteligentes
 
 **WhatsApp · Telegram · Bots de Voz · Ollama · Gemini · OpenAI · Google Cloud · ElevenLabs · RAG · PostgreSQL · Web Scraping**
 
