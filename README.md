@@ -322,7 +322,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For issues, questions, or suggestions:
 
-- Open an [issue](https://github.com/BarryGon911/n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes/issues)
 - Check the [documentation](docs/)
 - Visit the [n8n community](https://community.n8n.io/)
 
