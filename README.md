@@ -3,7 +3,7 @@
 
 # 🚀 n8n + MCP — Automatización y Agentes de IA Inteligentes
 
-**WhatsApp · Telegram · Bots de Voz · Ollama · Gemini · OpenAI · Google Cloud · ElevenLabs · RAG · PostgreSQL · Web Scraping** （3†README.md）
+**WhatsApp · Telegram · Bots de Voz · Ollama · Gemini · OpenAI · Google Cloud · ElevenLabs · RAG · PostgreSQL · Web Scraping**
 
 ---
 
@@ -27,7 +27,7 @@
 - Implementar **casos prácticos avanzados**: **chatbots**, **scraping**, **bots de Telegram/WhatsApp** y **agentes de voz** con datos en tiempo real.  
 - Crear y administrar **sistemas RAG** para consultar **bases de conocimiento** usando **PostgreSQL** y **Google Drive**.  
 
-> Enfoque 100% práctico y orientado a producto. （3†README.md）
+> Enfoque 100% práctico y orientado a producto.
 
 ---
 
@@ -43,7 +43,7 @@
 
 ---
 
-## 🛠️ Integraciones clave del proyecto （3†README.md）
+## 🛠️ Integraciones clave del proyecto
 - **Modelos**: **Ollama**, **OpenAI**, **Gemini**  
 - **Mensajería**: **WhatsApp**, **Telegram**  
 - **Voz**: **ElevenLabs**  
