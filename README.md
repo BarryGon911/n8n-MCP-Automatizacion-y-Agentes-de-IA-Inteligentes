@@ -107,9 +107,7 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 ---
 
 ## 📚 Referencias
-- Contenido base de objetivos y alcance tomado del **README técnico** proporcionado por el autor. （3†README.md）  
-- Inspiración visual/estética derivada del **README muestra** (badges/estilo). （8†README-muestra.md）
-
+- Aún por definir
 ---
 
 <div align="center">
