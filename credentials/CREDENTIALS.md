@@ -1,178 +1,195 @@
-# Credentials Template
+# Plantilla de Credenciales
 
-This file provides templates for setting up credentials in n8n. After importing workflows, configure these credentials in the n8n UI.
+Este archivo proporciona plantillas para configurar credenciales en n8n. Después de importar workflows, configura estas credenciales en la interfaz de n8n.
 
 ## PostgreSQL
 
-**Type**: PostgreSQL  
-**Name**: PostgreSQL
+**Tipo**: PostgreSQL  
+**Nombre**: PostgreSQL
 
-```
+```yaml
 Host: postgres
 Database: n8n
 User: n8n
 Password: [from .env: DB_POSTGRESDB_PASSWORD]
 Port: 5432
 SSL: false
+
 ```
 
-For RAG database:
-```
+Para base de datos RAG:
+
+```yaml
 Host: postgres
 Database: rag_database
 User: n8n
 Password: [from .env: DB_POSTGRESDB_PASSWORD]
 Port: 5432
 SSL: false
+
 ```
 
 ---
 
 ## OpenAI
 
-**Type**: OpenAI API  
-**Name**: OpenAI
+**Tipo**: OpenAI API  
+**Nombre**: OpenAI
 
-```
+```sh
 API Key: [from .env: OPENAI_API_KEY]
+
 ```
 
 ---
 
 ## Telegram
 
-**Type**: Telegram API  
-**Name**: Telegram Bot
+**Tipo**: Telegram API  
+**Nombre**: Telegram Bot
 
-```
+```sh
 Access Token: [from .env: TELEGRAM_BOT_TOKEN]
+
 ```
 
-To get a Telegram bot token:
-1. Message [@BotFather](https://t.me/botfather) on Telegram
-2. Send `/newbot` command
-3. Follow the prompts to create your bot
-4. Copy the provided token
+Para obtener un token de bot de Telegram:
+
+1. Envía mensaje a [@BotFather](https://t.me/botfather) en Telegram
+2. Envía el comando `/newbot`
+3. Sigue las instrucciones para crear tu bot
+4. Copia el token proporcionado
 
 ---
 
-## Google Gemini (HTTP Header Auth)
+## Google Gemini (Autenticación por Encabezado HTTP)
 
-**Type**: Header Auth  
-**Name**: Gemini API
+**Tipo**: Header Auth  
+**Nombre**: Gemini API
 
-```
+```html
 Name: x-goog-api-key
 Value: [from .env: GEMINI_API_KEY]
+
 ```
 
-To get a Gemini API key:
-1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Create a new API key
-3. Copy the key
+Para obtener una clave API de Gemini:
+
+1. Visita [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Crea una nueva clave API
+3. Copia la clave
 
 ---
 
-## ElevenLabs (HTTP Header Auth)
+## ElevenLabs (Autenticación por Encabezado HTTP)
 
-**Type**: Header Auth  
-**Name**: ElevenLabs
+**Tipo**: Header Auth  
+**Nombre**: ElevenLabs
 
-```
+```sh
 Name: xi-api-key
 Value: [from .env: ELEVENLABS_API_KEY]
+
 ```
 
-To get ElevenLabs credentials:
-1. Sign up at [ElevenLabs](https://elevenlabs.io/)
-2. Go to Profile Settings
-3. Copy your API key
-4. Go to Voices to find your Voice ID
+Para obtener credenciales de ElevenLabs:
+
+1. Regístrate en [ElevenLabs](https://elevenlabs.io/)
+2. Ve a Configuración de Perfil
+3. Copia tu clave API
+4. Ve a Voices para encontrar tu Voice ID
 
 ---
 
-## WhatsApp Business API (HTTP Header Auth)
+## WhatsApp Business API (Autenticación por Encabezado HTTP)
 
-**Type**: Header Auth  
-**Name**: WhatsApp API
+**Tipo**: Header Auth  
+**Nombre**: WhatsApp API
 
-```
+```html
 Name: Authorization
 Value: Bearer [from .env: WHATSAPP_ACCESS_TOKEN]
+
 ```
 
-To get WhatsApp Business API credentials:
-1. Create a [Meta Business Account](https://business.facebook.com/)
-2. Set up a WhatsApp Business app
-3. Get your Phone Number ID
-4. Generate an access token
-5. Set up webhook with verify token
+Para obtener credenciales de WhatsApp Business API:
+
+1. Crea una [Cuenta de Negocio de Meta](https://business.facebook.com/)
+2. Configura una app de WhatsApp Business
+3. Obtén tu Phone Number ID
+4. Genera un token de acceso
+5. Configura webhook con token de verificación
 
 ---
 
-## Google Cloud (JSON Auth)
+## Google Cloud (Autenticación JSON)
 
-**Type**: Google Cloud Platform API  
-**Name**: Google Cloud
+**Tipo**: Google Cloud Platform API  
+**Nombre**: Google Cloud
 
-```
+```ini
 Service Account Email: [from service account JSON]
 Private Key: [from service account JSON]
+
 ```
 
-To create a service account:
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Navigate to IAM & Admin > Service Accounts
-3. Create a new service account
-4. Generate and download JSON key
-5. Enable required APIs for your project
+Para crear una cuenta de servicio:
+
+1. Ve a [Google Cloud Console](https://console.cloud.google.com/)
+2. Navega a IAM & Admin > Service Accounts
+3. Crea una nueva cuenta de servicio
+4. Genera y descarga la clave JSON
+5. Habilita las APIs requeridas para tu proyecto
 
 ---
 
-## Twilio (for alternative WhatsApp)
+## Twilio (para WhatsApp alternativo)
 
-**Type**: HTTP Header Auth  
-**Name**: Twilio
+**Tipo**: HTTP Header Auth  
+**Nombre**: Twilio
 
-```
+```html
 Username: [TWILIO_ACCOUNT_SID]
 Password: [TWILIO_AUTH_TOKEN]
+
 ```
 
-Or use Basic Auth:
-```
+O usa Basic Auth:
+
+```sh
 Account SID: [from .env: TWILIO_ACCOUNT_SID]
 Auth Token: [from .env: TWILIO_AUTH_TOKEN]
+
 ```
 
 ---
 
-## Setting Up Credentials in n8n
+## Configurando Credenciales en n8n
 
-1. Log in to n8n at `http://localhost:5678`
-2. Click on **Settings** (gear icon) in the bottom left
-3. Select **Credentials**
-4. Click **Add Credential**
-5. Choose the credential type
-6. Fill in the required information
-7. Click **Save**
-8. Use the credential in your workflows
+1. Inicia sesión en n8n en `http://localhost:5678`
+2. Haz clic en **Settings** (ícono de engranaje) en la esquina inferior izquierda
+3. Selecciona **Credentials**
+4. Haz clic en **Add Credential**
+5. Elige el tipo de credencial
+6. Completa la información requerida
+7. Haz clic en **Save**
+8. Usa la credencial en tus workflows
 
-## Testing Credentials
+## Probando Credenciales
 
-After setting up credentials:
+Después de configurar credenciales:
 
-1. Open a workflow that uses the credential
-2. Click on a node using that credential
-3. Click **Test step** or **Execute node**
-4. Verify the connection works
-5. Check for any error messages
+1. Abre un workflow que use la credencial
+2. Haz clic en un nodo que use esa credencial
+3. Haz clic en **Test step** o **Execute node**
+4. Verifica que la conexión funcione
+5. Revisa cualquier mensaje de error
 
-## Security Notes
+## Notas de Seguridad
 
-- Never share your credentials or commit them to version control
-- Rotate API keys regularly
-- Use environment variables for sensitive data
-- Restrict API key permissions to minimum required
-- Monitor API usage for unusual activity
-- Use separate credentials for development and production
+- Nunca compartas tus credenciales o las subas a control de versiones
+- Rota las claves API regularmente
+- Usa variables de entorno para datos sensibles
+- Restringe permisos de claves API al mínimo requerido
+- Monitorea el uso de API por actividad inusual
+- Usa credenciales separadas para desarrollo y producción

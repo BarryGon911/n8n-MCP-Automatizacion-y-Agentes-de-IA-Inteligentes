@@ -400,68 +400,66 @@ Verifica:
 
 n8n soporta más de 300 integraciones:
 
-- Use built-in nodes
-- HTTP Request for APIs
-- Webhooks for events
-- Database nodes for data
-- Custom code for logic
+- Usa nodos integrados
+- HTTP Request para APIs
+- Webhooks para eventos
+- Nodos de base de datos para datos
+- Código personalizado para lógica
 
-### Can I schedule workflows?
+### ¿Puedo programar workflows?
 
-Yes, use:
+- Nodo Schedule Trigger
+- Expresiones cron
+- Triggers de intervalo
+- Triggers de webhook
 
-- Schedule Trigger node
-- Cron expressions
-- Interval triggers
-- Webhook triggers
+### ¿Cómo monitoreo workflows?
 
-### How do I monitor workflows?
+Métodos:
 
-Methods:
+- Logs de ejecución de n8n
+- Tabla workflow_logs de la base de datos
+- Notificaciones de error (email, Slack)
+- Herramientas de monitoreo externas
+- Dashboards personalizados
 
-- n8n execution logs
-- Database workflow_logs table
-- Error notifications (email, Slack)
-- External monitoring tools
-- Custom dashboards
+## Soporte
 
-## Support
+### ¿Dónde puedo obtener ayuda?
 
-### Where can I get help?
+- Revisa la documentación en `docs/`
+- Revisa los archivos README de workflows
+- Busca en GitHub issues
+- Visita la [comunidad n8n](https://community.n8n.io/)
+- Crea un GitHub issue
 
-- Check documentation in `docs/`
-- Review workflow README files
-- Search GitHub issues
-- Visit [n8n community](https://community.n8n.io/)
-- Create a GitHub issue
+### ¿Cómo reporto bugs?
 
-### How do I report bugs?
+Crea un GitHub issue con:
 
-Create a GitHub issue with:
+- Descripción clara
+- Pasos para reproducir
+- Comportamiento esperado vs actual
+- Detalles del entorno
+- Logs y capturas de pantalla
 
-- Clear description
-- Steps to reproduce
-- Expected vs actual behavior
-- Environment details
-- Logs and screenshots
+### ¿Puedo solicitar características?
 
-### Can I request features?
+¡Sí! Crea un GitHub issue con:
 
-Yes! Create a GitHub issue with:
+- Descripción de la característica
+- Caso de uso
+- Implementación potencial
+- Ejemplos
 
-- Feature description
-- Use case
-- Potential implementation
-- Examples
+### ¿Hay soporte comercial disponible?
 
-### Is commercial support available?
+Este es un proyecto comunitario. Para soporte comercial:
 
-This is a community project. For commercial support:
-
-- Hire n8n experts
-- Contact project maintainers
-- Consider n8n Cloud (official)
+- Contrata expertos de n8n
+- Contacta a los mantenedores del proyecto
+- Considera n8n Cloud (oficial)
 
 ---
 
-**Didn't find your question? Create an issue on GitHub!**
+**¿No encontraste tu pregunta? ¡Crea un issue en GitHub!**

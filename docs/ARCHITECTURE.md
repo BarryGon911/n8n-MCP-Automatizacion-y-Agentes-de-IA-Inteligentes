@@ -1,8 +1,8 @@
-# Architecture Overview
+# Resumen de Arquitectura
 
-## System Architecture
+## Arquitectura del Sistema
 
-```
+```ini
 ┌─────────────────────────────────────────────────────────────────────┐
 │                          External Services                           │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────────┐   │
@@ -60,191 +60,241 @@
         │  │     Queue       │  │    (Execution Tracking)          │ │
         │  └─────────────────┘  └──────────────────────────────────┘ │
         └──────────────────────────────────────────────────────────────┘
+
 ```
 
 ## Data Flow
 
 ### 1. Messaging Bots (Telegram/WhatsApp)
 
-```
-User Message
+## Flujo de Datos
+
+### 1. Bots de Mensajería (Telegram/WhatsApp)
+
+```ini
+Mensaje del Usuario
     ↓
-Webhook/Trigger → n8n Workflow
+Webhook/Trigger → Workflow n8n
     ↓
-Save to conversations table
+Guardar en tabla conversations
     ↓
-Retrieve context from RAG (vector search)
+Recuperar contexto de RAG (búsqueda vectorial)
     ↓
-Generate AI response (OpenAI/Gemini/Ollama)
+Generar respuesta de IA (OpenAI/Gemini/Ollama)
     ↓
-Save response to database
+Guardar respuesta en base de datos
     ↓
-Send reply to user
+Enviar respuesta al usuario
+
 ```
 
 ### 2. Web Scraping & RAG
 
+```ini
+Trigger Programado (cada 6 horas)
+    ↓
+Obtener URLs no procesadas de scraped_data
+    ↓
+HTTP Request → Extraer sitio web
+    ↓
+Extraer contenido con Cheerio
+    ↓
 ```
-Schedule Trigger (every 6 hours)
-    ↓
-Fetch unprocessed URLs from scraped_data
-    ↓
-HTTP Request → Scrape website
-    ↓
-Extract content with Cheerio
-    ↓
-Generate embeddings (OpenAI)
-    ↓
-Store in documents table with vector
-    ↓
-Mark URL as processed
 ```
 
-### 3. Autonomous Agent Tasks
+### 2. Web Scraping & RAG
+
+```ini
+Trigger Programado (cada 6 horas)
+    ↓
+Obtener URLs no procesadas de scraped_data
+    ↓
+HTTP Request → Extraer sitio web
+    ↓
+Extraer contenido con Cheerio
+    ↓
+Generar embeddings (OpenAI)
+    ↓
+Almacenar en tabla documents con vector
+    ↓
+Marcar URL como procesada
 
 ```
-Schedule Trigger (every 5 minutes)
+
+### 3. Tareas de Agentes Autónomos
+
+```ini
+Trigger Programado (cada 5 minutos)
     ↓
-Fetch pending tasks from agent_tasks
+Obtener tareas pendientes de agent_tasks
     ↓
-Update status to 'running'
+Actualizar estado a 'running'
     ↓
-Route by task_type:
+Enrutar por task_type:
     ├─ web_scraping → HTTP Request
     ├─ ai_analysis → OpenAI
-    └─ notification → Send message
+    └─ notification → Enviar mensaje
     ↓
-Store output_data
+Almacenar output_data
     ↓
-Update status to 'completed'
+Actualizar estado a 'completed'
+
 ```
 
-## Technology Stack
+## Stack Tecnológico
 
-### Core Platform
-- **n8n**: Workflow automation engine
-- **Docker**: Containerization
-- **Docker Compose**: Multi-container orchestration
+### Plataforma Principal
 
-### Database
-- **PostgreSQL 15**: Relational database
-- **pgvector**: Vector similarity search extension
+- **n8n**: Motor de automatización de workflows
+- **Docker**: Contenedorización
+- **Docker Compose**: Orquestación multi-contenedor
 
-### AI Models
-- **OpenAI GPT-4/3.5**: Cloud-based language models
-- **Google Gemini**: Google's multimodal AI
-- **Ollama**: Self-hosted local models (Llama2, Mistral)
+### Base de Datos
 
-### Messaging Platforms
-- **Telegram Bot API**: Telegram integration
-- **Meta WhatsApp Business API**: WhatsApp integration
-- **Twilio**: Alternative WhatsApp integration
+- **PostgreSQL 15**: Base de datos relacional
+- **pgvector**: Extensión de búsqueda por similitud vectorial
 
-### Additional Services
-- **ElevenLabs**: Text-to-speech synthesis
-- **Google Cloud**: Cloud services integration
-- **Cheerio**: HTML parsing for web scraping
+### Modelos de IA
+
+- **OpenAI GPT-4/3.5**: Modelos de lenguaje basados en la nube
+- **Google Gemini**: IA multimodal de Google
+- **Ollama**: Modelos locales auto-hospedados (Llama2, Mistral)
+
+### Plataformas de Mensajería
+
+- **Telegram Bot API**: Integración con Telegram
+- **Meta WhatsApp Business API**: Integración con WhatsApp
+- **Twilio**: Integración alternativa con WhatsApp
+
+### Servicios Adicionales
+
+- **ElevenLabs**: Síntesis de texto a voz
+- **Google Cloud**: Integración de servicios en la nube
+- **Cheerio**: Análisis HTML para web scraping
+
+## Arquitectura de Seguridad
+
+```ini
+┌─────────────────────────────────────────────────────────────┐
+│                     Capas de Seguridad                       │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│  1. Seguridad de Red                                         │
+│     ├─ Aislamiento de red Docker                            │
+│     ├─ Control de exposición de puertos                     │
+````
+```
 
 ## Security Architecture
 
-```
+```ini
 ┌─────────────────────────────────────────────────────────────┐
-│                     Security Layers                          │
+│                     Capas de Seguridad                       │
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
-│  1. Network Security                                         │
-│     ├─ Docker network isolation                             │
-│     ├─ Port exposure control                                │
-│     └─ HTTPS in production (reverse proxy)                  │
+│  1. Seguridad de Red                                         │
+│     ├─ Aislamiento de red Docker                            │
+│     ├─ Control de exposición de puertos                     │
+│     └─ HTTPS en producción (proxy inverso)                  │
 │                                                              │
-│  2. Authentication & Authorization                           │
-│     ├─ n8n basic auth                                       │
-│     ├─ Database credentials                                 │
-│     ├─ Webhook signature validation                         │
-│     └─ API key management                                   │
+│  2. Autenticación & Autorización                             │
+│     ├─ Autenticación básica de n8n                          │
+│     ├─ Credenciales de base de datos                        │
+│     ├─ Validación de firma de webhook                       │
+│     └─ Gestión de claves API                                │
 │                                                              │
-│  3. Data Security                                            │
-│     ├─ Environment variable isolation                       │
-│     ├─ No hardcoded credentials                             │
-│     ├─ Database access control                              │
-│     └─ Encrypted communication (HTTPS/SSL)                  │
+│  3. Seguridad de Datos                                       │
+│     ├─ Aislamiento de variables de entorno                  │
+│     ├─ Sin credenciales hardcodeadas                        │
+│     ├─ Control de acceso a base de datos                    │
+│     └─ Comunicación cifrada (HTTPS/SSL)                     │
 │                                                              │
-│  4. Application Security                                     │
-│     ├─ Input validation                                     │
-│     ├─ Rate limiting                                        │
-│     ├─ Error handling                                       │
-│     └─ Audit logging                                        │
+│  4. Seguridad de Aplicación                                  │
+│     ├─ Validación de entrada                                │
+│     ├─ Limitación de tasa                                   │
+│     ├─ Manejo de errores                                    │
+│     └─ Registro de auditoría                                │
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
+
 ```
 
-## Scalability Considerations
+## Consideraciones de Escalabilidad
 
-### Vertical Scaling
-- Increase Docker container resources
-- Upgrade database instance
-- Add more RAM for Ollama models
+### Escalamiento Vertical
 
-### Horizontal Scaling
-- Multiple n8n instances with load balancer
-- PostgreSQL read replicas
-- Redis for caching (future enhancement)
-- Message queue for task distribution (future enhancement)
+- Aumentar recursos de contenedores Docker
+- Actualizar instancia de base de datos
+- Agregar más RAM para modelos Ollama
 
-### Performance Optimization
-- Database indexing (implemented)
-- Connection pooling
-- Batch processing
-- Caching strategies
-- CDN for static assets (if needed)
+### Escalamiento Horizontal
 
-## Deployment Options
+- Múltiples instancias de n8n con balanceador de carga
+- Réplicas de lectura de PostgreSQL
+- Redis para caché (mejora futura)
+- Cola de mensajes para distribución de tareas (mejora futura)
 
-### 1. Development (Current Setup)
-- Docker Compose on local machine
-- All services on single host
-- Perfect for testing and development
+### Optimización de Rendimiento
 
-### 2. Production (Recommended)
-- Cloud hosting (AWS, GCP, Azure, DigitalOcean)
-- Managed PostgreSQL database
-- HTTPS with SSL certificates
-- Domain name with DNS
-- Firewall and security groups
-- Regular backups
-- Monitoring and alerting
+- Indexación de base de datos (implementado)
+- Pooling de conexiones
+- Procesamiento por lotes
+- Estrategias de caché
+- CDN para assets estáticos (si es necesario)
 
-### 3. Enterprise
-- Kubernetes cluster
-- High availability setup
-- Auto-scaling
-- Multi-region deployment
-- Advanced monitoring (Prometheus, Grafana)
-- CI/CD pipeline
-- Disaster recovery plan
+## Opciones de Despliegue
 
-## Monitoring & Observability
+### 1. Desarrollo (Configuración Actual)
 
-### Metrics to Track
-- Workflow execution times
-- API response times
-- Database query performance
-- Error rates
-- API usage and costs
-- Resource utilization (CPU, RAM, disk)
-- Active user count
-- Message volume
+- Docker Compose en máquina local
+- Todos los servicios en un solo host
+- Perfecto para pruebas y desarrollo
 
-### Logging
-- n8n execution logs
-- Database query logs
-- Application error logs
-- Webhook activity logs
-- Security audit logs
+### 2. Producción (Recomendado)
 
-### Tools (Future Enhancement)
-- Prometheus for metrics collection
-- Grafana for visualization
-- ELK stack for log aggregation
-- Uptime monitoring services
-- Cost tracking dashboards
+- Hosting en la nube (AWS, GCP, Azure, DigitalOcean)
+- Base de datos PostgreSQL administrada
+- HTTPS con certificados SSL
+- Nombre de dominio con DNS
+- Firewall y grupos de seguridad
+- Respaldos regulares
+- Monitoreo y alertas
+
+### 3. Empresarial
+
+- Clúster Kubernetes
+- Configuración de alta disponibilidad
+- Auto-escalamiento
+- Despliegue multi-región
+- Monitoreo avanzado (Prometheus, Grafana)
+- Pipeline CI/CD
+- Plan de recuperación ante desastres
+
+## Monitoreo & Observabilidad
+
+### Métricas a Rastrear
+
+- Tiempos de ejecución de workflows
+- Tiempos de respuesta de API
+- Rendimiento de consultas de base de datos
+- Tasas de error
+- Uso y costos de API
+- Utilización de recursos (CPU, RAM, disco)
+- Conteo de usuarios activos
+- Volumen de mensajes
+
+### Registro (Logging)
+
+- Logs de ejecución de n8n
+- Logs de consultas de base de datos
+- Logs de errores de aplicación
+- Logs de actividad de webhook
+- Logs de auditoría de seguridad
+
+### Herramientas (Mejora Futura)
+
+- Prometheus para recolección de métricas
+- Grafana para visualización
+- Stack ELK para agregación de logs
+- Servicios de monitoreo de uptime
+- Dashboards de seguimiento de costos

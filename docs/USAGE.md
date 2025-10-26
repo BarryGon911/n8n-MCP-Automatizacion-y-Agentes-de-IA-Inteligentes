@@ -1,64 +1,82 @@
-# Usage Guide
+# Guía de Uso
 
-This guide explains how to use the various workflows and features of the n8n Automation & AI Agents project.
+Esta guía explica cómo usar los diversos workflows y características del proyecto n8n Automatización & Agentes de IA.
 
-## Table of Contents
+## Tabla de Contenidos
 
-1. [Getting Started](#getting-started)
-2. [Telegram Bot](#telegram-bot)
-3. [WhatsApp Bot](#whatsapp-bot)
+1. [Comenzando](#comenzando)
+2. [Bot de Telegram](#bot-de-telegram)
+3. [Bot de WhatsApp](#bot-de-whatsapp)
 4. [Web Scraping & RAG](#web-scraping--rag)
-5. [AI Agent Tasks](#ai-agent-tasks)
+5. [Tareas de Agentes de IA](#tareas-de-agentes-de-ia)
 6. [Text-to-Speech](#text-to-speech)
-7. [Advanced Features](#advanced-features)
+7. [Características Avanzadas](#características-avanzadas)
 
-## Getting Started
+## Comenzando
 
-After installation, ensure all services are running:
+Después de la instalación, asegúrate de que todos los servicios estén ejecutándose:
 
 ```bash
 docker-compose ps
-```
-
-Access n8n at `http://localhost:5678` and log in with your credentials.
-
-## Telegram Bot
-
-The Telegram bot provides an AI-powered conversational interface using RAG (Retrieval-Augmented Generation).
-
-### Activating the Bot
-
-1. In n8n, open the "Telegram Bot with AI Agent" workflow
-2. Configure the Telegram credentials (bot token)
-3. Configure the PostgreSQL and OpenAI credentials
-4. Click the **Active** toggle to enable the workflow
-
-### Using the Bot
-
-1. Open Telegram and search for your bot (using the username you created with @BotFather)
-2. Start a conversation with `/start`
-3. Send any message to get an AI-powered response
-
-### Features
-
-- **Context-Aware Responses**: Uses RAG to retrieve relevant information from your knowledge base
-- **Conversation History**: Stores all conversations in PostgreSQL
-- **Multi-Model Support**: Can use OpenAI GPT-4 or local Ollama models
-- **User Tracking**: Maintains user profiles and preferences
-
-### Example Conversations
 
 ```
-User: What is n8n?
-Bot: n8n is a workflow automation platform that allows you to connect 
-     different services and automate tasks. It's a powerful tool for 
-     creating complex automations without coding.
 
-User: How do I use RAG?
-Bot: RAG (Retrieval-Augmented Generation) combines retrieval of relevant 
-     documents with language model generation. It searches your knowledge 
-     base for relevant information and uses that context to generate 
-     accurate responses.
+Accede a n8n en `http://localhost:5678` e inicia sesión con tus credenciales.
+
+## Bot de Telegram
+
+El bot de Telegram proporciona una interfaz conversacional potenciada por IA usando RAG (Generación Aumentada por Recuperación).
+
+### Activando el Bot
+
+1. En n8n, abre el workflow "Telegram Bot with AI Agent"
+2. Configura las credenciales de Telegram (token del bot)
+3. Configura las credenciales de PostgreSQL y OpenAI
+4. Haz clic en el interruptor **Active** para habilitar el workflow
+
+### Usando el Bot
+
+1. Abre Telegram y busca tu bot (usando el nombre de usuario que creaste con @BotFather)
+2. Inicia una conversación con `/start`
+3. Envía cualquier mensaje para obtener una respuesta potenciada por IA
+
+### Características
+
+- **Respuestas Contextuales**: Usa RAG para recuperar información relevante de tu base de conocimiento
+- **Historial de Conversación**: Almacena todas las conversaciones en PostgreSQL
+- **Soporte Multi-Modelo**: Puede usar OpenAI GPT-4 o modelos locales de Ollama
+- **Seguimiento de Usuarios**: Mantiene perfiles y preferencias de usuarios
+
+### Ejemplos de Conversaciones
+
+```html
+Usuario: ¿Qué es n8n?
+Bot: n8n es una plataforma de automatización de workflows que te permite conectar 
+     diferentes servicios y automatizar tareas. Es una herramienta poderosa para 
+     crear automatizaciones complejas sin programar.
+
+Usuario: ¿Cómo uso RAG?
+Bot: RAG (Generación Aumentada por Recuperación) combina la recuperación de documentos 
+     relevantes con la generación de modelos de lenguaje. Busca en tu base de conocimiento 
+     información relevante y usa ese contexto para generar respuestas precisas.
+
+```
+
+## Bot de WhatsApp
+
+El bot de WhatsApp proporciona capacidades de IA similares a través de WhatsApp Business API.
+
+### Requisitos de Configuración
+
+- Cuenta de Meta Business o cuenta de Twilio
+- Número verificado de WhatsApp Business
+- Webhook configurado para apuntar a tu instancia de n8n
+
+### Activando el Bot
+
+1. Abre el workflow "WhatsApp Bot with AI Agent"
+2. Configura tus credenciales de WhatsApp en las variables de entorno
+3. Configura el webhook en Meta Business Dashboard:
 ```
 
 ## WhatsApp Bot
@@ -73,84 +91,87 @@ The WhatsApp bot provides similar AI capabilities through WhatsApp Business API.
 
 ### Activating the Bot
 
-1. Open the "WhatsApp Bot with AI Agent" workflow
-2. Configure your WhatsApp credentials in the environment variables
-3. Set up the webhook in Meta Business Dashboard:
+1. Abre el workflow "WhatsApp Bot with AI Agent"
+2. Configura tus credenciales de WhatsApp en las variables de entorno
+3. Configura el webhook en Meta Business Dashboard:
    - Webhook URL: `http://your-domain.com:5678/webhook/whatsapp-webhook`
-   - Verify Token: (as set in your `.env`)
-4. Activate the workflow
+   - Verify Token: (como se establece en tu `.env`)
 
-### Features
+4. Activa el workflow
 
-- **Gemini AI Integration**: Uses Google's Gemini for natural language processing
-- **Message History**: Stores all WhatsApp conversations
-- **Multi-User Support**: Handles multiple conversations simultaneously
+### Características
 
-### Testing the Bot
+- **Integración con Gemini AI**: Usa Gemini de Google para procesamiento de lenguaje natural
+- **Historial de Mensajes**: Almacena todas las conversaciones de WhatsApp
+- **Soporte Multi-Usuario**: Maneja múltiples conversaciones simultáneamente
 
-Send a message to your WhatsApp Business number. The bot will respond with AI-generated content based on your message.
+### Probando el Bot
+
+Envía un mensaje a tu número de WhatsApp Business. El bot responderá con contenido generado por IA basado en tu mensaje.
 
 ## Web Scraping & RAG
 
-This workflow automatically scrapes web pages and adds the content to your RAG knowledge base.
+Este workflow automáticamente extrae páginas web y agrega el contenido a tu base de conocimiento RAG.
 
-### How It Works
+### Cómo Funciona
 
-1. Runs on a schedule (every 6 hours by default)
-2. Retrieves URLs from the `scraped_data` table
-3. Scrapes the content using HTTP requests
-4. Extracts text content using Cheerio
-5. Creates embeddings using OpenAI
-6. Stores everything in the documents table for RAG
+1. Se ejecuta según un horario (cada 6 horas por defecto)
+2. Recupera URLs de la tabla `scraped_data`
+3. Extrae el contenido usando solicitudes HTTP
+4. Extrae el contenido de texto usando Cheerio
+5. Crea embeddings usando OpenAI
+6. Almacena todo en la tabla documents para RAG
 
-### Adding URLs to Scrape
+### Agregando URLs para Extraer
 
-Connect to the PostgreSQL database and insert URLs:
+Conéctate a la base de datos PostgreSQL e inserta URLs:
 
 ```sql
 INSERT INTO scraped_data (url, is_processed) 
 VALUES 
   ('https://docs.n8n.io/', false),
   ('https://en.wikipedia.org/wiki/Artificial_intelligence', false);
+
 ```
 
-Or use the n8n workflow:
+O usa el workflow de n8n:
 
-1. Create a simple workflow with an HTTP Request node
-2. Add a PostgreSQL node to insert the URL
-3. Let the scraping workflow process it
+1. Crea un workflow simple con un nodo HTTP Request
+2. Agrega un nodo PostgreSQL para insertar la URL
+3. Deja que el workflow de scraping lo procese
 
-### Viewing Scraped Content
+### Viendo Contenido Extraído
 
 ```sql
 SELECT title, url, scraped_at 
 FROM scraped_data 
 WHERE is_processed = true 
 ORDER BY scraped_at DESC;
+
 ```
 
-### Using RAG in Conversations
+### Usando RAG en Conversaciones
 
-The Telegram and WhatsApp bots automatically use the RAG database to provide context-aware responses. The system:
+Los bots de Telegram y WhatsApp usan automáticamente la base de datos RAG para proporcionar respuestas contextuales. El sistema:
 
-1. Receives a user message
-2. Searches the documents table for relevant content
-3. Uses the retrieved content as context for the AI model
-4. Generates a response based on the context and question
+1. Recibe un mensaje del usuario
+2. Busca en la tabla documents contenido relevante
+3. Usa el contenido recuperado como contexto para el modelo de IA
+4. Genera una respuesta basada en el contexto y la pregunta
 
-## AI Agent Tasks
+## Tareas de Agentes de IA
 
-The AI Agent Task Executor runs autonomous tasks based on entries in the `agent_tasks` table.
+El Ejecutor de Tareas de Agentes de IA ejecuta tareas autónomas basadas en entradas en la tabla `agent_tasks`.
 
-### Task Types
+### Tipos de Tareas
 
-1. **web_scraping**: Scrape a specific URL
-2. **ai_analysis**: Analyze content with AI
-3. **notification**: Send notifications
+1. __web_scraping__: Extraer una URL específica
+2. __ai_analysis__: Analizar contenido con IA
+3. **notification**: Enviar notificaciones
 
-### Creating a Task
+### Creando una Tarea
 
-Insert a task into the database:
+Inserta una tarea en la base de datos:
 
 ```sql
 INSERT INTO agent_tasks (task_name, task_type, input_data, status)
@@ -160,83 +181,101 @@ VALUES (
   '{"prompt": "Summarize the main points of this article: [article text]"}',
   'pending'
 );
+
 ```
 
-### Monitoring Tasks
+### Monitoreando Tareas
 
-Check task status:
+Verifica el estado de las tareas:
 
 ```sql
 SELECT id, task_name, status, created_at, completed_at
 FROM agent_tasks
 ORDER BY created_at DESC
 LIMIT 10;
+
 ```
 
-### Task Workflow
+### Flujo de Trabajo de Tareas
 
-1. Schedule trigger runs every 5 minutes
-2. Fetches pending tasks
-3. Marks them as running
-4. Executes the appropriate action based on task_type
-5. Saves the output
-6. Marks as completed
+1. El trigger de programación se ejecuta cada 5 minutos
+2. Obtiene tareas pendientes
+3. Las marca como en ejecución
+4. Ejecuta la acción apropiada basada en task_type
+5. Guarda el resultado
+6. Las marca como completadas
 
 ## Text-to-Speech
 
 Convert text to speech using ElevenLabs.
 
-### Using the TTS Workflow
+### Usando el Workflow TTS
 
-Activate the "Text-to-Speech with ElevenLabs" workflow, then send a POST request:
+Activa el workflow "Text-to-Speech with ElevenLabs", luego envía una solicitud POST:
 
 ```bash
 curl -X POST http://localhost:5678/webhook/tts-request \
   -H "Content-Type: application/json" \
   -d '{"text": "Hello, this is a text to speech test."}'
+
 ```
 
-### Integration with Bots
+### Integración con Bots
 
-You can extend the Telegram or WhatsApp workflows to include TTS:
+Puedes extender los workflows de Telegram o WhatsApp para incluir TTS:
 
-1. Add an HTTP Request node after AI response generation
-2. Point it to the TTS webhook
-3. Send the AI response text
-4. The bot can then send the audio file back to the user
+1. Agrega un nodo HTTP Request después de la generación de respuesta de IA
+2. Apúntalo al webhook TTS
+3. Envía el texto de respuesta de IA
+4. El bot puede luego enviar el archivo de audio de vuelta al usuario
 
-## Advanced Features
+## Características Avanzadas
 
-### Custom AI Models
+### Modelos de IA Personalizados
 
-#### Using Different OpenAI Models
+#### Usando Diferentes Modelos de OpenAI
 
-Modify the workflow nodes to use different models:
-- `gpt-3.5-turbo` (faster, cheaper)
-- `gpt-4` (more accurate, slower)
-- `gpt-4-turbo` (balanced)
+Modifica los nodos del workflow para usar diferentes modelos:
 
-#### Using Local Ollama Models
+- `gpt-3.5-turbo` (más rápido, más económico)
+- `gpt-4` (más preciso, más lento)
+```
 
-Switch to Ollama for privacy and cost savings:
+### Usando Modelos Locales de Ollama
 
-1. Pull the desired model:
-   ```bash
-   docker exec -it n8n-mcp-automatizaci-n---agentes-de-ia-inteligentes-ollama-1 ollama pull mistral
-   ```
+Cambia a Ollama para privacidad y ahorro de costos:
 
-2. Update the workflow to use the HTTP Request node pointing to:
-   ```
-   http://ollama:11434/api/generate
-   ```
+1. Descarga el modelo deseado:
 
-### Multi-Language Support
+2. Actualiza el workflow para usar el nodo HTTP Request apuntando a:
 
-The bots support multiple languages out of the box since GPT-4, Gemini, and other models are multilingual.
+- `gpt-4-turbo` (balanceado)
 
-### Conversation Context
+2. Actualiza el workflow para usar el nodo HTTP Request apuntando a:
 
-Enhance responses by adding conversation history:
+Cambia a Ollama para privacidad y ahorro de costos:
+
+1. Descarga el modelo deseado:
+
+```bash
+docker exec -it n8n-mcp-automatizaci-n---agentes-de-ia-inteligentes-ollama-1 ollama pull mistral
+
+```
+
+2. Actualiza el workflow para usar el nodo HTTP Request apuntando a:
+
+```ini
+http://ollama:11434/api/generate
+
+```
+
+### Soporte Multi-Idioma
+
+Los bots soportan múltiples idiomas de forma nativa ya que GPT-4, Gemini y otros modelos son multilingües.
+
+### Contexto de Conversación
+
+Mejora las respuestas agregando historial de conversación:
 
 ```sql
 SELECT message, response 
@@ -244,13 +283,14 @@ FROM conversations
 WHERE user_id = 'user123' 
 ORDER BY created_at DESC 
 LIMIT 5;
+
 ```
 
-Use this context in your AI prompts for more coherent conversations.
+Usa este contexto en tus prompts de IA para conversaciones más coherentes.
 
-### Analytics
+### Analíticas
 
-Track usage statistics:
+Rastrea estadísticas de uso:
 
 ```sql
 -- Messages per platform
@@ -269,104 +309,113 @@ LIMIT 10;
 SELECT workflow_name, status, COUNT(*) as count
 FROM workflows_log
 GROUP BY workflow_name, status;
+
 ```
 
-## Best Practices
+## Mejores Prácticas
 
-### 1. Rate Limiting
+### 1. Limitación de Tasa
 
-Monitor your API usage to avoid hitting rate limits:
-- OpenAI: Check your usage dashboard
-- Gemini: Monitor quota in Google Cloud Console
-- ElevenLabs: Track character usage
+Monitorea tu uso de API para evitar alcanzar los límites de tasa:
 
-### 2. Error Handling
+- OpenAI: Revisa tu panel de uso
+- Gemini: Monitorea la cuota en Google Cloud Console
+- ElevenLabs: Rastrea el uso de caracteres
 
-Set up error notifications in n8n:
-1. Add an "Error Trigger" node
-2. Connect it to a notification service (Email, Slack, etc.)
-3. Get alerts when workflows fail
+### 2. Manejo de Errores
 
-### 3. Backup
+Configura notificaciones de error en n8n:
 
-Regularly backup your PostgreSQL database:
+1. Agrega un nodo "Error Trigger"
+2. Conéctalo a un servicio de notificación (Email, Slack, etc.)
+3. Recibe alertas cuando fallen los workflows
+
+### 3. Respaldo
+
+Respalda regularmente tu base de datos PostgreSQL:
 
 ```bash
 docker exec -t postgres pg_dump -U n8n n8n > backup_$(date +%Y%m%d).sql
+
 ```
 
-### 4. Security
+### 4. Seguridad
 
-- Never commit your `.env` file
-- Use strong passwords for n8n and PostgreSQL
-- Keep API keys secure
-- Use HTTPS in production
-- Implement webhook validation
+- Nunca subas tu archivo `.env`
+- Usa contraseñas fuertes para n8n y PostgreSQL
+- Mantén seguras las claves de API
+- Usa HTTPS en producción
+- Implementa validación de webhook
 
-### 5. Scaling
+### 5. Escalamiento
 
-For high-traffic scenarios:
-- Use PostgreSQL connection pooling
-- Add rate limiting to webhooks
-- Consider using queue systems for task processing
-- Scale n8n horizontally with multiple instances
+Para escenarios de alto tráfico:
 
-## Troubleshooting
+- Usa pooling de conexiones PostgreSQL
+- Agrega limitación de tasa a webhooks
+- Considera usar sistemas de cola para procesamiento de tareas
+- Escala n8n horizontalmente con múltiples instancias
 
-### Bot Not Responding
+## Solución de Problemas
 
-1. Check if the workflow is active
-2. Verify API credentials are correct
-3. Check n8n execution logs
-4. Verify webhook URLs are accessible
+### El Bot No Responde
 
-### Database Errors
+1. Verifica si el workflow está activo
+2. Verifica que las credenciales de API sean correctas
+3. Revisa los logs de ejecución de n8n
+4. Verifica que las URLs de webhook sean accesibles
 
-1. Check PostgreSQL is running: `docker-compose ps postgres`
-2. Verify connection credentials
-3. Check database logs: `docker-compose logs postgres`
+### Errores de Base de Datos
 
-### Slow AI Responses
+1. Verifica que PostgreSQL esté ejecutándose: `docker-compose ps postgres`
+2. Verifica las credenciales de conexión
+3. Revisa los logs de la base de datos: `docker-compose logs postgres`
 
-1. Consider using faster models (gpt-3.5-turbo instead of gpt-4)
-2. Reduce token limits
-3. Use local Ollama for faster responses
-4. Optimize RAG queries
+### Respuestas de IA Lentas
 
-## Examples and Use Cases
+1. Considera usar modelos más rápidos (gpt-3.5-turbo en lugar de gpt-4)
+2. Reduce los límites de tokens
+3. Usa Ollama local para respuestas más rápidas
+4. Optimiza las consultas RAG
 
-### Customer Support Bot
+## Ejemplos y Casos de Uso
 
-Use the Telegram/WhatsApp bots for automated customer support:
-1. Add your product documentation to the RAG database
-2. Configure the bot to answer common questions
-3. Log all interactions for analysis
+### Bot de Soporte al Cliente
 
-### Content Monitoring
+Usa los bots de Telegram/WhatsApp para soporte al cliente automatizado:
 
-Use web scraping to monitor competitor websites:
-1. Add competitor URLs to the scraping list
-2. Schedule regular scraping
-3. Set up alerts for significant changes
+1. Agrega la documentación de tu producto a la base de datos RAG
+2. Configura el bot para responder preguntas comunes
+3. Registra todas las interacciones para análisis
 
-### Automated Content Creation
+### Monitoreo de Contenido
 
-Use AI agents to generate content:
-1. Create tasks for article summarization
-2. Generate social media posts
-3. Create translations
+Usa web scraping para monitorear sitios web de competidores:
 
-### Voice Assistants
+1. Agrega URLs de competidores a la lista de scraping
+2. Programa scraping regular
+3. Configura alertas para cambios significativos
 
-Combine the bots with TTS:
-1. Receive text input from users
-2. Generate AI responses
-3. Convert to speech with ElevenLabs
-4. Send audio back to users
+### Creación Automatizada de Contenido
 
-## Next Steps
+Usa agentes de IA para generar contenido:
 
-- Explore creating custom workflows
-- Integrate with additional services
-- Optimize performance for your use case
-- Join the n8n community for support and ideas
+1. Crea tareas para resumir artículos
+2. Genera publicaciones para redes sociales
+3. Crea traducciones
+
+### Asistentes de Voz
+
+Combina los bots con TTS:
+
+1. Recibe entrada de texto de usuarios
+2. Genera respuestas de IA
+3. Convierte a voz con ElevenLabs
+4. Envía audio de vuelta a los usuarios
+
+## Próximos Pasos
+
+- Explora crear workflows personalizados
+- Integra con servicios adicionales
+- Optimiza el rendimiento para tu caso de uso
+- Únete a la comunidad de n8n para soporte e ideas

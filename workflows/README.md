@@ -1,51 +1,57 @@
-# Workflows Documentation
+# Documentación de Workflows
 
-This directory contains pre-built n8n workflows for various automation tasks involving AI agents, messaging platforms, and data processing.
+Este directorio contiene workflows pre-construidos de n8n para diversas tareas de automatización que involucran agentes de IA, plataformas de mensajería y procesamiento de datos.
 
-## Available Workflows
+## Workflows Disponibles
 
-### 1. Telegram Bot with AI Agent (`telegram-ai-bot.json`)
+### 1. Bot de Telegram con Agente de IA (`telegram-ai-bot.json`)
 
-**Description**: An intelligent Telegram bot that uses RAG (Retrieval-Augmented Generation) to provide context-aware responses.
+**Descripción**: Un bot inteligente de Telegram que usa RAG (Generación Aumentada por Recuperación) para proporcionar respuestas contextuales.
 
-**Features**:
-- Receives messages from Telegram users
-- Stores conversation history in PostgreSQL
-- Retrieves relevant context from the RAG database
-- Generates AI responses using OpenAI or Ollama
-- Supports conversation tracking and user profiling
+**Características**:
 
-**Nodes**:
+- Recibe mensajes de usuarios de Telegram
+- Almacena historial de conversación en PostgreSQL
+- Recupera contexto relevante de la base de datos RAG
+- Genera respuestas de IA usando OpenAI u Ollama
+- Soporta seguimiento de conversación y perfiles de usuario
+
+**Nodos**:
+
 - Telegram Trigger
-- PostgreSQL (Save/Retrieve)
+- PostgreSQL (Guardar/Recuperar)
 - OpenAI / Ollama
 - Telegram Send Message
 
-**Credentials Required**:
+**Credenciales Requeridas**:
+
 - Telegram Bot API
 - PostgreSQL
-- OpenAI API (or configure Ollama endpoint)
+- OpenAI API (o configurar endpoint de Ollama)
 
-**Use Cases**:
-- Customer support automation
-- Knowledge base Q&A
-- Personal AI assistant
-- Educational chatbot
+**Casos de Uso**:
+
+- Automatización de soporte al cliente
+- Preguntas y respuestas de base de conocimiento
+- Asistente personal de IA
+- Chatbot educativo
 
 ---
 
-### 2. WhatsApp Bot with AI Agent (`whatsapp-ai-bot.json`)
+### 2. Bot de WhatsApp con Agente de IA (`whatsapp-ai-bot.json`)
 
-**Description**: AI-powered WhatsApp bot using Meta's WhatsApp Business API and Google Gemini.
+**Descripción**: Bot de WhatsApp potenciado por IA usando WhatsApp Business API de Meta y Google Gemini.
 
-**Features**:
-- Webhook-based message receiving
-- WhatsApp Business API integration
-- Gemini AI for response generation
-- Message history tracking
-- Multi-user support
+**Características**:
 
-**Nodes**:
+- Recepción de mensajes basada en webhook
+- Integración con WhatsApp Business API
+- Gemini AI para generación de respuestas
+- Seguimiento de historial de mensajes
+- Soporte multi-usuario
+
+**Nodos**:
+
 - Webhook Trigger
 - Data Validation
 - Message Extraction
@@ -53,198 +59,221 @@ This directory contains pre-built n8n workflows for various automation tasks inv
 - Gemini AI
 - WhatsApp API Response
 
-**Credentials Required**:
-- Meta WhatsApp Business API credentials
+**Credenciales Requeridas**:
+
+- Credenciales de Meta WhatsApp Business API
 - PostgreSQL
 - Google Gemini API
 
-**Use Cases**:
-- Business customer service
-- Order notifications and tracking
-- Appointment scheduling
-- Product information queries
+**Casos de Uso**:
+
+- Servicio al cliente empresarial
+- Notificaciones y seguimiento de pedidos
+- Programación de citas
+- Consultas de información de productos
 
 ---
 
-### 3. Web Scraping to RAG Database (`web-scraping-rag.json`)
+### 3. Web Scraping a Base de Datos RAG (`web-scraping-rag.json`)
 
-**Description**: Automated web scraping workflow that extracts content from websites and stores it in the RAG database with vector embeddings.
+**Descripción**: Workflow automatizado de web scraping que extrae contenido de sitios web y lo almacena en la base de datos RAG con embeddings vectoriales.
 
-**Features**:
-- Scheduled execution (every 6 hours)
-- Batch processing of URLs
-- Content extraction with Cheerio
-- OpenAI embedding generation
-- Vector storage in PostgreSQL with pgvector
+**Características**:
 
-**Nodes**:
+- Ejecución programada (cada 6 horas)
+- Procesamiento por lotes de URLs
+- Extracción de contenido con Cheerio
+- Generación de embeddings de OpenAI
+- Almacenamiento vectorial en PostgreSQL con pgvector
+
+**Nodos**:
+
 - Schedule Trigger
-- PostgreSQL (Fetch URLs)
-- HTTP Request (Scrape)
-- Code Node (Cheerio extraction)
+- PostgreSQL (Obtener URLs)
+- HTTP Request (Scraping)
+- Code Node (extracción Cheerio)
 - OpenAI Embeddings
-- PostgreSQL (Store embeddings)
+- PostgreSQL (Almacenar embeddings)
 
-**Credentials Required**:
+**Credenciales Requeridas**:
+
 - PostgreSQL
 - OpenAI API
 
-**Use Cases**:
-- Building knowledge bases
-- Competitive intelligence
-- Content aggregation
-- Documentation indexing
-- News monitoring
+**Casos de Uso**:
+
+- Construcción de bases de conocimiento
+- Inteligencia competitiva
+- Agregación de contenido
+- Indexación de documentación
+- Monitoreo de noticias
 
 ---
 
-### 4. Text-to-Speech with ElevenLabs (`elevenlabs-tts.json`)
+### 4. Text-to-Speech con ElevenLabs (`elevenlabs-tts.json`)
 
-**Description**: Convert text to natural-sounding speech using ElevenLabs API.
+**Descripción**: Convierte texto a voz con sonido natural usando la API de ElevenLabs.
 
-**Features**:
-- Webhook-based text input
-- High-quality voice synthesis
-- Customizable voice settings
-- Audio file generation
+**Características**:
 
-**Nodes**:
+- Entrada de texto basada en webhook
+- Síntesis de voz de alta calidad
+- Configuración de voz personalizable
+- Generación de archivos de audio
+
+**Nodos**:
+
 - Webhook Trigger
 - HTTP Request (ElevenLabs API)
 - Webhook Response
 
-**Credentials Required**:
+**Credenciales Requeridas**:
+
 - ElevenLabs API
 
-**Use Cases**:
-- Podcast generation
-- Accessibility features
-- Voice notifications
-- Content narration
-- Language learning
+**Casos de Uso**:
+
+- Generación de podcasts
+- Características de accesibilidad
+- Notificaciones de voz
+- Narración de contenido
+- Aprendizaje de idiomas
 
 ---
 
-### 5. AI Agent Task Executor (`ai-agent-executor.json`)
+### 5. Ejecutor de Tareas de Agentes de IA (`ai-agent-executor.json`)
 
-**Description**: Autonomous agent system that processes tasks from a queue, supporting multiple task types.
+**Descripción**: Sistema de agentes autónomos que procesa tareas desde una cola, soportando múltiples tipos de tareas.
 
-**Features**:
-- Scheduled task polling (every 5 minutes)
-- Task type routing (web scraping, AI analysis, notifications)
-- Status tracking (pending, running, completed, failed)
-- Result storage
-- Error handling
+**Características**:
 
-**Nodes**:
+- Sondeo programado de tareas (cada 5 minutos)
+- Enrutamiento por tipo de tarea (web scraping, análisis de IA, notificaciones)
+- Seguimiento de estado (pendiente, ejecutando, completado, fallido)
+- Almacenamiento de resultados
+- Manejo de errores
+
+**Nodos**:
+
 - Schedule Trigger
-- PostgreSQL (Task queue)
-- Switch (Task type router)
+- PostgreSQL (Cola de tareas)
+- Switch (Enrutador de tipo de tarea)
 - HTTP Request (Web scraping)
-- OpenAI (AI analysis)
-- PostgreSQL (Update status)
+- OpenAI (Análisis de IA)
+- PostgreSQL (Actualizar estado)
 
-**Credentials Required**:
+**Credenciales Requeridas**:
+
 - PostgreSQL
 - OpenAI API
 
-**Use Cases**:
-- Automated content analysis
-- Batch processing
-- Scheduled AI tasks
-- Data pipeline automation
-- Background job processing
+**Casos de Uso**:
+
+- Análisis automatizado de contenido
+- Procesamiento por lotes
+- Tareas de IA programadas
+- Automatización de pipeline de datos
+- Procesamiento de trabajos en segundo plano
 
 ---
 
-## Workflow Import Instructions
+## Instrucciones de Importación de Workflows
 
-### Method 1: Via n8n UI
+### Método 1: Vía Interfaz de n8n
 
-1. Log in to n8n at `http://localhost:5678`
-2. Click on **Workflows** in the left sidebar
-3. Click the **Import from File** button
-4. Select the desired workflow JSON file
-5. Click **Import**
-6. Configure credentials and settings
-7. Activate the workflow
+1. Inicia sesión en n8n en `http://localhost:5678`
+2. Haz clic en **Workflows** en la barra lateral izquierda
+3. Haz clic en el botón **Import from File**
+4. Selecciona el archivo JSON del workflow deseado
+5. Haz clic en **Import**
+6. Configura credenciales y ajustes
+7. Activa el workflow
 
-### Method 2: Via File System
+### Método 2: Vía Sistema de Archivos
 
-1. Copy workflow files to n8n's workflows directory:
-   ```bash
-   cp workflows/*.json /path/to/n8n/.n8n/workflows/
-   ```
-2. Restart n8n
-3. Workflows will appear in the workflows list
+1. Copia los archivos de workflow al directorio de workflows de n8n:
 
-### Method 3: Via Docker Volume
+```bash
+cp workflows/*.json /path/to/n8n/.n8n/workflows/
 
-If using Docker:
+```
+
+2. Reinicia n8n
+
+3. Los workflows aparecerán en la lista de workflows
+
+### Método 3: Vía Volumen Docker
+
+Si usas Docker:
 
 ```bash
 docker cp workflows/telegram-ai-bot.json n8n:/home/node/.n8n/workflows/
+
 ```
 
 ---
 
-## Workflow Configuration
+## Configuración de Workflows
 
-### Setting Up Credentials
+### Configurando Credenciales
 
-Before activating workflows, configure the required credentials:
+Antes de activar workflows, configura las credenciales requeridas:
 
 #### PostgreSQL
 
-1. In n8n, go to **Credentials** → **New Credential**
-2. Select **PostgreSQL**
-3. Enter:
-   - Host: `postgres` (or `localhost` if running locally)
+1. En n8n, ve a **Credentials** → **New Credential**
+2. Selecciona **PostgreSQL**
+3. Ingresa:
+   - Host: `postgres` (o `localhost` si se ejecuta localmente)
    - Database: `n8n`
    - User: `n8n`
-   - Password: (from your `.env` file)
+   - Password: (de tu archivo `.env`)
    - Port: `5432`
 
 #### OpenAI
 
-1. Go to **Credentials** → **New Credential**
-2. Select **OpenAI API**
-3. Enter your API key from `.env`
+1. Ve a **Credentials** → **New Credential**
+2. Selecciona **OpenAI API**
+3. Ingresa tu clave API desde `.env`
 
 #### Telegram
 
-1. Go to **Credentials** → **New Credential**
-2. Select **Telegram API**
-3. Enter your bot token from @BotFather
+1. Ve a **Credentials** → **New Credential**
+2. Selecciona **Telegram API**
+3. Ingresa tu token de bot desde @BotFather
 
-#### Gemini (Generic HTTP Request)
+#### Gemini (HTTP Request Genérico)
 
-Configure via HTTP Request node with header authentication:
+Configura vía nodo HTTP Request con autenticación de encabezado:
+
 - Header Name: `x-goog-api-key`
-- Header Value: Your Gemini API key
+- Header Value: Tu clave API de Gemini
 
-#### ElevenLabs (Generic HTTP Request)
+#### ElevenLabs (HTTP Request Genérico)
 
-Configure via HTTP Request node with header authentication:
+Configura vía nodo HTTP Request con autenticación de encabezado:
+
 - Header Name: `xi-api-key`
-- Header Value: Your ElevenLabs API key
+- Header Value: Tu clave API de ElevenLabs
 
 ---
 
-## Customization Guide
+## Guía de Personalización
 
-### Modifying AI Models
+### Modificando Modelos de IA
 
-#### Change OpenAI Model
+#### Cambiar Modelo de OpenAI
 
-In any OpenAI node, modify the `model` parameter:
-- `gpt-3.5-turbo` - Fast and cost-effective
-- `gpt-4` - Most capable
-- `gpt-4-turbo` - Balanced performance
+En cualquier nodo OpenAI, modifica el parámetro `model`:
 
-#### Switch to Ollama
+- `gpt-3.5-turbo` - Rápido y económico
+- `gpt-4` - Más capaz
+- `gpt-4-turbo` - Rendimiento balanceado
 
-Replace OpenAI nodes with HTTP Request nodes:
+#### Cambiar a Ollama
+
+Reemplaza nodos OpenAI con nodos HTTP Request:
+
 ```json
 {
   "url": "http://ollama:11434/api/generate",
@@ -255,22 +284,24 @@ Replace OpenAI nodes with HTTP Request nodes:
     "stream": false
   }
 }
+
 ```
 
-### Adjusting Schedules
+### Ajustando Horarios
 
-Modify Schedule Trigger nodes to change execution frequency:
-- **Minutes**: For frequent updates (1-59 minutes)
-- **Hours**: For regular intervals (1-23 hours)
-- **Days**: For daily tasks
-- **Cron Expression**: For complex schedules
+Modifica los nodos Schedule Trigger para cambiar la frecuencia de ejecución:
 
-### Adding Error Handling
+- **Minutos**: Para actualizaciones frecuentes (1-59 minutos)
+- **Horas**: Para intervalos regulares (1-23 horas)
+- **Días**: Para tareas diarias
+- **Expresión Cron**: Para horarios complejos
 
-1. Add an **Error Trigger** node to workflows
-2. Connect to notification services (Email, Slack, Telegram)
-3. Configure retry logic in node settings
-4. Set up error logging to database
+### Agregando Manejo de Errores
+
+1. Agrega un nodo **Error Trigger** a los workflows
+2. Conéctalo a servicios de notificación (Email, Slack, Telegram)
+3. Configura lógica de reintentos en ajustes de nodo
+4. Configura registro de errores en base de datos
 
 ---
 
@@ -279,6 +310,7 @@ Modify Schedule Trigger nodes to change execution frequency:
 ### 1. Testing
 
 Always test workflows before activating:
+
 - Use the **Execute Workflow** button
 - Test with sample data
 - Verify all credentials
@@ -287,6 +319,7 @@ Always test workflows before activating:
 ### 2. Monitoring
 
 Set up monitoring:
+
 - Enable execution logging
 - Configure error notifications
 - Track execution times
@@ -295,6 +328,7 @@ Set up monitoring:
 ### 3. Optimization
 
 Improve performance:
+
 - Use batch processing where possible
 - Implement caching for frequently accessed data
 - Optimize database queries
@@ -302,142 +336,157 @@ Improve performance:
 
 ### 4. Security
 
-Secure your workflows:
-- Use environment variables for sensitive data
-- Implement webhook verification
-- Add rate limiting
-- Validate input data
+Asegura tus workflows:
 
-### 5. Documentation
+- Usa variables de entorno para datos sensibles
+- Implementa verificación de webhook
+- Agrega limitación de tasa
+- Valida datos de entrada
 
-Document your customizations:
-- Add notes to nodes
-- Use descriptive node names
-- Comment complex logic
-- Keep a changelog
+### 5. Documentación
 
----
+Documenta tus personalizaciones:
 
-## Troubleshooting
-
-### Workflow Won't Activate
-
-**Possible causes**:
-- Missing credentials
-- Invalid configuration
-- Node compatibility issues
-
-**Solutions**:
-- Check all credential connections
-- Verify node settings
-- Review error messages in the UI
-
-### Webhook Not Receiving Data
-
-**Possible causes**:
-- Incorrect webhook URL
-- Firewall blocking requests
-- Webhook not activated
-
-**Solutions**:
-- Verify webhook URL in external service
-- Check n8n logs: `docker-compose logs n8n`
-- Ensure workflow is active
-- Test with curl or Postman
-
-### Database Connection Errors
-
-**Possible causes**:
-- PostgreSQL not running
-- Incorrect credentials
-- Network issues
-
-**Solutions**:
-- Verify PostgreSQL is running: `docker-compose ps postgres`
-- Check credentials in n8n
-- Test connection from command line
-
-### AI Responses Too Slow
-
-**Solutions**:
-- Use faster models (gpt-3.5-turbo)
-- Reduce max tokens
-- Switch to Ollama for local inference
-- Implement caching
+- Agrega notas a los nodos
+- Usa nombres de nodos descriptivos
+- Comenta lógica compleja
+- Mantén un changelog
 
 ---
 
-## Advanced Workflows
+## Solución de Problemas
 
-### Creating Custom Workflows
+### El Workflow No Se Activa
 
-To create your own workflow:
+**Posibles causas**:
 
-1. Start with a trigger (Webhook, Schedule, or Manual)
-2. Add data processing nodes
-3. Integrate AI services
-4. Store results in database
-5. Add notifications or responses
-6. Test thoroughly
-7. Export as JSON for version control
+- Credenciales faltantes
+- Configuración inválida
+- Problemas de compatibilidad de nodos
 
-### Combining Workflows
+**Soluciones**:
 
-Link workflows together:
-- Use **Execute Workflow** node to call other workflows
-- Share data via PostgreSQL
-- Use webhooks for asynchronous communication
-- Implement event-driven architecture
+- Verifica todas las conexiones de credenciales
+- Verifica ajustes de nodos
+- Revisa mensajes de error en la interfaz
+
+### El Webhook No Recibe Datos
+
+**Posibles causas**:
+
+- URL de webhook incorrecta
+- Firewall bloqueando solicitudes
+- Webhook no activado
+
+**Soluciones**:
+
+- Verifica URL de webhook en servicio externo
+- Revisa logs de n8n: `docker-compose logs n8n`
+- Asegúrate de que el workflow esté activo
+- Prueba con curl o Postman
+
+### Errores de Conexión a Base de Datos
+
+**Posibles causas**:
+
+- PostgreSQL no está ejecutándose
+- Credenciales incorrectas
+- Problemas de red
+
+**Soluciones**:
+
+- Verifica que PostgreSQL esté ejecutándose: `docker-compose ps postgres`
+- Revisa credenciales en n8n
+- Prueba la conexión desde línea de comandos
+
+### Respuestas de IA Muy Lentas
+
+**Soluciones**:
+
+- Usa modelos más rápidos (gpt-3.5-turbo)
+- Reduce tokens máximos
+- Cambia a Ollama para inferencia local
+- Implementa caché
 
 ---
 
-## Example Workflow Combinations
+## Workflows Avanzados
 
-### 1. Complete Customer Support System
+### Creando Workflows Personalizados
+
+Para crear tu propio workflow:
+
+1. Comienza con un trigger (Webhook, Schedule o Manual)
+2. Agrega nodos de procesamiento de datos
+3. Integra servicios de IA
+4. Almacena resultados en base de datos
+5. Agrega notificaciones o respuestas
+6. Prueba exhaustivamente
+7. Exporta como JSON para control de versiones
+
+### Combinando Workflows
+
+Enlaza workflows juntos:
+
+- Usa el nodo **Execute Workflow** para llamar otros workflows
+- Comparte datos vía PostgreSQL
+- Usa webhooks para comunicación asíncrona
+- Implementa arquitectura basada en eventos
+
+---
+
+## Ejemplos de Combinaciones de Workflows
+
+### 1. Sistema Completo de Soporte al Cliente
 
 **Workflows**:
-- Telegram Bot + WhatsApp Bot
-- Web Scraping (for knowledge base updates)
-- AI Agent Executor (for background tasks)
 
-**Flow**:
-1. Users message via Telegram/WhatsApp
-2. RAG retrieves relevant documentation
-3. AI generates response
-4. Conversation logged
-5. Complex queries queued as agent tasks
+- Bot de Telegram + Bot de WhatsApp
+- Web Scraping (para actualizaciones de base de conocimiento)
+- Ejecutor de Agentes de IA (para tareas en segundo plano)
 
-### 2. Content Automation Pipeline
+**Flujo**:
+
+1. Usuarios envían mensajes vía Telegram/WhatsApp
+2. RAG recupera documentación relevante
+3. IA genera respuesta
+4. Conversación registrada
+5. Consultas complejas encoladas como tareas de agente
+
+### 2. Pipeline de Automatización de Contenido
 
 **Workflows**:
-- Web Scraping (content discovery)
-- AI Agent Executor (content analysis)
-- Text-to-Speech (audio creation)
 
-**Flow**:
-1. Scrape websites for new content
-2. AI analyzes and summarizes
-3. Generate audio versions
-4. Store and distribute
+- Web Scraping (descubrimiento de contenido)
+- Ejecutor de Agentes de IA (análisis de contenido)
+- Text-to-Speech (creación de audio)
 
----
+**Flujo**:
 
-## Contributing
-
-To contribute new workflows:
-
-1. Create and test your workflow in n8n
-2. Export as JSON
-3. Add documentation
-4. Submit a pull request
-5. Include use case examples
+1. Extraer sitios web para nuevo contenido
+2. IA analiza y resume
+3. Generar versiones de audio
+4. Almacenar y distribuir
 
 ---
 
-## Support
+## Contribuyendo
 
-For workflow-specific issues:
-- Check the [USAGE.md](../docs/USAGE.md) guide
-- Review [INSTALLATION.md](../docs/INSTALLATION.md)
-- Consult [n8n documentation](https://docs.n8n.io/)
-- Open an issue on GitHub
+Para contribuir nuevos workflows:
+
+1. Crea y prueba tu workflow en n8n
+2. Exporta como JSON
+3. Agrega documentación
+4. Envía un pull request
+5. Incluye ejemplos de casos de uso
+
+---
+
+## Soporte
+
+Para problemas específicos de workflows:
+
+- Revisa la guía [USAGE.md](../docs/USAGE.md)
+- Consulta [INSTALLATION.md](../docs/INSTALLATION.md)
+- Consulta la [documentación de n8n](https://docs.n8n.io/)
+- Abre un issue en GitHub
