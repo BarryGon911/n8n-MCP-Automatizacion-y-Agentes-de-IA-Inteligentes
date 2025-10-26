@@ -114,7 +114,6 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 
 <div align="center">
   
-**© EntusIAsta Tecnológico — 2025** · MIT
+**© Erick S. Ruiz — 2025** · MIT
 
 </div>
-
