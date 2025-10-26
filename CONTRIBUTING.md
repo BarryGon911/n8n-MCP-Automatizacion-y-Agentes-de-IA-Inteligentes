@@ -75,6 +75,7 @@ Para contribuir un nuevo workflow:
 3. Agrégalo al directorio `workflows/`
 4. Documenta el workflow en `workflows/README.md`
 5. Incluye:
+
    - Descripción
    - Credenciales requeridas
    - Casos de uso

@@ -93,9 +93,7 @@ docker-compose restart n8n
 ### 3. Obtener una Clave API de OpenAI
 
 1. Regístrate en [OpenAI](https://platform.openai.com/)
-
 2. Genera una clave API
-
 3. Agrégala a `.env`:
 
 ```env
@@ -118,6 +116,7 @@ OPENAI_API_KEY=sk-tu-clave-aqui
 1. Ve a **Settings** → **Credentials** → **New**
 2. Selecciona **PostgreSQL**
 3. Completa:
+
    - Host: `postgres`
    - Database: `n8n`
    - User: `n8n`

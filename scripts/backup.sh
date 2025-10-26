@@ -14,16 +14,11 @@ mkdir -p "$BACKUP_DIR"
 
 echo "Creating backup of n8n database..."
 
-# Backup main n8n database
+# Backup n8n database (includes all tables: n8n workflows + RAG data)
 docker-compose exec -T postgres pg_dump -U n8n n8n > "$BACKUP_FILE"
 
-# Backup RAG database
-docker-compose exec -T postgres pg_dump -U n8n rag_database > "$BACKUP_DIR/rag_backup_$TIMESTAMP.sql"
-
 echo "Backup completed successfully!"
-echo "Files saved to:"
-echo "  - $BACKUP_FILE"
-echo "  - $BACKUP_DIR/rag_backup_$TIMESTAMP.sql"
+echo "File saved to: $BACKUP_FILE"
 
 # Remove backups older than 30 days
 find "$BACKUP_DIR" -name "*.sql" -mtime +30 -delete
