@@ -69,7 +69,7 @@
 
 ## Flujo de Datos
 
-### 1. Bots de Mensajería (Telegram/WhatsApp)
+### 1. Bots de Mensajeria (Telegram/WhatsApp)
 
 ```ini
 Mensaje del Usuario
@@ -78,7 +78,7 @@ Webhook/Trigger → Workflow n8n
     ↓
 Guardar en tabla conversations
     ↓
-Recuperar contexto de RAG (búsqueda vectorial)
+Recuperar contexto de RAG (busqueda vectorial)
     ↓
 Generar respuesta de IA (OpenAI/Gemini/Ollama)
     ↓
@@ -121,7 +121,7 @@ Marcar URL como procesada
 
 ```
 
-### 3. Tareas de Agentes Autónomos
+### 3. Tareas de Agentes Autonomos
 
 ```ini
 Trigger Programado (cada 5 minutos)
@@ -141,18 +141,18 @@ Actualizar estado a 'completed'
 
 ```
 
-## Stack Tecnológico
+## Stack Tecnologico
 
 ### Plataforma Principal
 
-- **n8n**: Motor de automatización de workflows
-- **Docker**: Contenedorización
-- **Docker Compose**: Orquestación multi-contenedor
+- **n8n**: Motor de automatizacion de workflows
+- **Docker**: Contenedorizacion
+- **Docker Compose**: Orquestacion multi-contenedor
 
 ### Base de Datos
 
 - **PostgreSQL 15**: Base de datos relacional
-- **pgvector**: Extensión de búsqueda por similitud vectorial
+- **pgvector**: Extension de busqueda por similitud vectorial
 
 ### Modelos de IA
 
@@ -160,17 +160,17 @@ Actualizar estado a 'completed'
 - **Google Gemini**: IA multimodal de Google
 - **Ollama**: Modelos locales auto-hospedados (Llama2, Mistral)
 
-### Plataformas de Mensajería
+### Plataformas de Mensajeria
 
-- **Telegram Bot API**: Integración con Telegram
-- **Meta WhatsApp Business API**: Integración con WhatsApp
-- **Twilio**: Integración alternativa con WhatsApp
+- **Telegram Bot API**: Integracion con Telegram
+- **Meta WhatsApp Business API**: Integracion con WhatsApp
+- **Twilio**: Integracion alternativa con WhatsApp
 
 ### Servicios Adicionales
 
-- **ElevenLabs**: Síntesis de texto a voz
-- **Google Cloud**: Integración de servicios en la nube
-- **Cheerio**: Análisis HTML para web scraping
+- **ElevenLabs**: Sintesis de texto a voz
+- **Google Cloud**: Integracion de servicios en la nube
+- **Cheerio**: Analisis HTML para web scraping
 
 ## Arquitectura de Seguridad
 
@@ -181,7 +181,7 @@ Actualizar estado a 'completed'
 │                                                              │
 │  1. Seguridad de Red                                         │
 │     ├─ Aislamiento de red Docker                            │
-│     ├─ Control de exposición de puertos                     │
+│     ├─ Control de exposicion de puertos                     │
 ````
 ```
 
@@ -194,26 +194,26 @@ Actualizar estado a 'completed'
 │                                                              │
 │  1. Seguridad de Red                                         │
 │     ├─ Aislamiento de red Docker                            │
-│     ├─ Control de exposición de puertos                     │
-│     └─ HTTPS en producción (proxy inverso)                  │
+│     ├─ Control de exposicion de puertos                     │
+│     └─ HTTPS en produccion (proxy inverso)                  │
 │                                                              │
-│  2. Autenticación & Autorización                             │
-│     ├─ Autenticación básica de n8n                          │
+│  2. Autenticacion & Autorizacion                             │
+│     ├─ Autenticacion basica de n8n                          │
 │     ├─ Credenciales de base de datos                        │
-│     ├─ Validación de firma de webhook                       │
-│     └─ Gestión de claves API                                │
+│     ├─ Validacion de firma de webhook                       │
+│     └─ Gestion de claves API                                │
 │                                                              │
 │  3. Seguridad de Datos                                       │
 │     ├─ Aislamiento de variables de entorno                  │
 │     ├─ Sin credenciales hardcodeadas                        │
 │     ├─ Control de acceso a base de datos                    │
-│     └─ Comunicación cifrada (HTTPS/SSL)                     │
+│     └─ Comunicacion cifrada (HTTPS/SSL)                     │
 │                                                              │
-│  4. Seguridad de Aplicación                                  │
-│     ├─ Validación de entrada                                │
-│     ├─ Limitación de tasa                                   │
+│  4. Seguridad de Aplicacion                                  │
+│     ├─ Validacion de entrada                                │
+│     ├─ Limitacion de tasa                                   │
 │     ├─ Manejo de errores                                    │
-│     └─ Registro de auditoría                                │
+│     └─ Registro de auditoria                                │
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
 
@@ -225,32 +225,32 @@ Actualizar estado a 'completed'
 
 - Aumentar recursos de contenedores Docker
 - Actualizar instancia de base de datos
-- Agregar más RAM para modelos Ollama
+- Agregar mas RAM para modelos Ollama
 
 ### Escalamiento Horizontal
 
-- Múltiples instancias de n8n con balanceador de carga
-- Réplicas de lectura de PostgreSQL
-- Redis para caché (mejora futura)
-- Cola de mensajes para distribución de tareas (mejora futura)
+- Multiples instancias de n8n con balanceador de carga
+- Replicas de lectura de PostgreSQL
+- Redis para cache (mejora futura)
+- Cola de mensajes para distribucion de tareas (mejora futura)
 
-### Optimización de Rendimiento
+### Optimizacion de Rendimiento
 
-- Indexación de base de datos (implementado)
+- Indexacion de base de datos (implementado)
 - Pooling de conexiones
 - Procesamiento por lotes
-- Estrategias de caché
-- CDN para assets estáticos (si es necesario)
+- Estrategias de cache
+- CDN para assets estaticos (si es necesario)
 
 ## Opciones de Despliegue
 
-### 1. Desarrollo (Configuración Actual)
+### 1. Desarrollo (Configuracion Actual)
 
-- Docker Compose en máquina local
+- Docker Compose en maquina local
 - Todos los servicios en un solo host
 - Perfecto para pruebas y desarrollo
 
-### 2. Producción (Recomendado)
+### 2. Produccion (Recomendado)
 
 - Hosting en la nube (AWS, GCP, Azure, DigitalOcean)
 - Base de datos PostgreSQL administrada
@@ -262,39 +262,39 @@ Actualizar estado a 'completed'
 
 ### 3. Empresarial
 
-- Clúster Kubernetes
-- Configuración de alta disponibilidad
+- Cluster Kubernetes
+- Configuracion de alta disponibilidad
 - Auto-escalamiento
-- Despliegue multi-región
+- Despliegue multi-region
 - Monitoreo avanzado (Prometheus, Grafana)
 - Pipeline CI/CD
-- Plan de recuperación ante desastres
+- Plan de recuperacion ante desastres
 
 ## Monitoreo & Observabilidad
 
-### Métricas a Rastrear
+### Metricas a Rastrear
 
-- Tiempos de ejecución de workflows
+- Tiempos de ejecucion de workflows
 - Tiempos de respuesta de API
 - Rendimiento de consultas de base de datos
 - Tasas de error
 - Uso y costos de API
-- Utilización de recursos (CPU, RAM, disco)
+- Utilizacion de recursos (CPU, RAM, disco)
 - Conteo de usuarios activos
 - Volumen de mensajes
 
 ### Registro (Logging)
 
-- Logs de ejecución de n8n
+- Logs de ejecucion de n8n
 - Logs de consultas de base de datos
-- Logs de errores de aplicación
+- Logs de errores de aplicacion
 - Logs de actividad de webhook
-- Logs de auditoría de seguridad
+- Logs de auditoria de seguridad
 
 ### Herramientas (Mejora Futura)
 
-- Prometheus para recolección de métricas
-- Grafana para visualización
-- Stack ELK para agregación de logs
+- Prometheus para recoleccion de metricas
+- Grafana para visualizacion
+- Stack ELK para agregacion de logs
 - Servicios de monitoreo de uptime
 - Dashboards de seguimiento de costos

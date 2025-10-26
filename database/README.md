@@ -1,18 +1,18 @@
-# 📊 Documentación de Base de Datos
+# 📊 Documentacion de Base de Datos
 
-Este directorio contiene la configuración e inicialización de la base de datos PostgreSQL con extensión **pgvector** para el sistema RAG (Retrieval-Augmented Generation).
+Este directorio contiene la configuracion e inicializacion de la base de datos PostgreSQL con extension **pgvector** para el sistema RAG (Retrieval-Augmented Generation).
 
 ## 📋 Contenido
 
-- **`init.sql`**: Script de inicialización de la base de datos que crea todas las tablas necesarias
-- **`README.md`**: Este archivo de documentación
+- **`init.sql`**: Script de inicializacion de la base de datos que crea todas las tablas necesarias
+- **`README.md`**: Este archivo de documentacion
 
 ## 🗄️ Esquema de Base de Datos
 
 La base de datos `n8n` contiene las siguientes tablas principales:
 
-### 1. **users** - Gestión de Usuarios
-Almacena información de usuarios de diferentes plataformas (Telegram, WhatsApp, etc.)
+### 1. **users** - Gestion de Usuarios
+Almacena informacion de usuarios de diferentes plataformas (Telegram, WhatsApp, etc.)
 
 ### 2. **conversations** - Historial de Conversaciones
 Registra todas las conversaciones con contexto y metadatos.
@@ -21,7 +21,7 @@ Registra todas las conversaciones con contexto y metadatos.
 Almacena documentos procesados para el sistema RAG con embeddings vectoriales.
 
 ### 4. **scraped_data** - Datos de Web Scraping
-Datos extraídos de sitios web para análisis y procesamiento.
+Datos extraidos de sitios web para analisis y procesamiento.
 
 ### 5. **agent_tasks** - Tareas de Agentes IA
 Seguimiento de tareas ejecutadas por agentes de IA.
@@ -29,16 +29,16 @@ Seguimiento de tareas ejecutadas por agentes de IA.
 ### 6. **workflow_logs** - Logs de Workflows
 Registro de ejecuciones de workflows de n8n.
 
-## 🔍 Índices para Búsqueda Vectorial
+## 🔍 indices para Busqueda Vectorial
 
-El script crea índices **HNSW** (Hierarchical Navigable Small World) para búsqueda eficiente de vectores.
+El script crea indices **HNSW** (Hierarchical Navigable Small World) para busqueda eficiente de vectores.
 
 ## 🔧 Mantenimiento
 
 ### Crear Backup
 
 ```bash
-# Desde el directorio raíz del proyecto
+# Desde el directorio raiz del proyecto
 ./scripts/backup.sh
 ```
 
@@ -56,4 +56,4 @@ docker-compose exec -T postgres psql -U n8n n8n < ./backups/n8n_backup_TIMESTAMP
 
 ---
 
-**¿Necesitas ayuda?** Consulta la [documentación completa](../docs/) o abre un issue en GitHub.
+**Necesitas ayuda?** Consulta la [documentacion completa](../docs/) o abre un issue en GitHub.

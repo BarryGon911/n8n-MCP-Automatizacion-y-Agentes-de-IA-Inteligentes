@@ -1,20 +1,20 @@
-# Documentación de Workflows
+# Documentacion de Workflows
 
-Este directorio contiene workflows pre-construidos de n8n para diversas tareas de automatización que involucran agentes de IA, plataformas de mensajería y procesamiento de datos.
+Este directorio contiene workflows pre-construidos de n8n para diversas tareas de automatizacion que involucran agentes de IA, plataformas de mensajeria y procesamiento de datos.
 
 ## Workflows Disponibles
 
 ### 1. Bot de Telegram con Agente de IA (`telegram-ai-bot.json`)
 
-**Descripción**: Un bot inteligente de Telegram que usa RAG (Generación Aumentada por Recuperación) para proporcionar respuestas contextuales.
+**Descripcion**: Un bot inteligente de Telegram que usa RAG (Generacion Aumentada por Recuperacion) para proporcionar respuestas contextuales.
 
-**Características**:
+**Caracteristicas**:
 
 - Recibe mensajes de usuarios de Telegram
-- Almacena historial de conversación en PostgreSQL
+- Almacena historial de conversacion en PostgreSQL
 - Recupera contexto relevante de la base de datos RAG
 - Genera respuestas de IA usando OpenAI u Ollama
-- Soporta seguimiento de conversación y perfiles de usuario
+- Soporta seguimiento de conversacion y perfiles de usuario
 
 **Nodos**:
 
@@ -31,7 +31,7 @@ Este directorio contiene workflows pre-construidos de n8n para diversas tareas d
 
 **Casos de Uso**:
 
-- Automatización de soporte al cliente
+- Automatizacion de soporte al cliente
 - Preguntas y respuestas de base de conocimiento
 - Asistente personal de IA
 - Chatbot educativo
@@ -40,13 +40,13 @@ Este directorio contiene workflows pre-construidos de n8n para diversas tareas d
 
 ### 2. Bot de WhatsApp con Agente de IA (`whatsapp-ai-bot.json`)
 
-**Descripción**: Bot de WhatsApp potenciado por IA usando WhatsApp Business API de Meta y Google Gemini.
+**Descripcion**: Bot de WhatsApp potenciado por IA usando WhatsApp Business API de Meta y Google Gemini.
 
-**Características**:
+**Caracteristicas**:
 
-- Recepción de mensajes basada en webhook
-- Integración con WhatsApp Business API
-- Gemini AI para generación de respuestas
+- Recepcion de mensajes basada en webhook
+- Integracion con WhatsApp Business API
+- Gemini AI para generacion de respuestas
 - Seguimiento de historial de mensajes
 - Soporte multi-usuario
 
@@ -69,21 +69,21 @@ Este directorio contiene workflows pre-construidos de n8n para diversas tareas d
 
 - Servicio al cliente empresarial
 - Notificaciones y seguimiento de pedidos
-- Programación de citas
-- Consultas de información de productos
+- Programacion de citas
+- Consultas de informacion de productos
 
 ---
 
 ### 3. Web Scraping a Base de Datos RAG (`web-scraping-rag.json`)
 
-**Descripción**: Workflow automatizado de web scraping que extrae contenido de sitios web y lo almacena en la base de datos RAG con embeddings vectoriales.
+**Descripcion**: Workflow automatizado de web scraping que extrae contenido de sitios web y lo almacena en la base de datos RAG con embeddings vectoriales.
 
-**Características**:
+**Caracteristicas**:
 
-- Ejecución programada (cada 6 horas)
+- Ejecucion programada (cada 6 horas)
 - Procesamiento por lotes de URLs
-- Extracción de contenido con Cheerio
-- Generación de embeddings de OpenAI
+- Extraccion de contenido con Cheerio
+- Generacion de embeddings de OpenAI
 - Almacenamiento vectorial en PostgreSQL con pgvector
 
 **Nodos**:
@@ -91,7 +91,7 @@ Este directorio contiene workflows pre-construidos de n8n para diversas tareas d
 - Schedule Trigger
 - PostgreSQL (Obtener URLs)
 - HTTP Request (Scraping)
-- Code Node (extracción Cheerio)
+- Code Node (extraccion Cheerio)
 - OpenAI Embeddings
 - PostgreSQL (Almacenar embeddings)
 
@@ -102,24 +102,24 @@ Este directorio contiene workflows pre-construidos de n8n para diversas tareas d
 
 **Casos de Uso**:
 
-- Construcción de bases de conocimiento
+- Construccion de bases de conocimiento
 - Inteligencia competitiva
-- Agregación de contenido
-- Indexación de documentación
+- Agregacion de contenido
+- Indexacion de documentacion
 - Monitoreo de noticias
 
 ---
 
 ### 4. Text-to-Speech con ElevenLabs (`elevenlabs-tts.json`)
 
-**Descripción**: Convierte texto a voz con sonido natural usando la API de ElevenLabs.
+**Descripcion**: Convierte texto a voz con sonido natural usando la API de ElevenLabs.
 
-**Características**:
+**Caracteristicas**:
 
 - Entrada de texto basada en webhook
-- Síntesis de voz de alta calidad
-- Configuración de voz personalizable
-- Generación de archivos de audio
+- Sintesis de voz de alta calidad
+- Configuracion de voz personalizable
+- Generacion de archivos de audio
 
 **Nodos**:
 
@@ -133,22 +133,22 @@ Este directorio contiene workflows pre-construidos de n8n para diversas tareas d
 
 **Casos de Uso**:
 
-- Generación de podcasts
-- Características de accesibilidad
+- Generacion de podcasts
+- Caracteristicas de accesibilidad
 - Notificaciones de voz
-- Narración de contenido
+- Narracion de contenido
 - Aprendizaje de idiomas
 
 ---
 
 ### 5. Ejecutor de Tareas de Agentes de IA (`ai-agent-executor.json`)
 
-**Descripción**: Sistema de agentes autónomos que procesa tareas desde una cola, soportando múltiples tipos de tareas.
+**Descripcion**: Sistema de agentes autonomos que procesa tareas desde una cola, soportando multiples tipos de tareas.
 
-**Características**:
+**Caracteristicas**:
 
 - Sondeo programado de tareas (cada 5 minutos)
-- Enrutamiento por tipo de tarea (web scraping, análisis de IA, notificaciones)
+- Enrutamiento por tipo de tarea (web scraping, analisis de IA, notificaciones)
 - Seguimiento de estado (pendiente, ejecutando, completado, fallido)
 - Almacenamiento de resultados
 - Manejo de errores
@@ -159,7 +159,7 @@ Este directorio contiene workflows pre-construidos de n8n para diversas tareas d
 - PostgreSQL (Cola de tareas)
 - Switch (Enrutador de tipo de tarea)
 - HTTP Request (Web scraping)
-- OpenAI (Análisis de IA)
+- OpenAI (Analisis de IA)
 - PostgreSQL (Actualizar estado)
 
 **Credenciales Requeridas**:
@@ -169,27 +169,27 @@ Este directorio contiene workflows pre-construidos de n8n para diversas tareas d
 
 **Casos de Uso**:
 
-- Análisis automatizado de contenido
+- Analisis automatizado de contenido
 - Procesamiento por lotes
 - Tareas de IA programadas
-- Automatización de pipeline de datos
+- Automatizacion de pipeline de datos
 - Procesamiento de trabajos en segundo plano
 
 ---
 
-## Instrucciones de Importación de Workflows
+## Instrucciones de Importacion de Workflows
 
-### Método 1: Vía Interfaz de n8n
+### Metodo 1: Via Interfaz de n8n
 
-1. Inicia sesión en n8n en `http://localhost:5678`
+1. Inicia sesion en n8n en `http://localhost:5678`
 2. Haz clic en **Workflows** en la barra lateral izquierda
-3. Haz clic en el botón **Import from File**
+3. Haz clic en el boton **Import from File**
 4. Selecciona el archivo JSON del workflow deseado
 5. Haz clic en **Import**
 6. Configura credenciales y ajustes
 7. Activa el workflow
 
-### Método 2: Vía Sistema de Archivos
+### Metodo 2: Via Sistema de Archivos
 
 1. Copia los archivos de workflow al directorio de workflows de n8n:
 
@@ -200,9 +200,9 @@ cp workflows/*.json /path/to/n8n/.n8n/workflows/
 
 2. Reinicia n8n
 
-3. Los workflows aparecerán en la lista de workflows
+3. Los workflows apareceran en la lista de workflows
 
-### Método 3: Vía Volumen Docker
+### Metodo 3: Via Volumen Docker
 
 Si usas Docker:
 
@@ -213,7 +213,7 @@ docker cp workflows/telegram-ai-bot.json n8n:/home/node/.n8n/workflows/
 
 ---
 
-## Configuración de Workflows
+## Configuracion de Workflows
 
 ### Configurando Credenciales
 
@@ -242,32 +242,32 @@ Antes de activar workflows, configura las credenciales requeridas:
 2. Selecciona **Telegram API**
 3. Ingresa tu token de bot desde @BotFather
 
-#### Gemini (HTTP Request Genérico)
+#### Gemini (HTTP Request Generico)
 
-Configura vía nodo HTTP Request con autenticación de encabezado:
+Configura via nodo HTTP Request con autenticacion de encabezado:
 
 - Header Name: `x-goog-api-key`
 - Header Value: Tu clave API de Gemini
 
-#### ElevenLabs (HTTP Request Genérico)
+#### ElevenLabs (HTTP Request Generico)
 
-Configura vía nodo HTTP Request con autenticación de encabezado:
+Configura via nodo HTTP Request con autenticacion de encabezado:
 
 - Header Name: `xi-api-key`
 - Header Value: Tu clave API de ElevenLabs
 
 ---
 
-## Guía de Personalización
+## Guia de Personalizacion
 
 ### Modificando Modelos de IA
 
 #### Cambiar Modelo de OpenAI
 
-En cualquier nodo OpenAI, modifica el parámetro `model`:
+En cualquier nodo OpenAI, modifica el parametro `model`:
 
-- `gpt-3.5-turbo` - Rápido y económico
-- `gpt-4` - Más capaz
+- `gpt-3.5-turbo` - Rapido y economico
+- `gpt-4` - Mas capaz
 - `gpt-4-turbo` - Rendimiento balanceado
 
 #### Cambiar a Ollama
@@ -289,18 +289,18 @@ Reemplaza nodos OpenAI con nodos HTTP Request:
 
 ### Ajustando Horarios
 
-Modifica los nodos Schedule Trigger para cambiar la frecuencia de ejecución:
+Modifica los nodos Schedule Trigger para cambiar la frecuencia de ejecucion:
 
 - **Minutos**: Para actualizaciones frecuentes (1-59 minutos)
 - **Horas**: Para intervalos regulares (1-23 horas)
-- **Días**: Para tareas diarias
-- **Expresión Cron**: Para horarios complejos
+- **Dias**: Para tareas diarias
+- **Expresion Cron**: Para horarios complejos
 
 ### Agregando Manejo de Errores
 
 1. Agrega un nodo **Error Trigger** a los workflows
-2. Conéctalo a servicios de notificación (Email, Slack, Telegram)
-3. Configura lógica de reintentos en ajustes de nodo
+2. Conectalo a servicios de notificacion (Email, Slack, Telegram)
+3. Configura logica de reintentos en ajustes de nodo
 4. Configura registro de errores en base de datos
 
 ---
@@ -339,29 +339,29 @@ Improve performance:
 Asegura tus workflows:
 
 - Usa variables de entorno para datos sensibles
-- Implementa verificación de webhook
-- Agrega limitación de tasa
+- Implementa verificacion de webhook
+- Agrega limitacion de tasa
 - Valida datos de entrada
 
-### 5. Documentación
+### 5. Documentacion
 
 Documenta tus personalizaciones:
 
 - Agrega notas a los nodos
 - Usa nombres de nodos descriptivos
-- Comenta lógica compleja
-- Mantén un changelog
+- Comenta logica compleja
+- Manten un changelog
 
 ---
 
-## Solución de Problemas
+## Solucion de Problemas
 
 ### El Workflow No Se Activa
 
 **Posibles causas**:
 
 - Credenciales faltantes
-- Configuración inválida
+- Configuracion invalida
 - Problemas de compatibilidad de nodos
 
 **Soluciones**:
@@ -382,31 +382,31 @@ Documenta tus personalizaciones:
 
 - Verifica URL de webhook en servicio externo
 - Revisa logs de n8n: `docker-compose logs n8n`
-- Asegúrate de que el workflow esté activo
+- Asegurate de que el workflow este activo
 - Prueba con curl o Postman
 
-### Errores de Conexión a Base de Datos
+### Errores de Conexion a Base de Datos
 
 **Posibles causas**:
 
-- PostgreSQL no está ejecutándose
+- PostgreSQL no esta ejecutandose
 - Credenciales incorrectas
 - Problemas de red
 
 **Soluciones**:
 
-- Verifica que PostgreSQL esté ejecutándose: `docker-compose ps postgres`
+- Verifica que PostgreSQL este ejecutandose: `docker-compose ps postgres`
 - Revisa credenciales en n8n
-- Prueba la conexión desde línea de comandos
+- Prueba la conexion desde linea de comandos
 
 ### Respuestas de IA Muy Lentas
 
 **Soluciones**:
 
-- Usa modelos más rápidos (gpt-3.5-turbo)
-- Reduce tokens máximos
+- Usa modelos mas rapidos (gpt-3.5-turbo)
+- Reduce tokens maximos
 - Cambia a Ollama para inferencia local
-- Implementa caché
+- Implementa cache
 
 ---
 
@@ -429,8 +429,8 @@ Para crear tu propio workflow:
 Enlaza workflows juntos:
 
 - Usa el nodo **Execute Workflow** para llamar otros workflows
-- Comparte datos vía PostgreSQL
-- Usa webhooks para comunicación asíncrona
+- Comparte datos via PostgreSQL
+- Usa webhooks para comunicacion asincrona
 - Implementa arquitectura basada en eventos
 
 ---
@@ -447,19 +447,19 @@ Enlaza workflows juntos:
 
 **Flujo**:
 
-1. Usuarios envían mensajes vía Telegram/WhatsApp
-2. RAG recupera documentación relevante
+1. Usuarios envian mensajes via Telegram/WhatsApp
+2. RAG recupera documentacion relevante
 3. IA genera respuesta
-4. Conversación registrada
+4. Conversacion registrada
 5. Consultas complejas encoladas como tareas de agente
 
-### 2. Pipeline de Automatización de Contenido
+### 2. Pipeline de Automatizacion de Contenido
 
 **Workflows**:
 
 - Web Scraping (descubrimiento de contenido)
-- Ejecutor de Agentes de IA (análisis de contenido)
-- Text-to-Speech (creación de audio)
+- Ejecutor de Agentes de IA (analisis de contenido)
+- Text-to-Speech (creacion de audio)
 
 **Flujo**:
 
@@ -476,17 +476,17 @@ Para contribuir nuevos workflows:
 
 1. Crea y prueba tu workflow en n8n
 2. Exporta como JSON
-3. Agrega documentación
-4. Envía un pull request
+3. Agrega documentacion
+4. Envia un pull request
 5. Incluye ejemplos de casos de uso
 
 ---
 
 ## Soporte
 
-Para problemas específicos de workflows:
+Para problemas especificos de workflows:
 
-- Revisa la guía [USAGE.md](../docs/USAGE.md)
+- Revisa la guia [USAGE.md](../docs/USAGE.md)
 - Consulta [INSTALLATION.md](../docs/INSTALLATION.md)
-- Consulta la [documentación de n8n](https://docs.n8n.io/)
+- Consulta la [documentacion de n8n](https://docs.n8n.io/)
 - Abre un issue en GitHub

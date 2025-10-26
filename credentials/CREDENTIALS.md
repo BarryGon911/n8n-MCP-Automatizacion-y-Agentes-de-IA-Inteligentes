@@ -1,6 +1,6 @@
 # Plantilla de Credenciales
 
-Este archivo proporciona plantillas para configurar credenciales en n8n. Después de importar workflows, configura estas credenciales en la interfaz de n8n.
+Este archivo proporciona plantillas para configurar credenciales en n8n. Despues de importar workflows, configura estas credenciales en la interfaz de n8n.
 
 ## PostgreSQL
 
@@ -55,14 +55,14 @@ Access Token: [from .env: TELEGRAM_BOT_TOKEN]
 
 Para obtener un token de bot de Telegram:
 
-1. Envía mensaje a [@BotFather](https://t.me/botfather) en Telegram
-2. Envía el comando `/newbot`
+1. Envia mensaje a [@BotFather](https://t.me/botfather) en Telegram
+2. Envia el comando `/newbot`
 3. Sigue las instrucciones para crear tu bot
 4. Copia el token proporcionado
 
 ---
 
-## Google Gemini (Autenticación por Encabezado HTTP)
+## Google Gemini (Autenticacion por Encabezado HTTP)
 
 **Tipo**: Header Auth  
 **Nombre**: Gemini API
@@ -81,7 +81,7 @@ Para obtener una clave API de Gemini:
 
 ---
 
-## ElevenLabs (Autenticación por Encabezado HTTP)
+## ElevenLabs (Autenticacion por Encabezado HTTP)
 
 **Tipo**: Header Auth  
 **Nombre**: ElevenLabs
@@ -94,14 +94,14 @@ Value: [from .env: ELEVENLABS_API_KEY]
 
 Para obtener credenciales de ElevenLabs:
 
-1. Regístrate en [ElevenLabs](https://elevenlabs.io/)
-2. Ve a Configuración de Perfil
+1. Registrate en [ElevenLabs](https://elevenlabs.io/)
+2. Ve a Configuracion de Perfil
 3. Copia tu clave API
 4. Ve a Voices para encontrar tu Voice ID
 
 ---
 
-## WhatsApp Business API (Autenticación por Encabezado HTTP)
+## WhatsApp Business API (Autenticacion por Encabezado HTTP)
 
 **Tipo**: Header Auth  
 **Nombre**: WhatsApp API
@@ -116,13 +116,13 @@ Para obtener credenciales de WhatsApp Business API:
 
 1. Crea una [Cuenta de Negocio de Meta](https://business.facebook.com/)
 2. Configura una app de WhatsApp Business
-3. Obtén tu Phone Number ID
+3. Obten tu Phone Number ID
 4. Genera un token de acceso
-5. Configura webhook con token de verificación
+5. Configura webhook con token de verificacion
 
 ---
 
-## Google Cloud (Autenticación JSON)
+## Google Cloud (Autenticacion JSON)
 
 **Tipo**: Google Cloud Platform API  
 **Nombre**: Google Cloud
@@ -166,23 +166,23 @@ Auth Token: [from .env: TWILIO_AUTH_TOKEN]
 
 ## Configurando Credenciales en n8n
 
-1. Inicia sesión en n8n en `http://localhost:5678`
-2. Haz clic en **Settings** (ícono de engranaje) en la esquina inferior izquierda
+1. Inicia sesion en n8n en `http://localhost:5678`
+2. Haz clic en **Settings** (icono de engranaje) en la esquina inferior izquierda
 3. Selecciona **Credentials**
 4. Haz clic en **Add Credential**
 5. Elige el tipo de credencial
-6. Completa la información requerida
+6. Completa la informacion requerida
 7. Haz clic en **Save**
 8. Usa la credencial en tus workflows
 
 ## Probando Credenciales
 
-Después de configurar credenciales:
+Despues de configurar credenciales:
 
 1. Abre un workflow que use la credencial
 2. Haz clic en un nodo que use esa credencial
 3. Haz clic en **Test step** o **Execute node**
-4. Verifica que la conexión funcione
+4. Verifica que la conexion funcione
 5. Revisa cualquier mensaje de error
 
 ## Notas de Seguridad
@@ -190,6 +190,6 @@ Después de configurar credenciales:
 - Nunca compartas tus credenciales o las subas a control de versiones
 - Rota las claves API regularmente
 - Usa variables de entorno para datos sensibles
-- Restringe permisos de claves API al mínimo requerido
+- Restringe permisos de claves API al minimo requerido
 - Monitorea el uso de API por actividad inusual
-- Usa credenciales separadas para desarrollo y producción
+- Usa credenciales separadas para desarrollo y produccion

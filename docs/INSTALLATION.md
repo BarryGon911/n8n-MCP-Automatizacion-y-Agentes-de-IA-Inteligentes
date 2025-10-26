@@ -1,22 +1,22 @@
-# Guía de Instalación
+# Guia de Instalacion
 
-Esta guía te ayudará a configurar el proyecto n8n Automatización y Agentes de IA en tu sistema.
+Esta guia te ayudara a configurar el proyecto n8n Automatizacion y Agentes de IA en tu sistema.
 
 ## Prerequisitos
 
-Antes de comenzar, asegúrate de tener instalado lo siguiente:
+Antes de comenzar, asegurate de tener instalado lo siguiente:
 
-- **Docker** (versión 20.10 o superior)
-- **Docker Compose** (versión 2.0 o superior)
+- **Docker** (version 20.10 o superior)
+- **Docker Compose** (version 2.0 o superior)
 - **Git** (para clonar el repositorio)
 
 ## Requisitos del Sistema
 
-- **RAM**: Mínimo 4GB (8GB recomendados)
+- **RAM**: Minimo 4GB (8GB recomendados)
 - **Espacio en Disco**: Al menos 10GB de espacio libre
 - **Sistema Operativo**: Linux, macOS, o Windows con WSL2
 
-## Pasos de Instalación
+## Pasos de Instalacion
 
 ### 1. Clonar el Repositorio
 
@@ -28,7 +28,7 @@ cd n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
 
 ### 2. Configurar Variables de Entorno
 
-Copia el archivo de ejemplo de entorno y configúralo:
+Copia el archivo de ejemplo de entorno y configuralo:
 
 ```bash
 cp .env.example .env
@@ -44,7 +44,7 @@ nano .env  # or vim, code, etc.
 
 **Configuraciones requeridas:**
 
-#### Configuración Básica de n8n
+#### Configuracion Basica de n8n
 
 ```env
 N8N_BASIC_AUTH_USER=your_username
@@ -110,10 +110,10 @@ docker-compose up -d
 
 Este comando:
 
-- Descargará todas las imágenes Docker necesarias
-- Creará y configurará la base de datos PostgreSQL
-- Iniciará la plataforma de automatización n8n
-- Iniciará el servicio de modelos AI Ollama
+- Descargara todas las imagenes Docker necesarias
+- Creara y configurara la base de datos PostgreSQL
+- Iniciara la plataforma de automatizacion n8n
+- Iniciara el servicio de modelos AI Ollama
 
 ### 3. Iniciar los Servicios
 
@@ -129,21 +129,21 @@ This command will:
 - Download all required Docker images
 - Create and configure the PostgreSQL database
 - Iniciar la plataforma de automatizacion de workflows n8n
-- Iniciará el servicio de modelos AI Ollama
+- Iniciara el servicio de modelos AI Ollama
 
-### 4. Verificar Instalación
+### 4. Verificar Instalacion
 
-Verifica que todos los servicios estén ejecutándose:
+Verifica que todos los servicios esten ejecutandose:
 
 ```bash
 docker-compose ps
 
 ```
 
-Deberías ver tres servicios ejecutándose:
+Deberias ver tres servicios ejecutandose:
 
 - `postgres` (Base de datos PostgreSQL)
-- `n8n` (Plataforma de automatización n8n)
+- `n8n` (Plataforma de automatizacion n8n)
 - `ollama` (Servicio AI Ollama)
 
 ### 5. Acceder a n8n
@@ -155,10 +155,10 @@ http://localhost:5678
 
 ```
 
-Inicia sesión con las credenciales que configuraste en el archivo `.env`:
+Inicia sesion con las credenciales que configuraste en el archivo `.env`:
 
 - __Nombre de Usuario__: El valor que configuraste para `N8N_BASIC_AUTH_USER`
-- __Contraseña__: El valor que configuraste para `N8N_BASIC_AUTH_PASSWORD`
+- __Contrasena__: El valor que configuraste para `N8N_BASIC_AUTH_PASSWORD`
 
 ### 6. Inicializar Modelos Ollama
 
@@ -176,17 +176,17 @@ docker exec -it n8n-mcp-automatizaci-n---agentes-de-ia-inteligentes-ollama-1 oll
 
 ### 7. Importar Workflows
 
-Los workflows están ubicados en el directorio `workflows/`. Para importarlos en n8n:
+Los workflows estan ubicados en el directorio `workflows/`. Para importarlos en n8n:
 
-1. Inicia sesión en n8n en `http://localhost:5678`
+1. Inicia sesion en n8n en `http://localhost:5678`
 2. Haz clic en **Workflows** en la barra lateral izquierda
-3. Haz clic en el botón **Import from File**
+3. Haz clic en el boton **Import from File**
 4. Selecciona un archivo JSON de workflow del directorio `workflows/`
 5. Repite para cada workflow que quieras usar
 
-## Configuración de Integraciones
+## Configuracion de Integraciones
 
-### Configuración de Bot de Telegram
+### Configuracion de Bot de Telegram
 
 1. Crea un bot con [@BotFather](https://t.me/botfather) en Telegram
 2. Copia el token del bot
@@ -194,67 +194,67 @@ Los workflows están ubicados en el directorio `workflows/`. Para importarlos en
 4. En n8n, crea una nueva credencial de Telegram con tu token de bot
 5. Activa el workflow "Telegram Bot with AI Agent"
 
-### Configuración de WhatsApp
+### Configuracion de WhatsApp
 
 Tienes dos opciones:
 
-#### Opción A: WhatsApp Business API (Meta)
+#### Opcion A: WhatsApp Business API (Meta)
 
 1. Configura una [Cuenta de Negocio Meta](https://business.facebook.com/)
 2. Crea una App de WhatsApp Business
-3. Obtén tu Phone Number ID y Access Token
+3. Obten tu Phone Number ID y Access Token
 4. Configura la URL del webhook en Meta Dashboard para que apunte a tu instancia n8n
 5. Agrega las credenciales al archivo `.env`
 
-#### Opción B: Twilio WhatsApp
+#### Opcion B: Twilio WhatsApp
 
 1. Crea una [cuenta Twilio](https://www.twilio.com/)
-2. Configura el sandbox de WhatsApp u obtén aprobación para producción
+2. Configura el sandbox de WhatsApp u obten aprobacion para produccion
 3. Configura las credenciales de Twilio en `.env`
 4. Actualiza el workflow de WhatsApp para usar endpoints de Twilio
 
-### Configuración de Google Cloud
+### Configuracion de Google Cloud
 
 1. Crea un proyecto en [Google Cloud Console](https://console.cloud.google.com/)
 2. Habilita las APIs requeridas (Cloud Storage, Cloud Functions, etc.)
 3. Crea una cuenta de servicio y descarga la clave JSON
-4. Coloca el archivo JSON en una ubicación segura
+4. Coloca el archivo JSON en una ubicacion segura
 5. Actualiza `GOOGLE_APPLICATION_CREDENTIALS` en `.env`
 
-### Configuración de OpenAI
+### Configuracion de OpenAI
 
 1. Crea una cuenta en [OpenAI](https://platform.openai.com/)
 2. Genera una clave API
-3. Agrégala a `.env` como `OPENAI_API_KEY`
+3. Agregala a `.env` como `OPENAI_API_KEY`
 4. En n8n, crea una credencial de OpenAI con tu clave API
 
-### Configuración de Gemini
+### Configuracion de Gemini
 
-1. Obtén acceso a [Google AI Studio](https://makersuite.google.com/)
+1. Obten acceso a [Google AI Studio](https://makersuite.google.com/)
 2. Genera una clave API
-3. Agrégala a `.env` como `GEMINI_API_KEY`
+3. Agregala a `.env` como `GEMINI_API_KEY`
 
-### Configuración de ElevenLabs
+### Configuracion de ElevenLabs
 
 1. Crea una cuenta en [ElevenLabs](https://elevenlabs.io/)
-2. Obtén tu clave API desde la configuración de perfil
+2. Obten tu clave API desde la configuracion de perfil
 3. Elige una voz y copia su Voice ID
 4. Agrega ambos a tu archivo `.env`
 
-## Configuración de Base de Datos
+## Configuracion de Base de Datos
 
-La base de datos PostgreSQL se inicializa automáticamente con el esquema definido en `database/init.sql`. Esto incluye:
+La base de datos PostgreSQL se inicializa automaticamente con el esquema definido en `database/init.sql`. Esto incluye:
 
 - **documents**: Para almacenamiento RAG (Retrieval-Augmented Generation)
 - **conversations**: Almacenamiento de historial de chat
 - **users**: Perfiles de usuario y preferencias
 - __scraped_data__: Resultados de web scraping
-- __agent_tasks__: Cola de tareas de agente autónomo
-- __workflows_log__: Logs de ejecución de workflows
+- __agent_tasks__: Cola de tareas de agente autonomo
+- __workflows_log__: Logs de ejecucion de workflows
 
-La base de datos usa la extensión **pgvector** para búsqueda de similitud vectorial, lo que habilita la funcionalidad RAG.
+La base de datos usa la extension **pgvector** para busqueda de similitud vectorial, lo que habilita la funcionalidad RAG.
 
-## Solución de Problemas
+## Solucion de Problemas
 
 ### Los servicios no inician
 
@@ -270,13 +270,13 @@ docker-compose up -d
 
 ### No puedo acceder a n8n
 
-- Verifica que el servicio esté ejecutándose: `docker-compose ps`
-- Revisa la configuración del firewall
-- Asegúrate de que el puerto 5678 no esté en uso por otra aplicación
+- Verifica que el servicio este ejecutandose: `docker-compose ps`
+- Revisa la configuracion del firewall
+- Asegurate de que el puerto 5678 no este en uso por otra aplicacion
 
-### Errores de conexión a base de datos
+### Errores de conexion a base de datos
 
-- Verifica que PostgreSQL esté saludable: `docker-compose ps postgres`
+- Verifica que PostgreSQL este saludable: `docker-compose ps postgres`
 - Revisa las credenciales de base de datos en `.env`
 - Visualiza los logs de PostgreSQL: `docker-compose logs postgres`
 
@@ -291,17 +291,17 @@ docker exec -it n8n-mcp-automatizaci-n---agentes-de-ia-inteligentes-ollama-1 oll
 
 ```
 
-## Próximos Pasos
+## Proximos Pasos
 
-Después de la instalación, consulta:
+Despues de la instalacion, consulta:
 
-- **[Guía de Uso](USAGE.md)** - Aprende cómo usar los workflows
-- **[Guía de Configuración](CONFIGURATION.md)** - Opciones de configuración avanzadas
-- **[Documentación de Workflows](workflows/README.md)** - Documentación detallada de workflows
+- **[Guia de Uso](USAGE.md)** - Aprende como usar los workflows
+- **[Guia de Configuracion](CONFIGURATION.md)** - Opciones de configuracion avanzadas
+- **[Documentacion de Workflows](workflows/README.md)** - Documentacion detallada de workflows
 
-## Actualización
+## Actualizacion
 
-Para actualizar a la última versión:
+Para actualizar a la ultima version:
 
 ```bash
 # Pull latest changes
@@ -314,7 +314,7 @@ docker-compose up -d
 
 ```
 
-## Desinstalación
+## Desinstalacion
 
 Para eliminar completamente el proyecto:
 

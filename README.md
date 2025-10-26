@@ -1,62 +1,62 @@
-# Plataforma de Automatización n8n y Agentes de IA
+# Plataforma de Automatizacion n8n y Agentes de IA
 
-Una plataforma integral de automatización construida con n8n, que incluye agentes de IA inteligentes, bots de mensajería, RAG (Generación Aumentada por Recuperación) y capacidades de web scraping.
+Una plataforma integral de automatizacion construida con n8n, que incluye agentes de IA inteligentes, bots de mensajeria, RAG (Generacion Aumentada por Recuperacion) y capacidades de web scraping.
 
-![n8n](https://img.shields.io/badge/n8n-Automatización%20de%20Workflows-orange)
+![n8n](https://img.shields.io/badge/n8n-Automatizacion%20de%20Workflows-orange)
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
 ![License](https://img.shields.io/badge/licencia-MIT-green)
 
-## 🌟 Características
+## 🌟 Caracteristicas
 
 ### 🤖 Chatbots Potenciados por IA
 
 - **Bot de Telegram**: Bot conversacional inteligente con soporte RAG
-- **Bot de WhatsApp**: Mensajería empresarial con capacidades de IA
+- **Bot de WhatsApp**: Mensajeria empresarial con capacidades de IA
 - Soporte multiidioma
 - Historial de conversaciones y perfilado de usuarios
 
-### 🧠 Integración de Modelos de IA
+### 🧠 Integracion de Modelos de IA
 
-- **OpenAI**: GPT-4, GPT-3.5-turbo para comprensión avanzada del lenguaje
-- **Google Gemini**: El modelo de IA más reciente de Google
+- **OpenAI**: GPT-4, GPT-3.5-turbo para comprension avanzada del lenguaje
+- **Google Gemini**: El modelo de IA mas reciente de Google
 - **Ollama**: Modelos de IA locales (Llama2, Mistral, CodeLlama)
 - Cambio flexible de modelos y opciones de respaldo
 
-### 📚 RAG (Generación Aumentada por Recuperación)
+### 📚 RAG (Generacion Aumentada por Recuperacion)
 
 - Base de datos vectorial con pgvector
-- Generación automática de embeddings
+- Generacion automatica de embeddings
 - Respuestas de IA con contexto
-- Gestión de base de conocimiento
+- Gestion de base de conocimiento
 
 ### 🌐 Web Scraping y Procesamiento de Datos
 
-- Extracción automatizada de contenido
+- Extraccion automatizada de contenido
 - Workflows de scraping programados
-- Indexación de contenido para RAG
-- Análisis HTML basado en Cheerio
+- Indexacion de contenido para RAG
+- Analisis HTML basado en Cheerio
 
-### 🎙️ Conversión de Texto a Voz
+### 🎙️ Conversion de Texto a Voz
 
-- Integración con ElevenLabs
-- Síntesis de voz de alta calidad
-- Múltiples opciones de voz
+- Integracion con ElevenLabs
+- Sintesis de voz de alta calidad
+- Multiples opciones de voz
 - API basada en webhooks
 
-### 🔄 Agentes Autónomos
+### 🔄 Agentes Autonomos
 
 - Sistema de cola de tareas
-- Múltiples tipos de tareas (scraping, análisis, notificaciones)
+- Multiples tipos de tareas (scraping, analisis, notificaciones)
 - Procesamiento de trabajos en segundo plano
 - Seguimiento de estado y registro
 
-### 💾 Gestión de Datos
+### 💾 Gestion de Datos
 
 - Base de datos PostgreSQL con soporte vectorial
 - Almacenamiento de historial de conversaciones
 - Perfilado y preferencias de usuarios
-- Registros de ejecución de workflows
+- Registros de ejecucion de workflows
 
 ## 🚀 Inicio Rapido
 
@@ -204,7 +204,7 @@ Para mas detalles, consulta [docs/INSTALLATION.md](docs/INSTALLATION.md).
 
 ```
 
-## 🔧 Configuración
+## 🔧 Configuracion
 
 ### Variables de Entorno
 
@@ -236,19 +236,19 @@ ELEVENLABS_API_KEY=your-elevenlabs-key
 
 ```
 
-Para una lista completa de opciones de configuración, consulta [.env.example](.env.example).
+Para una lista completa de opciones de configuracion, consulta [.env.example](.env.example).
 
 ## 📦 Workflows Incluidos
 
-| Workflow | Descripción | Características Clave |
+| Workflow | Descripcion | Caracteristicas Clave |
 |----------|-------------|----------------------|
 | **Bot de IA Telegram** | Chatbot inteligente de Telegram | RAG, OpenAI/Ollama, historial de conversaciones |
 | **Bot de IA WhatsApp** | Bot de WhatsApp Business | Gemini AI, basado en webhooks, registro de mensajes |
-| **Web Scraping y RAG** | Extracción automatizada de contenido | Scraping programado, generación de embeddings, almacenamiento vectorial |
-| **Texto a Voz** | Convertir texto a audio | ElevenLabs, múltiples voces, API webhook |
-| **Ejecutor de Agentes IA** | Procesamiento autónomo de tareas | Cola de tareas, múltiples tipos de tareas, procesamiento en segundo plano |
+| **Web Scraping y RAG** | Extraccion automatizada de contenido | Scraping programado, generacion de embeddings, almacenamiento vectorial |
+| **Texto a Voz** | Convertir texto a audio | ElevenLabs, multiples voces, API webhook |
+| **Ejecutor de Agentes IA** | Procesamiento autonomo de tareas | Cola de tareas, multiples tipos de tareas, procesamiento en segundo plano |
 
-Consulta [workflows/README.md](workflows/README.md) para documentación detallada de workflows.
+Consulta [workflows/README.md](workflows/README.md) para documentacion detallada de workflows.
 
 ## 🛠️ Desarrollo
 
@@ -256,10 +256,10 @@ Consulta [workflows/README.md](workflows/README.md) para documentación detallad
 
 ```ini
 .
-├── docker-compose.yml      # Configuración de servicios Docker
+├── docker-compose.yml      # Configuracion de servicios Docker
 ├── .env.example           # Plantilla de variables de entorno
 ├── database/
-│   └── init.sql          # Script de inicialización de base de datos
+│   └── init.sql          # Script de inicializacion de base de datos
 ├── workflows/            # Archivos JSON de workflows n8n
 │   ├── telegram-ai-bot.json
 │   ├── whatsapp-ai-bot.json
@@ -268,9 +268,9 @@ Consulta [workflows/README.md](workflows/README.md) para documentación detallad
 │   ├── ai-agent-executor.json
 │   └── README.md
 ├── scripts/              # Scripts de utilidad
-│   ├── setup.sh         # Script de configuración inicial
+│   ├── setup.sh         # Script de configuracion inicial
 │   └── backup.sh        # Script de respaldo de base de datos
-└── docs/                # Documentación
+└── docs/                # Documentacion
     ├── INSTALLATION.md
     └── USAGE.md
 
@@ -289,13 +289,13 @@ Consulta [workflows/README.md](workflows/README.md) para documentación detallad
 
 El proyecto incluye un esquema completo de PostgreSQL con:
 
-- **pgvector**: Extensión para búsquedas vectoriales RAG
+- **pgvector**: Extension para busquedas vectoriales RAG
 - __6 Tablas__: users, conversations, documents, scraped_data, agent_tasks, workflow_logs
-- **Índices optimizados**: Para búsquedas rápidas y similitud vectorial
-- __Vistas útiles__: active_conversations, pending_tasks_summary
-- **Triggers automáticos**: Actualización de timestamps
+- **indices optimizados**: Para busquedas rapidas y similitud vectorial
+- __Vistas utiles__: active_conversations, pending_tasks_summary
+- **Triggers automaticos**: Actualizacion de timestamps
 
-Ver [database/README.md](database/README.md) para documentación detallada del esquema.
+Ver [database/README.md](database/README.md) para documentacion detallada del esquema.
 
 ### Respaldo de Base de Datos
 
@@ -309,15 +309,15 @@ Ejecuta el script de respaldo regularmente:
 
 Esto crea respaldos con marca de tiempo en el directorio `backups/`.
 
-## 🔐 Mejores Prácticas de Seguridad
+## 🔐 Mejores Practicas de Seguridad
 
 1. **Cambia las credenciales por defecto** en el archivo `.env`
 2. **Nunca hagas commit** del archivo `.env` en control de versiones
-3. **Usa HTTPS** en entornos de producción
-4. **Implementa limitación de tasa** en webhooks
+3. **Usa HTTPS** en entornos de produccion
+4. **Implementa limitacion de tasa** en webhooks
 5. **Valida las firmas de webhooks** para servicios externos
-6. **Mantén las claves API seguras** y rótalas regularmente
-7. **Actualiza las imágenes Docker** regularmente para parches de seguridad
+6. **Manten las claves API seguras** y rotalas regularmente
+7. **Actualiza las imagenes Docker** regularmente para parches de seguridad
 
 ## 🚦 Monitoreo y Mantenimiento
 
@@ -335,7 +335,7 @@ docker-compose ps
 # Todos los servicios
 docker-compose logs
 
-# Servicio específico
+# Servicio especifico
 docker-compose logs n8n
 docker-compose logs postgres
 docker-compose logs ollama
@@ -361,54 +361,54 @@ docker-compose exec postgres psql -U n8n -d n8n
 
 ## 🤝 Contribuciones
 
-¡Las contribuciones son bienvenidas! Por favor:
+Las contribuciones son bienvenidas! Por favor:
 
 1. Haz un fork del repositorio
 2. Crea una rama de funcionalidad
 3. Realiza tus cambios
-4. Agrega documentación
-5. Envía un pull request
+4. Agrega documentacion
+5. Envia un pull request
 
 ## 📄 Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto esta licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para mas detalles.
 
 ## 🙏 Agradecimientos
 
-- [n8n](https://n8n.io/) - Plataforma de automatización de workflows
+- [n8n](https://n8n.io/) - Plataforma de automatizacion de workflows
 - [OpenAI](https://openai.com/) - Modelos GPT
 - [Google](https://ai.google.dev/) - Gemini AI
 - [Ollama](https://ollama.ai/) - Modelos de IA locales
-- [ElevenLabs](https://elevenlabs.io/) - Conversión de texto a voz
+- [ElevenLabs](https://elevenlabs.io/) - Conversion de texto a voz
 - [PostgreSQL](https://www.postgresql.org/) - Base de datos
-- [pgvector](https://github.com/pgvector/pgvector) - Búsqueda de similitud vectorial
+- [pgvector](https://github.com/pgvector/pgvector) - Busqueda de similitud vectorial
 
 ## 📞 Soporte
 
 Para problemas, preguntas o sugerencias:
 
-- Consulta la [documentación](docs/)
+- Consulta la [documentacion](docs/)
 - Visita la [comunidad de n8n](https://community.n8n.io/)
 
 ## 🗺️ Hoja de Ruta
 
-- [ ] Agregar soporte para más modelos de IA (Anthropic Claude, Cohere)
-- [ ] Implementar técnicas avanzadas de RAG (búsqueda híbrida, re-ranking)
-- [ ] Agregar integración con bot de Discord
-- [ ] Crear interfaz web para gestión de workflows
-- [ ] Agregar soporte para más idiomas
-- [ ] Implementar panel de análisis de conversaciones
+- [ ] Agregar soporte para mas modelos de IA (Anthropic Claude, Cohere)
+- [ ] Implementar tecnicas avanzadas de RAG (busqueda hibrida, re-ranking)
+- [ ] Agregar integracion con bot de Discord
+- [ ] Crear interfaz web para gestion de workflows
+- [ ] Agregar soporte para mas idiomas
+- [ ] Implementar panel de analisis de conversaciones
 - [ ] Agregar soporte de mensajes de voz para bots
-- [ ] Crear ejemplos de integración con aplicaciones móviles
+- [ ] Crear ejemplos de integracion con aplicaciones moviles
 
 ## 🌍 Casos de Uso
 
 - **Soporte al Cliente**: Sistemas de respuesta automatizados para empresas
-- **Gestión del Conocimiento**: Crear bases de conocimiento consultables con RAG
-- **Automatización de Contenido**: Creación y distribución automatizada de contenido
+- **Gestion del Conocimiento**: Crear bases de conocimiento consultables con RAG
+- **Automatizacion de Contenido**: Creacion y distribucion automatizada de contenido
 - **Asistente Personal**: Herramientas de productividad personal potenciadas por IA
 - **Bots Educativos**: Asistentes de aprendizaje interactivos
-- **Inteligencia de Negocios**: Recopilación y análisis automatizado de datos
+- **Inteligencia de Negocios**: Recopilacion y analisis automatizado de datos
 - **Sistemas de Notificaciones**: Entrega inteligente de alertas y notificaciones
 
 ---
@@ -419,7 +419,7 @@ Para problemas, preguntas o sugerencias:
 
 <div align="center">
 
-# 🚀 n8n + MCP - Automatización y Agentes de IA Inteligentes
+# 🚀 n8n + MCP - Automatizacion y Agentes de IA Inteligentes
 
 **WhatsApp · Telegram · Bots de Voz · Ollama · Gemini · OpenAI · Google Cloud · ElevenLabs · RAG · PostgreSQL · Web Scraping**
 
@@ -440,34 +440,34 @@ Para problemas, preguntas o sugerencias:
 
 ---
 
-## ✨ ¿Qué aprenderás?
+## ✨ Que aprenderas?
 
-- Diseñar y automatizar **flujos de trabajo completos** en **n8n** integrando **Google Sheets, Gmail, APIs externas y bases de datos**.
+- Disenar y automatizar **flujos de trabajo completos** en **n8n** integrando **Google Sheets, Gmail, APIs externas y bases de datos**.
 - Construir **agentes de IA con MCP**, conectados a **herramientas personalizadas** y servicios como **Google Calendar**, correo y **modelos**.
-- Implementar **casos prácticos avanzados**: **chatbots**, **scraping**, **bots de Telegram/WhatsApp** y **agentes de voz** con datos en tiempo real.
+- Implementar **casos practicos avanzados**: **chatbots**, **scraping**, **bots de Telegram/WhatsApp** y **agentes de voz** con datos en tiempo real.
 - Crear y administrar **sistemas RAG** para consultar **bases de conocimiento** usando **PostgreSQL** y **Google Drive**.
 
-> Enfoque 100% práctico y orientado a productos.
+> Enfoque 100% practico y orientado a productos.
 
 ---
 
 ## 🧩 Casos de uso (reales y vendibles)
 
-| Caso | Descripción | Stack recomendado |
+| Caso | Descripcion | Stack recomendado |
 |---|---|---|
-| Chatbot FAQ empresarial | Responde políticas, soporte y ventas | n8n + RAG (PostgreSQL/Drive) + OpenAI/Ollama |
-| Bot de WhatsApp | Atención 24/7 y seguimiento de leads | n8n + WhatsApp API + RAG |
+| Chatbot FAQ empresarial | Responde politicas, soporte y ventas | n8n + RAG (PostgreSQL/Drive) + OpenAI/Ollama |
+| Bot de WhatsApp | Atencion 24/7 y seguimiento de leads | n8n + WhatsApp API + RAG |
 | Bot de Telegram | Notificaciones operativas y comandos | n8n + Telegram Bot API |
 | Agente de voz | Recepcionista/IVR con contexto | ElevenLabs/Retell + n8n + RAG |
-| Web Scraping | Recolección de precios/noticias | n8n + HTTP/Code + Parse + DB |
-| Automatización ofimática | Reportes/recordatorios desde Gmail/Sheets | n8n + Google APIs |
+| Web Scraping | Recoleccion de precios/noticias | n8n + HTTP/Code + Parse + DB |
+| Automatizacion ofimatica | Reportes/recordatorios desde Gmail/Sheets | n8n + Google APIs |
 
 ---
 
 ## 🛠️ Integraciones clave del proyecto
 
 - **Modelos**: **Ollama**, **OpenAI**, **Gemini**
-- **Mensajería**: **WhatsApp**, **Telegram**
+- **Mensajeria**: **WhatsApp**, **Telegram**
 - **Voz**: **ElevenLabs**
 - **Cloud & Datos**: **Google Cloud**, **PostgreSQL**, **Google Drive**
 - **Patrones IA**: **RAG**, **Agentes con MCP**
@@ -513,9 +513,9 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 
 5. **Prueba**
 
-- Ejecuta nodos por sección, verifica logs y tokens de rate limit.
+- Ejecuta nodos por seccion, verifica logs y tokens de rate limit.
 
-> Tip: empieza por un **flujo mínimo** (canal → IA → respuesta) y luego añade **RAG** y **MCP**.
+> Tip: empieza por un **flujo minimo** (canal → IA → respuesta) y luego anade **RAG** y **MCP**.
 
 ---
 
@@ -536,18 +536,18 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 
 ---
 
-## ✅ Buenas prácticas
+## ✅ Buenas practicas
 
-- **Desacopla** conectores (mensajería/voz) de la **lógica IA**.
+- **Desacopla** conectores (mensajeria/voz) de la **logica IA**.
 - **Versiona** tus flujos (export JSON) y documenta triggers/webhooks.
-- **RAG**: controla tamaño de chunk, embeddings y políticas de refresco.
-- **MCP**: define herramientas idempotentes, con validación de input/output.
+- **RAG**: controla tamano de chunk, embeddings y politicas de refresco.
+- **MCP**: define herramientas idempotentes, con validacion de input/output.
 
 ---
 
 ## 📚 Referencias
 
-- Aún por definir
+- Aun por definir
 
 ---
 

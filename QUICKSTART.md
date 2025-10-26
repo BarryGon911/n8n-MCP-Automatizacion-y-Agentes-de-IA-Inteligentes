@@ -1,17 +1,17 @@
-# Guía de Inicio Rápido
+# Guia de Inicio Rapido
 
-¡Configura y ejecuta n8n Automatización y Agentes de IA en 10 minutos!
+Configura y ejecuta n8n Automatizacion y Agentes de IA en 10 minutos!
 
 ## 🚀 Requisitos Previos
 
-Antes de comenzar, asegúrate de tener:
+Antes de comenzar, asegurate de tener:
 
 - [Docker](https://docs.docker.com/get-docker/) instalado
 - [Docker Compose](https://docs.docker.com/compose/install/) instalado
 - Al menos 4GB de RAM disponible
 - 10GB de espacio libre en disco
 
-## ⚡ Configuración en 5 Minutos
+## ⚡ Configuracion en 5 Minutos
 
 ### Paso 1: Clonar el Repositorio
 
@@ -32,12 +32,12 @@ nano .env
 
 ```
 
-**Cambios mínimos requeridos:**
+**Cambios minimos requeridos:**
 
 ```env
 N8N_BASIC_AUTH_USER=tuusuario
-N8N_BASIC_AUTH_PASSWORD=tucontraseña
-DB_POSTGRESDB_PASSWORD=contraseñasegura
+N8N_BASIC_AUTH_PASSWORD=tucontrasena
+DB_POSTGRESDB_PASSWORD=contrasenasegura
 
 ```
 
@@ -59,9 +59,9 @@ http://localhost:5678
 
 ```
 
-Inicia sesión con las credenciales que configuraste en el Paso 2.
+Inicia sesion con las credenciales que configuraste en el Paso 2.
 
-**🎉 ¡Felicitaciones! ¡Ahora estás ejecutando n8n con capacidades de IA!**
+**🎉 Felicitaciones! Ahora estas ejecutando n8n con capacidades de IA!**
 
 ---
 
@@ -69,8 +69,8 @@ Inicia sesión con las credenciales que configuraste en el Paso 2.
 
 ### 1. Crear un Bot de Telegram
 
-1. Abre Telegram y envía un mensaje a [@BotFather](https://t.me/botfather)
-2. Envía `/newbot`
+1. Abre Telegram y envia un mensaje a [@BotFather](https://t.me/botfather)
+2. Envia `/newbot`
 3. Sigue las indicaciones para nombrar tu bot
 4. Copia el token del bot (se ve como `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`)
 
@@ -92,9 +92,9 @@ docker-compose restart n8n
 
 ### 3. Obtener una Clave API de OpenAI
 
-1. Regístrate en [OpenAI](https://platform.openai.com/)
+1. Registrate en [OpenAI](https://platform.openai.com/)
 2. Genera una clave API
-3. Agrégala a `.env`:
+3. Agregala a `.env`:
 
 ```env
 OPENAI_API_KEY=sk-tu-clave-aqui
@@ -144,13 +144,13 @@ OPENAI_API_KEY=sk-tu-clave-aqui
 1. Abre el workflow "Telegram AI Bot"
 2. Conecta las credenciales a cada nodo
 3. Haz clic en el interruptor **Active**
-4. ¡Prueba enviando un mensaje a tu bot en Telegram!
+4. Prueba enviando un mensaje a tu bot en Telegram!
 
 ---
 
 ## 🌐 Opcional: IA Local con Ollama
 
-¿Quieres usar IA sin costos de API? Configura Ollama:
+Quieres usar IA sin costos de API? Configura Ollama:
 
 ### 1. Descargar un Modelo
 
@@ -169,7 +169,7 @@ En tu workflow de Telegram:
 2. Habilita el nodo HTTP Request de Ollama
 3. Guarda y prueba
 
-¡Ahora tu bot usa IA local - sin costos de API!
+Ahora tu bot usa IA local - sin costos de API!
 
 ---
 
@@ -188,7 +188,7 @@ Insertar conocimiento:
 
 ```sql
 INSERT INTO documents (content, metadata) VALUES 
-  ('n8n es una herramienta de automatización de workflows que conecta diferentes servicios.', 
+  ('n8n es una herramienta de automatizacion de workflows que conecta diferentes servicios.', 
    '{"source": "documentacion", "category": "general"}'),
   ('Para crear un webhook en n8n, usa el nodo Webhook y activa el workflow.', 
    '{"source": "documentacion", "category": "tutorial"}');
@@ -199,51 +199,51 @@ Sal con `\q`
 
 ### 2. Probar RAG
 
-Envía un mensaje a tu bot de Telegram:
+Envia un mensaje a tu bot de Telegram:
 
 ```sh
-¿Qué es n8n?
+Que es n8n?
 
 ```
 
-¡El bot usará tu base de conocimiento para responder!
+El bot usara tu base de conocimiento para responder!
 
 ---
 
-## 🎯 Próximos Pasos
+## 🎯 Proximos Pasos
 
-### Explorar Más Características
+### Explorar Mas Caracteristicas
 
-1. **Bot de WhatsApp**: Configura mensajería empresarial
+1. **Bot de WhatsApp**: Configura mensajeria empresarial
 
    - Ver [docs/INSTALLATION.md](docs/INSTALLATION.md#whatsapp-setup)
 
-2. **Web Scraping**: Recopila contenido automáticamente
+2. **Web Scraping**: Recopila contenido automaticamente
 
    - Importa `workflows/web-scraping-rag.json`
    - Agrega URLs para scraping
 
 3. **Texto a Voz**: Genera audio
 
-   - Obtén clave API de ElevenLabs
+   - Obten clave API de ElevenLabs
    - Importa `workflows/elevenlabs-tts.json`
 
-4. **Agentes Autónomos**: Procesamiento de tareas en segundo plano
+4. **Agentes Autonomos**: Procesamiento de tareas en segundo plano
 
    - Importa `workflows/ai-agent-executor.json`
 
-### Aprende Más
+### Aprende Mas
 
-- **[Guía Completa de Instalación](docs/INSTALLATION.md)** - Configuración detallada
-- **[Guía de Uso](docs/USAGE.md)** - Cómo usar todas las funciones
+- **[Guia Completa de Instalacion](docs/INSTALLATION.md)** - Configuracion detallada
+- **[Guia de Uso](docs/USAGE.md)** - Como usar todas las funciones
 - **[FAQ](docs/FAQ.md)** - Preguntas frecuentes
-- **[Workflows](workflows/README.md)** - Documentación de workflows
+- **[Workflows](workflows/README.md)** - Documentacion de workflows
 
 ### Obtener Claves API
 
-Necesitarás estas para funcionalidad completa:
+Necesitaras estas para funcionalidad completa:
 
-| Servicio | Para qué es | Consíguelo aquí |
+| Servicio | Para que es | Consiguelo aqui |
 
 ## 📚 Agregar Conocimiento a tu Bot (RAG)
 
@@ -316,7 +316,7 @@ The bot will use your knowledge base to answer!
 You'll need these for full functionality:
 
 <VSCode.Cell id="#VSC-1d7213f6" language="markdown">
-| Servicio | Para qué es | Consíguelo aquí |
+| Servicio | Para que es | Consiguelo aqui |
 |---------|---------------|-------------|
 | OpenAI | Respuestas de IA | [platform.openai.com](https://platform.openai.com/) |
 | Gemini | IA alternativa | [makersuite.google.com](https://makersuite.google.com/) |
@@ -326,12 +326,12 @@ You'll need these for full functionality:
 
 ---
 
-## 🔧 Solución de Problemas
+## 🔧 Solucion de Problemas
 
 ### Los Servicios No Inician
 
 ```bash
-# Verificar qué está mal
+# Verificar que esta mal
 docker-compose logs
 
 # Reiniciar todo
@@ -342,28 +342,28 @@ docker-compose up -d
 
 ### No Puedo Acceder a n8n
 
-- Verifica si está ejecutándose: `docker-compose ps`
+- Verifica si esta ejecutandose: `docker-compose ps`
 - Prueba `http://127.0.0.1:5678` en su lugar
-- Verifica la configuración del firewall
+- Verifica la configuracion del firewall
 
 ### El Bot No Responde
 
-1. ¿Está activo el workflow? (el interruptor debe estar ON)
-2. ¿Están configuradas las credenciales?
+1. Esta activo el workflow? (el interruptor debe estar ON)
+2. Estan configuradas las credenciales?
 
 ---
 
-### ¿Necesitas Ayuda?
+### Necesitas Ayuda?
 
 - Consulta el [FAQ](docs/FAQ.md)
-- Revisa la [sección de solución de problemas](docs/INSTALLATION.md#troubleshooting)
+- Revisa la [seccion de solucion de problemas](docs/INSTALLATION.md#troubleshooting)
 - Abre un issue en GitHub
 
 ---
 
 ## 📊 Uso de Recursos
 
-Consumo típico de recursos:
+Consumo tipico de recursos:
 
 | Servicio | RAM | CPU | Disco |
 |---------|-----|-----|------|
@@ -402,15 +402,15 @@ Consumo típico de recursos:
 
 ## 💡 Consejos Pro
 
-1. **Empieza Pequeño**: Comienza con un workflow, luego expande
+1. **Empieza Pequeno**: Comienza con un workflow, luego expande
 2. **Usa IA Local**: Ollama es gratuito y privado
 3. **Respaldos Regulares**: Ejecuta `./scripts/backup.sh` semanalmente
 4. **Monitorea Costos**: Rastrea el uso de API en los dashboards del proveedor
-5. **Asegúralo**: Cambia las contraseñas predeterminadas de inmediato
+5. **Aseguralo**: Cambia las contrasenas predeterminadas de inmediato
 6. **Lee Logs**: Verifica `docker-compose logs` cuando depures
 
 ---
 
-**¿Listo para construir algo increíble? ¡Vamos! 🚀**
+**Listo para construir algo increible? Vamos! 🚀**
 
-Para documentación detallada, consulta el directorio [docs/](docs/).
+Para documentacion detallada, consulta el directorio [docs/](docs/).

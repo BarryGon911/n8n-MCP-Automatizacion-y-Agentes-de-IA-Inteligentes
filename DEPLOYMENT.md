@@ -18,7 +18,7 @@ Para deployment en servidor en la nube:
 
 ### Comparativa
 
-¿No sabes cual elegir?
+No sabes cual elegir?
 
 - [Comparacion: Local vs Cloud](docs/DEPLOYMENT_COMPARISON.md)
 
