@@ -1,0 +1,114 @@
+{
+  "name": "Web Scraping with AI Analysis",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "scrape-analyze",
+        "method": "POST"
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "scrape-analyze-webhook"
+    },
+    {
+      "parameters": {
+        "url": "http://mcp-server:3000/mcp/tools/execute",
+        "method": "POST",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "scrape_website"
+            },
+            {
+              "name": "parameters",
+              "value": "={{ { url: $json.url, selector: $json.selector } }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Scrape Website",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://mcp-server:3000/agents/execute",
+        "method": "POST",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "agentType",
+              "value": "web-scraper"
+            },
+            {
+              "name": "task",
+              "value": "={{ $node['Webhook'].json.analysisTask || 'Summarize the main points from this content' }}"
+            },
+            {
+              "name": "context",
+              "value": "={{ { scrapedContent: $json.content } }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "AI Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}"
+      },
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Scrape Website",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Website": {
+      "main": [
+        [
+          {
+            "node": "AI Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Analysis": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "id": "3"
+}
