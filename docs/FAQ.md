@@ -1,362 +1,405 @@
-# Frequently Asked Questions (FAQ)
+# Preguntas Frecuentes (FAQ)
 
-## General Questions
+## Preguntas Generales
 
-### What is this project?
+### ¿Qué es este proyecto?
 
-This is a comprehensive automation platform built on n8n that integrates AI models, messaging platforms (Telegram, WhatsApp), RAG (Retrieval-Augmented Generation), web scraping, and autonomous agents. It's designed to help you build intelligent automation workflows without extensive coding.
+Esta es una plataforma de automatización completa construida sobre n8n que integra modelos de IA, plataformas de mensajería (Telegram, WhatsApp), RAG (Retrieval-Augmented Generation), web scraping, y agentes autónomos. Está diseñada para ayudarte a construir workflows de automatización inteligentes sin necesidad de programar extensivamente.
 
-### Do I need programming knowledge?
+### ¿Necesito conocimientos de programación?
 
-No, most workflows can be configured through n8n's visual interface. However, basic understanding of JSON and SQL can be helpful for customization.
+No, la mayoría de workflows pueden configurarse a través de la interfaz visual de n8n. Sin embargo, un entendimiento básico de JSON y SQL puede ser útil para personalización.
 
-### Is this free to use?
+### ¿Es gratuito?
 
-The platform itself is free and open-source. However, some integrated services (OpenAI, ElevenLabs, etc.) require paid API subscriptions.
+La plataforma en sí es gratuita y de código abierto. Sin embargo, algunos servicios integrados (OpenAI, ElevenLabs, etc.) requieren suscripciones de API de pago.
 
-### Can I use this in production?
+### ¿Puedo usar esto en producción?
 
-Yes, but ensure you:
-- Use strong authentication
-- Implement HTTPS
-- Follow security best practices
-- Have proper backups
-- Monitor resource usage
+Sí, pero asegúrate de:
 
-## Installation & Setup
+- Usar autenticación fuerte
+- Implementar HTTPS
+- Seguir mejores prácticas de seguridad
+- Tener respaldos apropiados
+- Monitorear el uso de recursos
 
-### What are the system requirements?
+## Instalación y Configuración
+
+### ¿Cuáles son los requisitos del sistema?
 
 - Docker 20.10+
 - Docker Compose 2.0+
-- 4GB RAM minimum (8GB recommended)
-- 10GB free disk space
-- Linux, macOS, or Windows with WSL2
+- 4GB RAM mínimo (8GB recomendados)
+- 10GB de espacio libre en disco
+- Linux, macOS, o Windows con WSL2
 
-### Why won't Docker services start?
+### ¿Por qué los servicios Docker no inician?
 
-Common causes:
-- Port conflicts (5678, 5432, 11434)
-- Insufficient resources
-- Docker not running
-- Corrupted volumes
+Causas comunes:
 
-Solution: Check logs with `docker-compose logs` and ensure ports are available.
+- Conflictos de puertos (5678, 5432, 11434)
+- Recursos insuficientes
+- Docker no está ejecutándose
+- Volúmenes corruptos
 
-### How do I change the default port?
+Solución: Revisa los logs con `docker-compose logs` y asegúrate de que los puertos estén disponibles.
 
-Edit `docker-compose.yml` and change the port mapping:
+### ¿Cómo cambio el puerto predeterminado?
+
+Edita `docker-compose.yml` y cambia el mapeo de puertos:
+
 ```yaml
 ports:
   - "8080:5678"  # Change 5678 to your preferred port
+
 ```
 
-### Can I run this without Docker?
+### ¿Puedo ejecutar esto sin Docker?
 
-Yes, but it's more complex. You'll need to:
-- Install PostgreSQL with pgvector extension
-- Install n8n manually
-- Install and configure Ollama
-- Manually configure all services
+Sí, pero es más complejo. Necesitarás:
 
-## AI Models
+- Instalar PostgreSQL con extensión pgvector
+- Instalar n8n manualmente
+- Instalar y configurar Ollama
+- Configurar manualmente todos los servicios
 
-### Which AI model should I use?
+## Modelos de IA
 
-Depends on your needs:
-- **OpenAI GPT-4**: Most accurate, expensive
-- **GPT-3.5-turbo**: Fast, cost-effective
-- **Gemini**: Good balance, Google ecosystem
-- **Ollama (Llama2)**: Free, private, runs locally
+### ¿Qué modelo de IA debería usar?
 
-### How do I use local Ollama models?
+Depende de tus necesidades:
 
-1. Pull the model:
-   ```bash
-   docker exec -it $(docker-compose ps -q ollama) ollama pull llama2
-   ```
-2. Update workflows to use HTTP Request to `http://ollama:11434/api/generate`
+- **OpenAI GPT-4**: Más preciso, costoso
+- **GPT-3.5-turbo**: Rápido, costo-efectivo
+- **Gemini**: Buen balance, ecosistema Google
+- **Ollama (Llama2)**: Gratuito, privado, ejecuta localmente
 
-### Can I use multiple AI models together?
+### ¿Cómo uso modelos locales de Ollama?
 
-Yes! You can:
-- Use different models for different workflows
-- Implement fallback mechanisms
-- Compare outputs from multiple models
-- Route based on task complexity
+1. Descarga el modelo:
 
-### How much do API calls cost?
+```bash
+docker exec -it $(docker-compose ps -q ollama) ollama pull llama2
 
-Costs vary by provider:
-- **OpenAI**: ~$0.002-0.06 per 1K tokens
-- **Gemini**: Free tier available, then ~$0.00025-0.0005 per 1K characters
-- **ElevenLabs**: ~$0.30 per 1K characters
-- **Ollama**: Free (self-hosted)
+```
 
-## Messaging Bots
+2. Actualiza los workflows para usar HTTP Request a `http://ollama:11434/api/generate`
 
-### How do I create a Telegram bot?
+### ¿Puedo usar múltiples modelos de IA juntos?
 
-1. Message [@BotFather](https://t.me/botfather)
-2. Send `/newbot`
-3. Follow prompts to name your bot
-4. Copy the provided token
-5. Add token to `.env` file
+¡Sí! Puedes:
 
-### Why isn't my Telegram bot responding?
+- Usar diferentes modelos para diferentes workflows
+- Implementar mecanismos de respaldo
+- Comparar salidas de múltiples modelos
+- Enrutar basado en complejidad de tarea
 
-Check:
-- Workflow is activated in n8n
-- Telegram credentials are correct
-- Bot token is valid
-- n8n is accessible (no firewall blocking)
-- Check n8n execution logs
+### ¿Cuánto cuestan las llamadas a API?
 
-### How do I set up WhatsApp Business API?
+Los costos varían por proveedor:
 
-Two options:
+- **OpenAI**: ~$0.002-0.06 por 1K tokens
+- **Gemini**: Nivel gratuito disponible, luego ~$0.00025-0.0005 por 1K caracteres
+- **ElevenLabs**: ~$0.30 por 1K caracteres
+- **Ollama**: Gratuito (auto-hospedado)
 
-**Option 1: Meta Business API** (Recommended for production)
-1. Create Meta Business Account
-2. Create WhatsApp Business app
-3. Configure webhook
-4. Get access token
+## Bots de Mensajería
 
-**Option 2: Twilio** (Easier for testing)
-1. Create Twilio account
-2. Enable WhatsApp sandbox
-3. Configure credentials
+### ¿Cómo creo un bot de Telegram?
 
-### Can I use the same workflow for multiple bots?
+1. Envía mensaje a [@BotFather](https://t.me/botfather)
+2. Envía `/newbot`
+3. Sigue las indicaciones para nombrar tu bot
+4. Copia el token proporcionado
+5. Agrega el token al archivo `.env`
 
-Yes, you can:
-- Duplicate the workflow
-- Use different credentials
-- Modify as needed for each bot
+### ¿Por qué mi bot de Telegram no responde?
+
+Verifica:
+
+- El workflow está activado en n8n
+- Las credenciales de Telegram son correctas
+- El token del bot es válido
+- n8n es accesible (sin bloqueo de firewall)
+- Revisa los logs de ejecución de n8n
+
+### ¿Cómo configuro WhatsApp Business API?
+
+Dos opciones:
+
+**Opción 1: Meta Business API** (Recomendado para producción)
+
+1. Crear Cuenta de Negocio Meta
+2. Crear app WhatsApp Business
+3. Configurar webhook
+4. Obtener access token
+
+**Opción 2: Twilio** (Más fácil para pruebas)
+
+1. Crear cuenta Twilio
+2. Habilitar sandbox de WhatsApp
+3. Configurar credenciales
+
+### ¿Puedo usar el mismo workflow para múltiples bots?
+
+Sí, puedes:
+
+- Duplicar el workflow
+- Usar diferentes credenciales
+- Modificar según sea necesario para cada bot
 
 ## RAG (Retrieval-Augmented Generation)
 
-### What is RAG?
+### ¿Qué es RAG?
 
-RAG combines document retrieval with AI generation. It searches your knowledge base for relevant information and uses that context to generate accurate, informed responses.
+RAG combina recuperación de documentos con generación de IA. Busca en tu base de conocimiento información relevante y usa ese contexto para generar respuestas precisas e informadas.
 
-### How do I add documents to the RAG database?
+### ¿Cómo agrego documentos a la base de datos RAG?
 
-Several methods:
-1. **Web scraping**: Use the scraping workflow
-2. **Manual insertion**: Use SQL INSERT statements
-3. **API**: Create a workflow with HTTP webhook
-4. **CSV import**: Create an import workflow
+Varios métodos:
 
-### What is pgvector?
+1. **Web scraping**: Usa el workflow de scraping
+2. **Inserción manual**: Usa sentencias SQL INSERT
+3. **API**: Crea un workflow con HTTP webhook
+4. **Importación CSV**: Crea un workflow de importación
 
-pgvector is a PostgreSQL extension that enables vector similarity search, essential for RAG. It allows finding similar documents based on semantic meaning, not just keywords.
+### ¿Qué es pgvector?
 
-### How accurate is RAG?
+pgvector es una extensión de PostgreSQL que habilita la búsqueda de similitud vectorial, esencial para RAG. Permite encontrar documentos similares basándose en significado semántico, no solo palabras clave.
 
-Accuracy depends on:
-- Quality of your knowledge base
-- Relevance of retrieved documents
-- AI model quality
-- Embedding model effectiveness
+### ¿Qué tan preciso es RAG?
 
-Typically 70-90% accurate with good data.
+La precisión depende de:
+
+- Calidad de tu base de conocimiento
+- Relevancia de documentos recuperados
+- Calidad del modelo de IA
+- Efectividad del modelo de embeddings
+
+Típicamente 70-90% preciso con buenos datos.
 
 ## Web Scraping
 
-### Is web scraping legal?
+### ¿Es legal el web scraping?
 
-It depends:
-- Check website's Terms of Service
-- Review robots.txt
-- Respect rate limits
-- Don't scrape personal data without permission
-- Consider copyright implications
+Depende:
 
-### How do I add websites to scrape?
+- Revisa los Términos de Servicio del sitio web
+- Revisa robots.txt
+- Respeta los límites de tasa
+- No extraigas datos personales sin permiso
+- Considera las implicaciones de copyright
 
-Insert URLs into the database:
+### ¿Cómo agrego sitios web para scrapear?
+
+Inserta URLs en la base de datos:
+
 ```sql
 INSERT INTO scraped_data (url, is_processed)
 VALUES ('https://example.com', false);
+
 ```
 
-### Why is scraping failing?
+### ¿Por qué falla el scraping?
 
-Common issues:
-- Website blocking automated requests
-- Invalid URL
-- JavaScript-rendered content (needs browser)
-- Rate limiting
-- Authentication required
+Problemas comunes:
 
-### How often should I scrape?
+- Sitio web bloqueando solicitudes automatizadas
+- URL inválida
+- Contenido renderizado con JavaScript (necesita navegador)
+- Limitación de tasa
+- Autenticación requerida
 
-Depends on:
-- Content update frequency
-- Website rate limits
-- Your storage capacity
-- API cost considerations
+### ¿Con qué frecuencia debo scrapear?
 
-Typical: Every 6-24 hours
+Depende de:
 
-## Database
+- Frecuencia de actualización de contenido
+- Límites de tasa del sitio web
+- Tu capacidad de almacenamiento
+- Consideraciones de costo de API
 
-### How do I access the database?
+Típico: Cada 6-24 horas
+
+## Base de Datos
+
+### ¿Cómo accedo a la base de datos?
 
 ```bash
 docker-compose exec postgres psql -U n8n -d n8n
+
 ```
 
-Or use a GUI tool like pgAdmin with:
+O usa una herramienta GUI como pgAdmin con:
+
 - Host: localhost
 - Port: 5432
 - Database: n8n
 - User: n8n
-- Password: (from .env)
+- Password: (del archivo .env)
 
-### How do I backup the database?
+### ¿Cómo respaldo la base de datos?
 
-Use the backup script:
+Usa el script de respaldo:
+
 ```bash
 ./scripts/backup.sh
+
 ```
 
-Or manually:
+O manualmente:
+
 ```bash
 docker-compose exec -T postgres pg_dump -U n8n n8n > backup.sql
+
 ```
 
-### Can I use an external PostgreSQL server?
+### ¿Puedo usar un servidor PostgreSQL externo?
 
-Yes, update `docker-compose.yml`:
+Sí, actualiza `docker-compose.yml`:
+
 ```yaml
 environment:
   - DB_POSTGRESDB_HOST=your-postgres-host
   - DB_POSTGRESDB_PORT=5432
   # ... other settings
+
 ```
 
-Remove the postgres service from docker-compose.yml.
+Elimina el servicio postgres de docker-compose.yml.
 
-### How do I clean up old data?
+### ¿Cómo limpio datos antiguos?
 
-Run maintenance queries:
+Ejecuta consultas de mantenimiento:
+
 ```sql
 DELETE FROM conversations WHERE created_at < NOW() - INTERVAL '6 months';
 DELETE FROM workflows_log WHERE executed_at < NOW() - INTERVAL '3 months';
 VACUUM ANALYZE;
+
 ```
 
-## Performance
+## Rendimiento
 
-### n8n is running slowly
+### n8n está funcionando lento
 
-Solutions:
-- Increase Docker memory allocation
-- Optimize workflows (reduce polling)
-- Use webhooks instead of polling
-- Implement caching
-- Upgrade hardware
+Soluciones:
 
-### Database is getting large
+- Aumenta la asignación de memoria de Docker
+- Optimiza workflows (reduce polling)
+- Usa webhooks en lugar de polling
+- Implementa caché
+- Actualiza el hardware
 
-Solutions:
-- Implement data retention policies
-- Archive old data
-- Delete unnecessary logs
-- Vacuum the database regularly
+### La base de datos se está volviendo grande
 
-### API calls are too slow
+Soluciones:
 
-Solutions:
-- Use faster AI models
-- Reduce token limits
-- Switch to local Ollama
-- Implement response caching
-- Use batch processing
+- Implementa políticas de retención de datos
+- Archiva datos antiguos
+- Elimina logs innecesarios
+- Ejecuta VACUUM en la base de datos regularmente
 
-## Security
+### Las llamadas API son muy lentas
 
-### How do I secure my installation?
+Soluciones:
 
-1. Change default credentials
-2. Use HTTPS (with reverse proxy)
-3. Implement firewall rules
-4. Use strong passwords
-5. Rotate API keys
-6. Keep Docker images updated
-7. Implement rate limiting
+- Usa modelos de IA más rápidos
+- Reduce los límites de tokens
+- Cambia a Ollama local
+- Implementa caché de respuestas
+- Usa procesamiento por lotes
 
-### Are my API keys safe?
+## Seguridad
 
-Yes, if you:
-- Use environment variables
-- Never commit .env to git
-- Restrict file permissions
-- Use secret management tools
-- Monitor for unauthorized access
+### ¿Cómo aseguro mi instalación?
 
-### Should I expose n8n to the internet?
+1. Cambia las credenciales predeterminadas
+2. Usa HTTPS (con reverse proxy)
+3. Implementa reglas de firewall
+4. Usa contraseñas fuertes
+5. Rota las claves API
+6. Mantén las imágenes Docker actualizadas
+7. Implementa limitación de tasa
 
-For webhooks (Telegram, WhatsApp), yes, but:
-- Use HTTPS
-- Implement authentication
-- Use a reverse proxy (nginx)
-- Implement rate limiting
-- Monitor access logs
+### ¿Mis claves API están seguras?
 
-## Troubleshooting
+Sí, si tú:
 
-### Workflows aren't executing
+- Usas variables de entorno
+- Nunca haces commit de .env a git
+- Restringes permisos de archivos
+- Usas herramientas de gestión de secretos
+- Monitoreas acceso no autorizado
 
-Check:
-- Workflow is activated
-- Credentials are configured
-- Trigger is set up correctly
-- No errors in execution log
-- Services are running
+### ¿Debería exponer n8n a internet?
 
-### Webhook isn't receiving data
+Para webhooks (Telegram, WhatsApp), sí, pero:
 
-Check:
-- Correct webhook URL
-- Workflow is active
-- Firewall allows incoming requests
-- External service is configured correctly
-- Test with curl or Postman
+- Usa HTTPS
+- Implementa autenticación
+- Usa un reverse proxy (nginx)
+- Implementa limitación de tasa
+- Monitorea logs de acceso
 
-### Out of memory errors
+## Solución de Problemas
 
-Solutions:
-- Increase Docker memory limit
-- Reduce concurrent executions
-- Process data in batches
-- Clean up old data
-- Upgrade system resources
+### Los workflows no se ejecutan
 
-### Container keeps restarting
+Verifica:
 
-Check:
+- El workflow está activado
+- Las credenciales están configuradas
+- El trigger está configurado correctamente
+- No hay errores en el log de ejecución
+- Los servicios están ejecutándose
+
+### El webhook no recibe datos
+
+Verifica:
+
+- URL del webhook correcta
+- El workflow está activo
+- El firewall permite solicitudes entrantes
+- El servicio externo está configurado correctamente
+- Prueba con curl o Postman
+
+### Errores de memoria insuficiente
+
+Soluciones:
+
+- Aumenta el límite de memoria de Docker
+- Reduce ejecuciones concurrentes
+- Procesa datos en lotes
+- Limpia datos antiguos
+- Actualiza recursos del sistema
+
+### El contenedor se reinicia constantemente
+
+Verifica:
+
 - `docker-compose logs [service]`
-- Resource constraints
-- Configuration errors
-- Port conflicts
-- Volume permissions
+- Restricciones de recursos
+- Errores de configuración
+- Conflictos de puertos
+- Permisos de volúmenes
 
-## Advanced Usage
+## Uso Avanzado
 
-### Can I create custom workflows?
+### ¿Puedo crear workflows personalizados?
 
-Absolutely! Use n8n's visual workflow editor to:
-- Combine existing nodes
-- Add custom code nodes
-- Integrate new services
-- Build complex automations
+¡Absolutamente! Usa el editor visual de workflows de n8n para:
 
-### How do I integrate other services?
+- Combinar nodos existentes
+- Agregar nodos de código personalizados
+- Integrar nuevos servicios
+- Construir automatizaciones complejas
 
-n8n supports 300+ integrations:
+### ¿Cómo integro otros servicios?
+
+n8n soporta más de 300 integraciones:
+
 - Use built-in nodes
 - HTTP Request for APIs
 - Webhooks for events
@@ -366,6 +409,7 @@ n8n supports 300+ integrations:
 ### Can I schedule workflows?
 
 Yes, use:
+
 - Schedule Trigger node
 - Cron expressions
 - Interval triggers
@@ -374,6 +418,7 @@ Yes, use:
 ### How do I monitor workflows?
 
 Methods:
+
 - n8n execution logs
 - Database workflow_logs table
 - Error notifications (email, Slack)
@@ -393,6 +438,7 @@ Methods:
 ### How do I report bugs?
 
 Create a GitHub issue with:
+
 - Clear description
 - Steps to reproduce
 - Expected vs actual behavior
@@ -402,6 +448,7 @@ Create a GitHub issue with:
 ### Can I request features?
 
 Yes! Create a GitHub issue with:
+
 - Feature description
 - Use case
 - Potential implementation
@@ -410,6 +457,7 @@ Yes! Create a GitHub issue with:
 ### Is commercial support available?
 
 This is a community project. For commercial support:
+
 - Hire n8n experts
 - Contact project maintainers
 - Consider n8n Cloud (official)

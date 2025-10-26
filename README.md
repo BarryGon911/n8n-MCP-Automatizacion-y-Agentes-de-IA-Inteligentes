@@ -1,121 +1,125 @@
-# n8n Automation & AI Agents Platform
+# Plataforma de Automatización n8n y Agentes de IA
 
-A comprehensive automation platform built with n8n, featuring intelligent AI agents, messaging bots, RAG (Retrieval-Augmented Generation), and web scraping capabilities.
+Una plataforma integral de automatización construida con n8n, que incluye agentes de IA inteligentes, bots de mensajería, RAG (Generación Aumentada por Recuperación) y capacidades de web scraping.
 
-![n8n](https://img.shields.io/badge/n8n-Workflow%20Automation-orange)
+![n8n](https://img.shields.io/badge/n8n-Automatización%20de%20Workflows-orange)
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![License](https://img.shields.io/badge/licencia-MIT-green)
 
-## 🌟 Features
+## 🌟 Características
 
-### 🤖 AI-Powered Chatbots
+### 🤖 Chatbots Potenciados por IA
 
-- **Telegram Bot**: Intelligent conversational bot with RAG support
-- **WhatsApp Bot**: Business messaging with AI capabilities
-- Multi-language support
-- Conversation history and user profiling
+- **Bot de Telegram**: Bot conversacional inteligente con soporte RAG
+- **Bot de WhatsApp**: Mensajería empresarial con capacidades de IA
+- Soporte multiidioma
+- Historial de conversaciones y perfilado de usuarios
 
-### 🧠 AI Model Integration
+### 🧠 Integración de Modelos de IA
 
-- **OpenAI**: GPT-4, GPT-3.5-turbo for advanced language understanding
-- **Google Gemini**: Google's latest AI model
-- **Ollama**: Local AI models (Llama2, Mistral, CodeLlama)
-- Flexible model switching and fallback options
+- **OpenAI**: GPT-4, GPT-3.5-turbo para comprensión avanzada del lenguaje
+- **Google Gemini**: El modelo de IA más reciente de Google
+- **Ollama**: Modelos de IA locales (Llama2, Mistral, CodeLlama)
+- Cambio flexible de modelos y opciones de respaldo
 
-### 📚 RAG (Retrieval-Augmented Generation)
+### 📚 RAG (Generación Aumentada por Recuperación)
 
-- Vector database with pgvector
-- Automatic embedding generation
-- Context-aware AI responses
-- Knowledge base management
+- Base de datos vectorial con pgvector
+- Generación automática de embeddings
+- Respuestas de IA con contexto
+- Gestión de base de conocimiento
 
-### 🌐 Web Scraping & Data Processing
+### 🌐 Web Scraping y Procesamiento de Datos
 
-- Automated content extraction
-- Scheduled scraping workflows
-- Content indexing for RAG
-- Cheerio-based HTML parsing
+- Extracción automatizada de contenido
+- Workflows de scraping programados
+- Indexación de contenido para RAG
+- Análisis HTML basado en Cheerio
 
-### 🎙️ Text-to-Speech
+### 🎙️ Conversión de Texto a Voz
 
-- ElevenLabs integration
-- High-quality voice synthesis
-- Multiple voice options
-- Webhook-based API
+- Integración con ElevenLabs
+- Síntesis de voz de alta calidad
+- Múltiples opciones de voz
+- API basada en webhooks
 
-### 🔄 Autonomous Agents
+### 🔄 Agentes Autónomos
 
-- Task queue system
-- Multiple task types (scraping, analysis, notifications)
-- Background job processing
-- Status tracking and logging
+- Sistema de cola de tareas
+- Múltiples tipos de tareas (scraping, análisis, notificaciones)
+- Procesamiento de trabajos en segundo plano
+- Seguimiento de estado y registro
 
-### 💾 Data Management
+### 💾 Gestión de Datos
 
-- PostgreSQL database with vector support
-- Conversation history storage
-- User profiling and preferences
-- Workflow execution logs
+- Base de datos PostgreSQL con soporte vectorial
+- Almacenamiento de historial de conversaciones
+- Perfilado y preferencias de usuarios
+- Registros de ejecución de workflows
 
-## 🚀 Quick Start
+## 🚀 Inicio Rápido
 
-### Prerequisites
+### Requisitos Previos
 
-- Docker (version 20.10+)
-- Docker Compose (version 2.0+)
+- Docker (versión 20.10+)
+- Docker Compose (versión 2.0+)
 - Git
 
-### Installation
+### Instalación
 
-1. **Clone the repository**
+1. **Clonar el repositorio**
 
 ```bash
 git clone https://github.com/BarryGon911/n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes.git
 cd n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
 
+
 ```
 
-2. **Run the setup script**
+2. **Ejecutar el script de configuración**
 
 ```bash
 ./scripts/setup.sh
 
+
 ```
 
-3. **Configure environment variables**
+3. **Configurar las variables de entorno**
 
 ```bash
 cp .env.example .env
-nano .env  # Edit with your credentials
+nano .env  # Editar con tus credenciales
+
 
 ```
 
-4. **Start the services**
+4. **Iniciar los servicios**
 
 ```bash
 docker-compose up -d
 
+
 ```
 
-5. **Access n8n**
+5. **Acceder a n8n**
 
-   Open your browser and navigate to: `http://localhost:5678`
+   Abre tu navegador y navega a: `http://localhost:5678`
 
-   Default credentials:
+   Credenciales por defecto:
 
-   - Username: `admin`
-   - Password: `admin` (change this in `.env`)
+   - Usuario: `admin`
+   - Contraseña: `admin` (cámbiala en `.env`)
 
-For detailed installation instructions, see [docs/INSTALLATION.md](docs/INSTALLATION.md).
+Para instrucciones detalladas de instalación, consulta [docs/INSTALLATION.md](docs/INSTALLATION.md).
 
-## 📖 Documentation
+## 📖 Documentación
 
-- **[Installation Guide](docs/INSTALLATION.md)** - Complete setup instructions
-- **[Usage Guide](docs/USAGE.md)** - How to use the workflows and features
-- **[Workflows Documentation](workflows/README.md)** - Detailed workflow explanations
+- **[Guía de Instalación](docs/INSTALLATION.md)** - Instrucciones completas de configuración
+- **[Guía de Uso](docs/USAGE.md)** - Cómo usar los workflows y funciones
+- **[Documentación de Workflows](workflows/README.md)** - Explicaciones detalladas de workflows
 
-## 🏗️ Architecture
+## 🏗️ Arquitectura
 
 ```ini
 ┌─────────────────────────────────────────────────────────────┐
@@ -144,13 +148,14 @@ For detailed installation instructions, see [docs/INSTALLATION.md](docs/INSTALLA
         │  └──────────┘  └──────────────┘  │
         └───────────────────────────────────┘
 
+
 ```
 
-## 🔧 Configuration
+## 🔧 Configuración
 
-### Environment Variables
+### Variables de Entorno
 
-Key environment variables to configure in `.env`:
+Variables de entorno clave a configurar en `.env`:
 
 ```env
 # n8n
@@ -175,180 +180,187 @@ WHATSAPP_ACCESS_TOKEN=your-access-token
 # ElevenLabs
 ELEVENLABS_API_KEY=your-elevenlabs-key
 
+
 ```
 
-For a complete list of configuration options, see [.env.example](.env.example).
+Para una lista completa de opciones de configuración, consulta [.env.example](.env.example).
 
-## 📦 Included Workflows
+## 📦 Workflows Incluidos
 
-| Workflow | Description | Key Features |
-|----------|-------------|--------------|
-| **Telegram AI Bot** | Intelligent Telegram chatbot | RAG, OpenAI/Ollama, conversation history |
-| **WhatsApp AI Bot** | WhatsApp Business bot | Gemini AI, webhook-based, message logging |
-| **Web Scraping & RAG** | Automated content extraction | Scheduled scraping, embedding generation, vector storage |
-| **Text-to-Speech** | Convert text to audio | ElevenLabs, multiple voices, webhook API |
-| **AI Agent Executor** | Autonomous task processing | Task queue, multiple task types, background processing |
+| Workflow | Descripción | Características Clave |
+|----------|-------------|----------------------|
+| **Bot de IA Telegram** | Chatbot inteligente de Telegram | RAG, OpenAI/Ollama, historial de conversaciones |
+| **Bot de IA WhatsApp** | Bot de WhatsApp Business | Gemini AI, basado en webhooks, registro de mensajes |
+| **Web Scraping y RAG** | Extracción automatizada de contenido | Scraping programado, generación de embeddings, almacenamiento vectorial |
+| **Texto a Voz** | Convertir texto a audio | ElevenLabs, múltiples voces, API webhook |
+| **Ejecutor de Agentes IA** | Procesamiento autónomo de tareas | Cola de tareas, múltiples tipos de tareas, procesamiento en segundo plano |
 
-See [workflows/README.md](workflows/README.md) for detailed workflow documentation.
+Consulta [workflows/README.md](workflows/README.md) para documentación detallada de workflows.
 
-## 🛠️ Development
+## 🛠️ Desarrollo
 
-### Project Structure
+### Estructura del Proyecto
 
 ```ini
 .
-├── docker-compose.yml      # Docker services configuration
-├── .env.example           # Environment variables template
+├── docker-compose.yml      # Configuración de servicios Docker
+├── .env.example           # Plantilla de variables de entorno
 ├── database/
-│   └── init.sql          # Database initialization script
-├── workflows/            # n8n workflow JSON files
+│   └── init.sql          # Script de inicialización de base de datos
+├── workflows/            # Archivos JSON de workflows n8n
 │   ├── telegram-ai-bot.json
 │   ├── whatsapp-ai-bot.json
 │   ├── web-scraping-rag.json
 │   ├── elevenlabs-tts.json
 │   ├── ai-agent-executor.json
 │   └── README.md
-├── scripts/              # Utility scripts
-│   ├── setup.sh         # Initial setup script
-│   └── backup.sh        # Database backup script
-└── docs/                # Documentation
+├── scripts/              # Scripts de utilidad
+│   ├── setup.sh         # Script de configuración inicial
+│   └── backup.sh        # Script de respaldo de base de datos
+└── docs/                # Documentación
     ├── INSTALLATION.md
     └── USAGE.md
 
+
 ```
 
-### Adding New Workflows
+### Agregar Nuevos Workflows
 
-1. Create workflow in n8n UI
-2. Export as JSON
-3. Add to `workflows/` directory
-4. Document in `workflows/README.md`
-5. Update this README
+1. Crear workflow en la interfaz de n8n
+2. Exportar como JSON
+3. Agregar al directorio `workflows/`
+4. Documentar en `workflows/README.md`
+5. Actualizar este README
 
 ### Database Schema
 
 El proyecto incluye un esquema completo de PostgreSQL con:
 
 - **pgvector**: Extensión para búsquedas vectoriales RAG
-- **6 Tablas**: users, conversations, documents, scraped_data, agent_tasks, workflow_logs
+- __6 Tablas__: users, conversations, documents, scraped_data, agent_tasks, workflow_logs
 - **Índices optimizados**: Para búsquedas rápidas y similitud vectorial
-- **Vistas útiles**: active_conversations, pending_tasks_summary
+- __Vistas útiles__: active_conversations, pending_tasks_summary
 - **Triggers automáticos**: Actualización de timestamps
 
 Ver [database/README.md](database/README.md) para documentación detallada del esquema.
 
-### Database Backup
+### Respaldo de Base de Datos
 
-Run the backup script regularly:
+Ejecuta el script de respaldo regularmente:
 
 ```bash
 ./scripts/backup.sh
 
+
 ```
 
-This creates timestamped backups in the `backups/` directory.
+Esto crea respaldos con marca de tiempo en el directorio `backups/`.
 
-## 🔐 Security Best Practices
+## 🔐 Mejores Prácticas de Seguridad
 
-1. **Change default credentials** in `.env` file
-2. **Never commit** `.env` file to version control
-3. **Use HTTPS** in production environments
-4. **Implement rate limiting** on webhooks
-5. **Validate webhook signatures** for external services
-6. **Keep API keys secure** and rotate them regularly
-7. **Update Docker images** regularly for security patches
+1. **Cambia las credenciales por defecto** en el archivo `.env`
+2. **Nunca hagas commit** del archivo `.env` en control de versiones
+3. **Usa HTTPS** en entornos de producción
+4. **Implementa limitación de tasa** en webhooks
+5. **Valida las firmas de webhooks** para servicios externos
+6. **Mantén las claves API seguras** y rótalas regularmente
+7. **Actualiza las imágenes Docker** regularmente para parches de seguridad
 
-## 🚦 Monitoring & Maintenance
+## 🚦 Monitoreo y Mantenimiento
 
-### Check Service Status
+### Verificar Estado de Servicios
 
 ```bash
 docker-compose ps
 
+
 ```
 
-### View Logs
+### Ver Registros (Logs)
 
 ```bash
-# All services
+# Todos los servicios
 docker-compose logs
 
-# Specific service
+# Servicio específico
 docker-compose logs n8n
 docker-compose logs postgres
 docker-compose logs ollama
 
+
 ```
 
-### Restart Services
+### Reiniciar Servicios
 
 ```bash
 docker-compose restart
 
+
 ```
 
-### Database Access
+### Acceso a la Base de Datos
 
 ```bash
 docker-compose exec postgres psql -U n8n -d n8n
 
+
 ```
 
-## 🤝 Contributing
+## 🤝 Contribuciones
 
-Contributions are welcome! Please:
+¡Las contribuciones son bienvenidas! Por favor:
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add documentation
-5. Submit a pull request
+1. Haz un fork del repositorio
+2. Crea una rama de funcionalidad
+3. Realiza tus cambios
+4. Agrega documentación
+5. Envía un pull request
 
-## 📄 License
+## 📄 Licencia
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-## 🙏 Acknowledgments
+## 🙏 Agradecimientos
 
-- [n8n](https://n8n.io/) - Workflow automation platform
-- [OpenAI](https://openai.com/) - GPT models
+- [n8n](https://n8n.io/) - Plataforma de automatización de workflows
+- [OpenAI](https://openai.com/) - Modelos GPT
 - [Google](https://ai.google.dev/) - Gemini AI
-- [Ollama](https://ollama.ai/) - Local AI models
-- [ElevenLabs](https://elevenlabs.io/) - Text-to-speech
-- [PostgreSQL](https://www.postgresql.org/) - Database
-- [pgvector](https://github.com/pgvector/pgvector) - Vector similarity search
+- [Ollama](https://ollama.ai/) - Modelos de IA locales
+- [ElevenLabs](https://elevenlabs.io/) - Conversión de texto a voz
+- [PostgreSQL](https://www.postgresql.org/) - Base de datos
+- [pgvector](https://github.com/pgvector/pgvector) - Búsqueda de similitud vectorial
 
-## 📞 Support
+## 📞 Soporte
 
-For issues, questions, or suggestions:
+Para problemas, preguntas o sugerencias:
 
-- Check the [documentation](docs/)
-- Visit the [n8n community](https://community.n8n.io/)
+- Consulta la [documentación](docs/)
+- Visita la [comunidad de n8n](https://community.n8n.io/)
 
-## 🗺️ Roadmap
+## 🗺️ Hoja de Ruta
 
-- [ ] Add support for more AI models (Anthropic Claude, Cohere)
-- [ ] Implement advanced RAG techniques (hybrid search, re-ranking)
-- [ ] Add Discord bot integration
-- [ ] Create web interface for workflow management
-- [ ] Add support for more languages
-- [ ] Implement conversation analytics dashboard
-- [ ] Add voice message support for bots
-- [ ] Create mobile app integration examples
+- [ ] Agregar soporte para más modelos de IA (Anthropic Claude, Cohere)
+- [ ] Implementar técnicas avanzadas de RAG (búsqueda híbrida, re-ranking)
+- [ ] Agregar integración con bot de Discord
+- [ ] Crear interfaz web para gestión de workflows
+- [ ] Agregar soporte para más idiomas
+- [ ] Implementar panel de análisis de conversaciones
+- [ ] Agregar soporte de mensajes de voz para bots
+- [ ] Crear ejemplos de integración con aplicaciones móviles
 
-## 🌍 Use Cases
+## 🌍 Casos de Uso
 
-- **Customer Support**: Automated response systems for businesses
-- **Knowledge Management**: Build searchable knowledge bases with RAG
-- **Content Automation**: Automated content creation and distribution
-- **Personal Assistant**: AI-powered personal productivity tools
-- **Educational Bots**: Interactive learning assistants
-- **Business Intelligence**: Automated data collection and analysis
-- **Notification Systems**: Smart alert and notification delivery
+- **Soporte al Cliente**: Sistemas de respuesta automatizados para empresas
+- **Gestión del Conocimiento**: Crear bases de conocimiento consultables con RAG
+- **Automatización de Contenido**: Creación y distribución automatizada de contenido
+- **Asistente Personal**: Herramientas de productividad personal potenciadas por IA
+- **Bots Educativos**: Asistentes de aprendizaje interactivos
+- **Inteligencia de Negocios**: Recopilación y análisis automatizado de datos
+- **Sistemas de Notificaciones**: Entrega inteligente de alertas y notificaciones
 
 ---
 
-**Built with ❤️ using n8n and AI**
+**Construido con ❤️ usando n8n e IA**
 
 <!-- Banner centrado -->
 
@@ -382,7 +394,7 @@ For issues, questions, or suggestions:
 - Implementar **casos prácticos avanzados**: **chatbots**, **scraping**, **bots de Telegram/WhatsApp** y **agentes de voz** con datos en tiempo real.
 - Crear y administrar **sistemas RAG** para consultar **bases de conocimiento** usando **PostgreSQL** y **Google Drive**.
 
-> Enfoque 100% práctico y orientado a producto.
+> Enfoque 100% práctico y orientado a productos.
 
 ---
 
@@ -423,6 +435,7 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
                 ▼
            RAG: Index + Store (PostgreSQL/Drive)
 
+
 ```
 
 ---
@@ -431,11 +444,11 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 
 1. **Requisitos**
 
-- Node.js LTS, Docker (opcional), cuenta(s) de APIs necesarias.
+- Node.js LTS, Docker (opcional), cuenta(s) de las APIs necesarias.
 
 2. **n8n**
 
-- Self-host (Docker) o npx: `npx n8n`
+- Auto-hospedaje (Docker) o npx: `npx n8n`
 
 3. **Variables de entorno**
 
@@ -464,6 +477,7 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
  /docs
   ├─ HOWTOs.md
   └─ env.example.md
+
 
 ```
 

@@ -1,68 +1,123 @@
-# Security Policy
+# Política de Seguridad
 
-## Supported Versions
+## Versiones Soportadas
 
-Currently, we support the latest version of this project. Security updates will be applied to the main branch.
+Actualmente, soportamos la última versión de este proyecto. Las actualizaciones de seguridad se aplicarán a la rama principal.
 
-| Version | Supported          |
+| Versión | Soportada          |
 | ------- | ------------------ |
-| Latest  | :white_check_mark: |
+| Última  | :white_check_mark: |
 | < 1.0   | :x:                |
 
-## Reporting a Vulnerability
+## Reportar una Vulnerabilidad
 
-If you discover a security vulnerability, please follow these steps:
+Si descubres una vulnerabilidad de seguridad, por favor sigue estos pasos:
 
-### Do NOT
-- Open a public issue
-- Disclose the vulnerability publicly
-- Exploit the vulnerability
+### NO
 
-### Do
-1. **Email the maintainers** directly with:
-   - Description of the vulnerability
-   - Steps to reproduce
-   - Potential impact
-   - Suggested fix (if any)
+- Abras un issue público
+- Divulgues la vulnerabilidad públicamente
+- Explotes la vulnerabilidad
 
-2. **Wait for acknowledgment**
-   - We will respond within 48 hours
-   - We will work on a fix promptly
-   - We will keep you updated on progress
+### SÍ
 
-3. **Coordinated disclosure**
-   - We will coordinate with you on disclosure timeline
-   - We will credit you in the security advisory (if desired)
+1. **Envía un email a los mantenedores** directamente con:
+
+   - Descripción de la vulnerabilidad
+   - Pasos para reproducirla
+   - Impacto potencial
+   - Solución sugerida (si tienes alguna)
+
+2. **Espera reconocimiento**
+
+   - Responderemos dentro de 48 horas
+   - Trabajaremos en una corrección de inmediato
+   - Te mantendremos actualizado sobre el progreso
+
+3. **Divulgación coordinada**
+
+   - Coordinaremos contigo la línea de tiempo de divulgación
+   - Te acreditaremos en el aviso de seguridad (si lo deseas)
+
+## Mejores Prácticas de Seguridad
+
+### Para Usuarios
+
+1. **Variables de Entorno**
+
+   - Nunca hagas commit del archivo `.env`
+   - Usa contraseñas fuertes
+   - Rota las claves API regularmente
+   - Restringe los permisos de las claves API
+
+2. **Seguridad de Red**
+
+   - Usa HTTPS en producción
+   - Implementa reglas de firewall
+   - Restringe el acceso a la base de datos
+   - Usa VPN para acceso remoto
+
+3. **Control de Acceso**
+
+   - Cambia las credenciales por defecto
+   - Usa autenticación fuerte
+   - Implementa limitación de tasa
+   - Monitorea los registros de acceso
+
+4. **Seguridad en Docker**
+
+   - Mantén las imágenes actualizadas
+   - Usa etiquetas de versión específicas
+   - Escanea imágenes en busca de vulnerabilidades
+   - Ejecuta contenedores como no-root
+
+5. **Seguridad de API**
+
+   - Valida las firmas de webhooks
+   - Implementa limitación de tasa
+   - Usa HTTPS para webhooks
+   - Valida todas las entradas
+
+### Para Contribuidores
+
+1. **Revisión de Código**
+
+   - Revisa en busca de problemas de seguridad
 
 ## Security Best Practices
 
 ### For Users
 
 1. **Environment Variables**
+
    - Never commit `.env` file
    - Use strong passwords
    - Rotate API keys regularly
    - Restrict API key permissions
 
 2. **Network Security**
+
    - Use HTTPS in production
    - Implement firewall rules
    - Restrict database access
    - Use VPN for remote access
 
 3. **Access Control**
+
    - Change default credentials
    - Use strong authentication
    - Implement rate limiting
    - Monitor access logs
 
 4. **Docker Security**
+
    - Keep images updated
    - Use specific version tags
    - Scan images for vulnerabilities
    - Run containers as non-root
 
 5. **API Security**
+
    - Validate webhook signatures
    - Implement rate limiting
    - Use HTTPS for webhooks
@@ -70,102 +125,166 @@ If you discover a security vulnerability, please follow these steps:
 
 ### For Contributors
 
-1. **Code Review**
-   - Review for security issues
-   - Check for hardcoded secrets
-   - Validate input handling
-   - Check dependency versions
+1. **Revisión de Código**
 
-2. **Dependencies**
-   - Keep dependencies updated
-   - Review dependency security
-   - Use official sources only
-   - Check for known vulnerabilities
+   - Revisa en busca de problemas de seguridad
+   - Verifica secretos codificados
+   - Valida el manejo de entradas
+   - Verifica versiones de dependencias
 
-3. **Secrets Management**
-   - Never commit secrets
-   - Use environment variables
-   - Implement secret rotation
-   - Use secret management tools
+2. **Dependencias**
 
-## Known Security Considerations
+   - Mantén las dependencias actualizadas
+   - Revisa la seguridad de dependencias
+   - Usa solo fuentes oficiales
+   - Verifica vulnerabilidades conocidas
 
-### API Keys
-- Store in environment variables only
-- Never expose in logs or error messages
-- Implement key rotation
-- Monitor for unauthorized usage
+3. **Gestión de Secretos**
+
+   - Nunca hagas commit de secretos
+   - Usa variables de entorno
+   - Implementa rotación de secretos
+   - Usa herramientas de gestión de secretos
+
+## Consideraciones de Seguridad Conocidas
+
+### Claves API
+
+- Almacenar solo en variables de entorno
+- Nunca exponerlas en logs o mensajes de error
+- Implementar rotación de claves
+- Monitorear uso no autorizado
 
 ### Webhooks
-- Implement signature verification
-- Use HTTPS endpoints
-- Validate payload structure
-- Implement rate limiting
 
-### Database
-- Use strong passwords
-- Restrict network access
-- Implement regular backups
-- Enable audit logging
+- Implementar verificación de firma
+- Usar endpoints HTTPS
+- Validar estructura del payload
+- Implementar limitación de tasa
+
+### Base de Datos
+
+- Usar contraseñas fuertes
+- Restringir acceso de red
+- Implementar respaldos regulares
+- Habilitar registro de auditoría
 
 ### Docker
-- Regular security updates
-- Minimal base images
-- Non-root users
-- Resource limits
 
-## Security Updates
+- Actualizaciones de seguridad regulares
+- Imágenes base mínimas
+- Usuarios no-root
+- Límites de recursos
 
-We will:
-- Monitor dependencies for vulnerabilities
-- Apply security patches promptly
-- Notify users of critical issues
-- Provide upgrade instructions
+## Actualizaciones de Seguridad
 
-## Compliance
+Nosotros:
 
-This project handles:
-- User conversations (potential PII)
-- API credentials (sensitive data)
-- Scraped content (copyright considerations)
+- Monitoreamos dependencias en busca de vulnerabilidades
+- Aplicamos parches de seguridad de inmediato
+- Notificamos a los usuarios sobre problemas críticos
+- Proporcionamos instrucciones de actualización
 
-Users are responsible for:
-- Compliance with data protection laws (GDPR, CCPA, etc.)
-- Proper handling of user data
-- Obtaining necessary consents
-- Implementing data retention policies
+## Cumplimiento
 
-## Audit Logging
+Este proyecto maneja:
 
-Consider implementing:
-- Workflow execution logs
-- API access logs
-- Database query logs
-- Authentication attempts
-- Configuration changes
+- Conversaciones de usuarios (potencial PII - Información Personal Identificable)
+- Credenciales API (datos sensibles)
+- Contenido scrapeado (consideraciones de derechos de autor)
 
-## Incident Response
+Los usuarios son responsables de:
 
-In case of a security incident:
+- Cumplimiento con leyes de protección de datos (GDPR, CCPA, etc.)
+- Manejo apropiado de datos de usuarios
+- Obtención de consentimientos necesarios
 
-1. **Identify** the scope and impact
-2. **Contain** the issue immediately
-3. **Investigate** root cause
-4. **Remediate** the vulnerability
-5. **Communicate** with affected users
-6. **Review** and improve processes
+## Consideraciones de Seguridad Conocidas
 
-## Resources
+### Claves API
+
+- Almacenar solo en variables de entorno
+- Nunca exponer en logs o mensajes de error
+- Implementar rotación de claves
+- Monitorear uso no autorizado
+
+### Webhooks
+
+- Implementar verificación de firma
+- Usar endpoints HTTPS
+- Validar estructura de payload
+- Implementar limitación de tasa
+
+### Base de Datos
+
+- Usar contraseñas fuertes
+- Restringir acceso de red
+- Implementar respaldos regulares
+- Habilitar registro de auditoría
+
+### Docker
+
+- Actualizaciones de seguridad regulares
+- Imágenes base mínimas
+- Usuarios no root
+- Límites de recursos
+
+## Actualizaciones de Seguridad
+
+Nosotros:
+
+- Monitoreamos dependencias para vulnerabilidades
+- Aplicamos parches de seguridad prontamente
+- Notificamos a los usuarios sobre problemas críticos
+- Proporcionamos instrucciones de actualización
+
+## Cumplimiento
+
+Este proyecto maneja:
+
+- Conversaciones de usuarios (potencial PII)
+- Credenciales API (datos sensibles)
+- Contenido scrapeado (consideraciones de copyright)
+
+Los usuarios son responsables de:
+
+- Cumplimiento con leyes de protección de datos (GDPR, CCPA, etc.)
+- Manejo apropiado de datos de usuario
+- Obtención de consentimientos necesarios
+- Implementación de políticas de retención de datos
+
+## Registro de Auditoría
+
+Considera implementar:
+
+- Logs de ejecución de workflows
+- Logs de acceso API
+- Logs de consultas de base de datos
+- Intentos de autenticación
+- Cambios de configuración
+
+## Respuesta a Incidentes
+
+En caso de un incidente de seguridad:
+
+1. **Identificar** el alcance e impacto
+2. **Contener** el problema inmediatamente
+3. **Investigar** la causa raíz
+4. **Remediar** la vulnerabilidad
+5. **Comunicar** con usuarios afectados
+6. **Revisar** y mejorar procesos
+
+## Recursos
 
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
-- [Docker Security Best Practices](https://docs.docker.com/engine/security/)
-- [n8n Security Guide](https://docs.n8n.io/hosting/security/)
-- [PostgreSQL Security](https://www.postgresql.org/docs/current/security.html)
+- [Mejores Prácticas de Seguridad Docker](https://docs.docker.com/engine/security/)
+- [Guía de Seguridad n8n](https://docs.n8n.io/hosting/security/)
+- [Seguridad PostgreSQL](https://www.postgresql.org/docs/current/security.html)
 
-## Contact
+## Contacto
 
-For security concerns, contact the maintainers through GitHub.
+Para preocupaciones de seguridad, contacta a los mantenedores a través de GitHub.
 
 ---
 
-**Security is a shared responsibility. Thank you for helping keep this project secure!**
+**La seguridad es una responsabilidad compartida. ¡Gracias por ayudar a mantener este proyecto seguro!**

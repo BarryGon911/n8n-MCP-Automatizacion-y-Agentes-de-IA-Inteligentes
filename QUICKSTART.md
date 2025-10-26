@@ -1,172 +1,271 @@
-# Quick Start Guide
+# Guía de Inicio Rápido
 
-Get up and running with n8n Automation & AI Agents in 10 minutes!
+¡Configura y ejecuta n8n Automatización y Agentes de IA en 10 minutos!
 
-## 🚀 Prerequisites
+## 🚀 Requisitos Previos
 
-Before you begin, ensure you have:
-- [Docker](https://docs.docker.com/get-docker/) installed
-- [Docker Compose](https://docs.docker.com/compose/install/) installed
-- At least 4GB of available RAM
-- 10GB of free disk space
+Antes de comenzar, asegúrate de tener:
 
-## ⚡ 5-Minute Setup
+- [Docker](https://docs.docker.com/get-docker/) instalado
+- [Docker Compose](https://docs.docker.com/compose/install/) instalado
+- Al menos 4GB de RAM disponible
+- 10GB de espacio libre en disco
 
-### Step 1: Clone the Repository
+## ⚡ Configuración en 5 Minutos
+
+### Paso 1: Clonar el Repositorio
 
 ```bash
 git clone https://github.com/BarryGon911/n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes.git
 cd n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
+
 ```
 
-### Step 2: Configure Environment
+### Paso 2: Configurar el Entorno
 
 ```bash
-# Copy environment template
+# Copiar plantilla de entorno
 cp .env.example .env
 
-# Edit with your preferred editor
+# Editar con tu editor preferido
 nano .env
+
 ```
 
-**Minimum required changes:**
+**Cambios mínimos requeridos:**
+
 ```env
-N8N_BASIC_AUTH_USER=yourusername
-N8N_BASIC_AUTH_PASSWORD=yourpassword
-DB_POSTGRESDB_PASSWORD=securepassword
+N8N_BASIC_AUTH_USER=tuusuario
+N8N_BASIC_AUTH_PASSWORD=tucontraseña
+DB_POSTGRESDB_PASSWORD=contraseñasegura
+
 ```
 
-### Step 3: Start Services
+### Paso 3: Iniciar Servicios
 
 ```bash
 docker-compose up -d
+
 ```
 
-Wait about 30 seconds for services to initialize.
+Espera aproximadamente 30 segundos para que los servicios se inicialicen.
 
-### Step 4: Access n8n
+### Paso 4: Acceder a n8n
 
-Open your browser and go to:
-```
+Abre tu navegador y ve a:
+
+```sh
 http://localhost:5678
+
 ```
 
-Login with the credentials you set in Step 2.
+Inicia sesión con las credenciales que configuraste en el Paso 2.
 
-**🎉 Congratulations! You're now running n8n with AI capabilities!**
+**🎉 ¡Felicitaciones! ¡Ahora estás ejecutando n8n con capacidades de IA!**
 
 ---
 
-## 🤖 Try Your First Bot (Telegram)
+## 🤖 Prueba tu Primer Bot (Telegram)
 
-### 1. Create a Telegram Bot
+### 1. Crear un Bot de Telegram
 
-1. Open Telegram and message [@BotFather](https://t.me/botfather)
-2. Send `/newbot`
-3. Follow prompts to name your bot
-4. Copy the bot token (looks like `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`)
+1. Abre Telegram y envía un mensaje a [@BotFather](https://t.me/botfather)
+2. Envía `/newbot`
+3. Sigue las indicaciones para nombrar tu bot
+4. Copia el token del bot (se ve como `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`)
 
-### 2. Add Bot Token
+### 2. Agregar el Token del Bot
 
-Edit your `.env` file:
+Edita tu archivo `.env`:
+
 ```env
 TELEGRAM_BOT_TOKEN=your-token-here
+
 ```
 
-Restart n8n:
+Reiniciar n8n:
+
 ```bash
 docker-compose restart n8n
+
 ```
 
-### 3. Get an OpenAI API Key
+### 3. Obtener una Clave API de OpenAI
 
-1. Sign up at [OpenAI](https://platform.openai.com/)
-2. Generate an API key
-3. Add to `.env`:
-   ```env
-   OPENAI_API_KEY=sk-your-key-here
-   ```
-4. Restart: `docker-compose restart n8n`
+1. Regístrate en [OpenAI](https://platform.openai.com/)
 
-### 4. Import the Telegram Workflow
+2. Genera una clave API
 
-1. In n8n, click **Workflows** → **Import from File**
-2. Select `workflows/telegram-ai-bot.json`
-3. Click **Import**
+3. Agrégala a `.env`:
 
-### 5. Configure Credentials
+```env
+OPENAI_API_KEY=sk-tu-clave-aqui
+
+```
+
+4. Reiniciar: `docker-compose restart n8n`
+
+### 4. Importar el Workflow de Telegram
+
+1. En n8n, haz clic en **Workflows** → **Import from File**
+2. Selecciona `workflows/telegram-ai-bot.json`
+3. Haz clic en **Import**
+
+### 5. Configurar Credenciales
 
 **PostgreSQL:**
-1. Go to **Settings** → **Credentials** → **New**
-2. Select **PostgreSQL**
-3. Fill in:
+
+1. Ve a **Settings** → **Credentials** → **New**
+2. Selecciona **PostgreSQL**
+3. Completa:
    - Host: `postgres`
    - Database: `n8n`
    - User: `n8n`
-   - Password: (from your `.env`)
+   - Password: (de tu archivo `.env`)
    - Port: `5432`
-4. Click **Save**
+
+4. Haz clic en **Save**
 
 **OpenAI:**
+
 1. **Settings** → **Credentials** → **New**
-2. Select **OpenAI**
-3. Enter your API key
-4. Click **Save**
+2. Selecciona **OpenAI**
+3. Ingresa tu clave API
+4. Haz clic en **Save**
 
 **Telegram:**
+
 1. **Settings** → **Credentials** → **New**
-2. Select **Telegram**
-3. Enter your bot token
-4. Click **Save**
+2. Selecciona **Telegram**
+3. Ingresa el token de tu bot
+4. Haz clic en **Save**
 
-### 6. Activate the Workflow
+### 6. Activar el Workflow
 
-1. Open the "Telegram AI Bot" workflow
-2. Connect credentials to each node
-3. Click the **Active** toggle switch
-4. Test by messaging your bot on Telegram!
+1. Abre el workflow "Telegram AI Bot"
+2. Conecta las credenciales a cada nodo
+3. Haz clic en el interruptor **Active**
+4. ¡Prueba enviando un mensaje a tu bot en Telegram!
 
 ---
 
-## 🌐 Optional: Local AI with Ollama
+## 🌐 Opcional: IA Local con Ollama
 
-Want to use AI without API costs? Set up Ollama:
+¿Quieres usar IA sin costos de API? Configura Ollama:
 
-### 1. Pull a Model
+### 1. Descargar un Modelo
 
 ```bash
 docker exec -it $(docker-compose ps -q ollama) ollama pull llama2
+
 ```
 
-This downloads the Llama2 model (~4GB).
+Esto descarga el modelo Llama2 (~4GB).
 
-### 2. Update Workflow
+### 2. Actualizar el Workflow
 
-In your Telegram workflow:
-1. Disable the OpenAI node
-2. Enable the Ollama HTTP Request node
-3. Save and test
+En tu workflow de Telegram:
 
-Now your bot uses local AI - no API costs!
+1. Deshabilita el nodo OpenAI
+2. Habilita el nodo HTTP Request de Ollama
+3. Guarda y prueba
+
+¡Ahora tu bot usa IA local - sin costos de API!
 
 ---
+
+## 📚 Agregar Conocimiento a tu Bot (RAG)
+
+### 1. Agregar Documentos de Muestra
+
+Conecta a la base de datos:
+
+```bash
+docker-compose exec postgres psql -U n8n -d rag_database
+
+```
+
+Insertar conocimiento:
+
+```sql
+INSERT INTO documents (content, metadata) VALUES 
+  ('n8n es una herramienta de automatización de workflows que conecta diferentes servicios.', 
+   '{"source": "documentacion", "category": "general"}'),
+  ('Para crear un webhook en n8n, usa el nodo Webhook y activa el workflow.', 
+   '{"source": "documentacion", "category": "tutorial"}');
+
+```
+
+Sal con `\q`
+
+### 2. Probar RAG
+
+Envía un mensaje a tu bot de Telegram:
+
+```sh
+¿Qué es n8n?
+
+```
+
+¡El bot usará tu base de conocimiento para responder!
+
+---
+
+## 🎯 Próximos Pasos
+
+### Explorar Más Características
+
+1. **Bot de WhatsApp**: Configura mensajería empresarial
+
+   - Ver [docs/INSTALLATION.md](docs/INSTALLATION.md#whatsapp-setup)
+
+2. **Web Scraping**: Recopila contenido automáticamente
+
+   - Importa `workflows/web-scraping-rag.json`
+   - Agrega URLs para scraping
+
+3. **Texto a Voz**: Genera audio
+
+   - Obtén clave API de ElevenLabs
+   - Importa `workflows/elevenlabs-tts.json`
+
+4. **Agentes Autónomos**: Procesamiento de tareas en segundo plano
+
+   - Importa `workflows/ai-agent-executor.json`
+
+### Aprende Más
+
+- **[Guía Completa de Instalación](docs/INSTALLATION.md)** - Configuración detallada
+- **[Guía de Uso](docs/USAGE.md)** - Cómo usar todas las funciones
+- **[FAQ](docs/FAQ.md)** - Preguntas frecuentes
+- **[Workflows](workflows/README.md)** - Documentación de workflows
+
+### Obtener Claves API
+
+Necesitarás estas para funcionalidad completa:
+
+| Servicio | Para qué es | Consíguelo aquí |
 
 ## 📚 Add Knowledge to Your Bot (RAG)
 
 ### 1. Add Sample Documents
 
 Connect to the database:
+
 ```bash
 docker-compose exec postgres psql -U n8n -d rag_database
+
 ```
 
 Insert knowledge:
+
 ```sql
 INSERT INTO documents (content, metadata) VALUES 
   ('n8n is a workflow automation tool that connects different services.', 
    '{"source": "documentation", "category": "general"}'),
   ('To create a webhook in n8n, use the Webhook node and activate the workflow.', 
    '{"source": "documentation", "category": "tutorial"}');
+
 ```
 
 Exit with `\q`
@@ -174,8 +273,10 @@ Exit with `\q`
 ### 2. Test RAG
 
 Message your Telegram bot:
-```
+
+```sh
 What is n8n?
+
 ```
 
 The bot will use your knowledge base to answer!
@@ -187,17 +288,21 @@ The bot will use your knowledge base to answer!
 ### Explore More Features
 
 1. **WhatsApp Bot**: Set up business messaging
+
    - See [docs/INSTALLATION.md](docs/INSTALLATION.md#whatsapp-setup)
 
 2. **Web Scraping**: Automatically gather content
+
    - Import `workflows/web-scraping-rag.json`
    - Add URLs to scrape
 
 3. **Text-to-Speech**: Generate audio
+
    - Get ElevenLabs API key
    - Import `workflows/elevenlabs-tts.json`
 
 4. **Autonomous Agents**: Background task processing
+
    - Import `workflows/ai-agent-executor.json`
 
 ### Learn More
@@ -211,100 +316,102 @@ The bot will use your knowledge base to answer!
 
 You'll need these for full functionality:
 
-| Service | What it's for | Get it here |
+<VSCode.Cell id="#VSC-1d7213f6" language="markdown">
+| Servicio | Para qué es | Consíguelo aquí |
 |---------|---------------|-------------|
-| OpenAI | AI responses | [platform.openai.com](https://platform.openai.com/) |
-| Gemini | Alternative AI | [makersuite.google.com](https://makersuite.google.com/) |
-| ElevenLabs | Text-to-speech | [elevenlabs.io](https://elevenlabs.io/) |
-| Telegram | Telegram bot | [@BotFather](https://t.me/botfather) |
-| WhatsApp | WhatsApp bot | [business.facebook.com](https://business.facebook.com/) |
+| OpenAI | Respuestas de IA | [platform.openai.com](https://platform.openai.com/) |
+| Gemini | IA alternativa | [makersuite.google.com](https://makersuite.google.com/) |
+| ElevenLabs | Texto a voz | [elevenlabs.io](https://elevenlabs.io/) |
+| Telegram | Bot de Telegram | [@BotFather](https://t.me/botfather) |
+| WhatsApp | Bot de WhatsApp | [business.facebook.com](https://business.facebook.com/) |
 
 ---
 
-## 🔧 Troubleshooting
+## 🔧 Solución de Problemas
 
-### Services Won't Start
+### Los Servicios No Inician
 
 ```bash
-# Check what's wrong
+# Verificar qué está mal
 docker-compose logs
 
-# Restart everything
+# Reiniciar todo
 docker-compose down
 docker-compose up -d
+
 ```
 
-### Can't Access n8n
+### No Puedo Acceder a n8n
 
-- Check if it's running: `docker-compose ps`
-- Try `http://127.0.0.1:5678` instead
-- Check firewall settings
+- Verifica si está ejecutándose: `docker-compose ps`
+- Prueba `http://127.0.0.1:5678` en su lugar
+- Verifica la configuración del firewall
 
-### Bot Not Responding
+### El Bot No Responde
 
-1. Is the workflow active? (toggle should be ON)
-2. Are credentials configured?
-3. Check execution logs in n8n
-4. Verify bot token is correct
-
-### Need Help?
-
-- Check [FAQ](docs/FAQ.md)
-- Review [troubleshooting section](docs/INSTALLATION.md#troubleshooting)
-- Open an issue on GitHub
+1. ¿Está activo el workflow? (el interruptor debe estar ON)
+2. ¿Están configuradas las credenciales?
 
 ---
 
-## 📊 Resource Usage
+### ¿Necesitas Ayuda?
 
-Typical resource consumption:
+- Consulta el [FAQ](docs/FAQ.md)
+- Revisa la [sección de solución de problemas](docs/INSTALLATION.md#troubleshooting)
+- Abre un issue en GitHub
 
-| Service | RAM | CPU | Disk |
+---
+
+## 📊 Uso de Recursos
+
+Consumo típico de recursos:
+
+| Servicio | RAM | CPU | Disco |
 |---------|-----|-----|------|
 | n8n | 200MB | 5% | 500MB |
 | PostgreSQL | 100MB | 2% | 1GB+ |
-| Ollama (with model) | 2GB+ | 10%+ | 4GB+ |
+| Ollama (con modelo) | 2GB+ | 10%+ | 4GB+ |
 
-**Tip**: If not using Ollama, you can remove it from `docker-compose.yml` to save resources.
-
----
-
-## 🎓 Learn by Example
-
-### Example 1: Customer Support Bot
-
-1. Import Telegram workflow
-2. Add company FAQs to RAG database
-3. Train with common questions
-4. Activate and test
-
-### Example 2: Content Aggregator
-
-1. Import web scraping workflow
-2. Add news website URLs to `scraped_data` table
-3. Schedule runs every 6 hours
-4. View aggregated content in RAG database
-
-### Example 3: Personal AI Assistant
-
-1. Import Telegram workflow
-2. Add personal notes and documents to RAG
-3. Use local Ollama for privacy
-4. Ask questions about your notes
+**Consejo**: Si no usas Ollama, puedes eliminarlo de `docker-compose.yml` para ahorrar recursos.
 
 ---
 
-## 💡 Pro Tips
+## 🎓 Aprende con Ejemplos
 
-1. **Start Small**: Begin with one workflow, then expand
-2. **Use Local AI**: Ollama is free and private
-3. **Backup Regularly**: Run `./scripts/backup.sh` weekly
-4. **Monitor Costs**: Track API usage in provider dashboards
-5. **Secure It**: Change default passwords immediately
-6. **Read Logs**: Check `docker-compose logs` when debugging
+### Ejemplo 1: Bot de Soporte al Cliente
+
+1. Importa el workflow de Telegram
+2. Agrega FAQs de la empresa a la base de datos RAG
+3. Entrena con preguntas comunes
+4. Activa y prueba
+
+### Ejemplo 2: Agregador de Contenido
+
+1. Importa el workflow de web scraping
+2. Agrega URLs de sitios de noticias a la tabla `scraped_data`
+3. Programa ejecuciones cada 6 horas
+4. Visualiza el contenido agregado en la base de datos RAG
+
+### Ejemplo 3: Asistente de IA Personal
+
+1. Importa el workflow de Telegram
+2. Agrega notas personales y documentos al RAG
+3. Usa Ollama local para privacidad
+4. Haz preguntas sobre tus notas
 
 ---
 
-**Ready to build something amazing? Let's go! 🚀**
+## 💡 Consejos Pro
 
-For detailed documentation, see [docs/](docs/) directory.
+1. **Empieza Pequeño**: Comienza con un workflow, luego expande
+2. **Usa IA Local**: Ollama es gratuito y privado
+3. **Respaldos Regulares**: Ejecuta `./scripts/backup.sh` semanalmente
+4. **Monitorea Costos**: Rastrea el uso de API en los dashboards del proveedor
+5. **Asegúralo**: Cambia las contraseñas predeterminadas de inmediato
+6. **Lee Logs**: Verifica `docker-compose logs` cuando depures
+
+---
+
+**¿Listo para construir algo increíble? ¡Vamos! 🚀**
+
+Para documentación detallada, consulta el directorio [docs/](docs/).

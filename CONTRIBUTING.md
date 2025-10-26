@@ -1,150 +1,167 @@
-# Contributing to n8n Automation & AI Agents
+# Contribuir a n8n Automatización y Agentes de IA
 
-Thank you for your interest in contributing! This document provides guidelines for contributing to this project.
+¡Gracias por tu interés en contribuir! Este documento proporciona pautas para contribuir a este proyecto.
 
-## How to Contribute
+## Cómo Contribuir
 
-### Reporting Bugs
+### Reportar Errores
 
-If you find a bug, please create an issue with:
-- Clear description of the problem
-- Steps to reproduce
-- Expected behavior
-- Actual behavior
-- Screenshots if applicable
-- Environment details (OS, Docker version, etc.)
+Si encuentras un error, por favor crea un issue con:
 
-### Suggesting Features
+- Descripción clara del problema
+- Pasos para reproducir
+- Comportamiento esperado
+- Comportamiento actual
+- Capturas de pantalla si aplica
+- Detalles del entorno (SO, versión de Docker, etc.)
 
-Feature requests are welcome! Please include:
-- Clear description of the feature
-- Use case and benefits
-- Possible implementation approach
-- Any relevant examples
+### Sugerir Funciones
 
-### Contributing Code
+¡Las solicitudes de funciones son bienvenidas! Por favor incluye:
 
-1. **Fork the repository**
-   ```bash
-   git fork https://github.com/BarryGon911/n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes.git
-   ```
+- Descripción clara de la función
+- Caso de uso y beneficios
+- Posible enfoque de implementación
+- Ejemplos relevantes
 
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+### Contribuir Código
 
-3. **Make your changes**
-   - Follow existing code style
-   - Add documentation
-   - Test your changes
+1. **Haz fork del repositorio**
 
-4. **Commit your changes**
-   ```bash
-   git commit -m "Add feature: description"
-   ```
-
-5. **Push to your fork**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-6. **Create a Pull Request**
-   - Describe your changes
-   - Reference any related issues
-   - Include screenshots if UI changes
-
-### Contributing Workflows
-
-To contribute a new workflow:
-
-1. Create and test the workflow in n8n
-2. Export as JSON
-3. Add to `workflows/` directory
-4. Document the workflow in `workflows/README.md`
-5. Include:
-   - Description
-   - Required credentials
-   - Use cases
-   - Configuration steps
-6. Submit a pull request
-
-### Documentation
-
-Documentation improvements are always welcome:
-- Fix typos or unclear explanations
-- Add examples
-- Translate to other languages
-- Improve installation guides
-- Add troubleshooting tips
-
-## Development Guidelines
-
-### Code Style
-
-- Use descriptive names for workflows and nodes
-- Add comments for complex logic
-- Follow n8n best practices
-- Keep workflows modular and reusable
-
-### Workflow Standards
-
-- Test thoroughly before submitting
-- Include error handling
-- Document all credentials needed
-- Provide example data
-- Add execution notes
-
-### Commit Messages
-
-Use clear, descriptive commit messages:
-- `feat: add new workflow for X`
-- `fix: resolve issue with Y`
-- `docs: update installation guide`
-- `refactor: improve workflow Z`
-
-### Testing
-
-Before submitting:
-- Test all workflows
-- Verify credentials work
-- Check error handling
-- Test edge cases
-- Ensure backward compatibility
-
-## Project Structure
+```bash
+git fork https://github.com/BarryGon911/n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes.git
 
 ```
+
+2. **Crea una rama de funcionalidad**
+
+```bash
+git checkout -b feature/nombre-de-tu-funcion
+
+```
+
+3. **Realiza tus cambios**
+
+   - Sigue el estilo de código existente
+   - Agrega documentación
+   - Prueba tus cambios
+
+4. **Haz commit de tus cambios**
+
+```bash
+git commit -m "Agregar función: descripción"
+
+```
+
+5. **Push a tu fork**
+
+```bash
+git push origin feature/nombre-de-tu-funcion
+
+```
+
+6. **Crea un Pull Request**
+
+   - Describe tus cambios
+   - Referencia cualquier issue relacionado
+   - Incluye capturas de pantalla si hay cambios en la UI
+
+### Contribuir Workflows
+
+Para contribuir un nuevo workflow:
+
+1. Crea y prueba el workflow en n8n
+2. Exporta como JSON
+3. Agrégalo al directorio `workflows/`
+4. Documenta el workflow en `workflows/README.md`
+5. Incluye:
+   - Descripción
+   - Credenciales requeridas
+   - Casos de uso
+   - Pasos de configuración
+
+6. Envía un pull request
+
+### Documentación
+
+Mejoras en la documentación siempre son bienvenidas:
+
+- Corregir errores tipográficos o explicaciones poco claras
+- Agregar ejemplos
+- Traducir a otros idiomas
+- Mejorar guías de instalación
+- Agregar consejos de solución de problemas
+
+## Pautas de Desarrollo
+
+### Estilo de Código
+
+- Usa nombres descriptivos para workflows y nodos
+- Agrega comentarios para lógica compleja
+- Sigue las mejores prácticas de n8n
+- Mantén los workflows modulares y reutilizables
+
+### Estándares de Workflow
+
+- Prueba exhaustivamente antes de enviar
+- Incluye manejo de errores
+- Documenta todas las credenciales necesarias
+- Proporciona datos de ejemplo
+- Agrega notas de ejecución
+
+### Mensajes de Commit
+
+Usa mensajes de commit claros y descriptivos:
+
+- `feat: agregar nuevo workflow para X`
+- `fix: resolver problema con Y`
+- `docs: actualizar guía de instalación`
+- `refactor: mejorar workflow Z`
+
+### Pruebas
+
+Antes de enviar:
+
+- Prueba todos los workflows
+- Verifica que las credenciales funcionen
+- Verifica el manejo de errores
+- Prueba casos extremos
+- Asegura compatibilidad hacia atrás
+
+## Estructura del Proyecto
+
+```ini
 .
-├── docker-compose.yml       # Docker services
-├── .env.example            # Environment template
-├── database/               # Database scripts
-├── workflows/              # n8n workflows
-├── credentials/            # Credential templates
-├── scripts/                # Utility scripts
-└── docs/                   # Documentation
+├── docker-compose.yml       # Servicios Docker
+├── .env.example            # Plantilla de entorno
+├── database/               # Scripts de base de datos
+├── workflows/              # Workflows de n8n
+├── credentials/            # Plantillas de credenciales
+├── scripts/                # Scripts de utilidad
+└── docs/                   # Documentación
+
 ```
 
-## Getting Help
+## Obtener Ayuda
 
-- Check existing documentation
-- Search closed issues
-- Ask in discussions
-- Join n8n community
+- Consulta la documentación existente
+- Busca en issues cerrados
+- Pregunta en discusiones
+- Únete a la comunidad de n8n
 
-## Code of Conduct
+## Código de Conducta
 
-- Be respectful and inclusive
-- Welcome newcomers
-- Accept constructive criticism
-- Focus on what's best for the project
+- Sé respetuoso e inclusivo
+- Da la bienvenida a los nuevos
+- Acepta críticas constructivas
+- Enfócate en lo mejor para el proyecto
 
-## License
+## Licencia
 
-By contributing, you agree that your contributions will be licensed under the MIT License.
+Al contribuir, aceptas que tus contribuciones serán licenciadas bajo la Licencia MIT.
 
-## Recognition
+## Reconocimiento
 
-Contributors will be recognized in the project README.
+Los contribuidores serán reconocidos en el README del proyecto.
 
-Thank you for contributing! 🙏
+¡Gracias por contribuir! 🙏

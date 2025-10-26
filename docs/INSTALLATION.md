@@ -1,86 +1,119 @@
-# Installation Guide
+# Guía de Instalación
 
-This guide will help you set up the n8n Automation & AI Agents project on your system.
+Esta guía te ayudará a configurar el proyecto n8n Automatización y Agentes de IA en tu sistema.
 
-## Prerequisites
+## Prerequisitos
 
-Before you begin, ensure you have the following installed:
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
-- **Docker** (version 20.10 or higher)
-- **Docker Compose** (version 2.0 or higher)
-- **Git** (for cloning the repository)
+- **Docker** (versión 20.10 o superior)
+- **Docker Compose** (versión 2.0 o superior)
+- **Git** (para clonar el repositorio)
 
-## System Requirements
+## Requisitos del Sistema
 
-- **RAM**: Minimum 4GB (8GB recommended)
-- **Disk Space**: At least 10GB free space
-- **Operating System**: Linux, macOS, or Windows with WSL2
+- **RAM**: Mínimo 4GB (8GB recomendados)
+- **Espacio en Disco**: Al menos 10GB de espacio libre
+- **Sistema Operativo**: Linux, macOS, o Windows con WSL2
 
-## Installation Steps
+## Pasos de Instalación
 
-### 1. Clone the Repository
+### 1. Clonar el Repositorio
 
 ```bash
 git clone https://github.com/BarryGon911/n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes.git
 cd n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
+
 ```
 
-### 2. Configure Environment Variables
+### 2. Configurar Variables de Entorno
 
-Copy the example environment file and configure it:
+Copia el archivo de ejemplo de entorno y configúralo:
 
 ```bash
 cp .env.example .env
+
 ```
 
-Edit the `.env` file with your preferred text editor:
+Edita el archivo `.env` con tu editor de texto preferido:
 
 ```bash
 nano .env  # or vim, code, etc.
+
 ```
 
-**Required configurations:**
+**Configuraciones requeridas:**
 
-#### n8n Basic Setup
+#### Configuración Básica de n8n
+
 ```env
 N8N_BASIC_AUTH_USER=your_username
 N8N_BASIC_AUTH_PASSWORD=your_secure_password
+
 ```
 
-#### Database
+#### Base de Datos
+
 ```env
 DB_POSTGRESDB_PASSWORD=your_secure_database_password
+
 ```
 
-#### API Keys (configure the ones you plan to use)
+#### Claves API (configura las que planeas usar)
 
 **OpenAI:**
+
 ```env
 OPENAI_API_KEY=sk-your-openai-api-key
+
 ```
 
 **Gemini:**
+
 ```env
 GEMINI_API_KEY=your-gemini-api-key
+
 ```
 
 **ElevenLabs:**
+
 ```env
 ELEVENLABS_API_KEY=your-elevenlabs-api-key
 ELEVENLABS_VOICE_ID=your-preferred-voice-id
+
 ```
 
-**Telegram Bot:**
+**Bot de Telegram:**
+
 ```env
 TELEGRAM_BOT_TOKEN=your-telegram-bot-token
+
 ```
 
 **WhatsApp (Meta Business API):**
+
 ```env
 WHATSAPP_PHONE_NUMBER_ID=your-phone-number-id
 WHATSAPP_ACCESS_TOKEN=your-access-token
 WHATSAPP_VERIFY_TOKEN=your-custom-verify-token
+
 ```
+
+### 3. Iniciar los Servicios
+
+Inicia todos los servicios usando Docker Compose:
+
+```bash
+docker-compose up -d
+
+```
+
+Este comando:
+
+- Descargará todas las imágenes Docker necesarias
+- Creará y configurará la base de datos PostgreSQL
+- Iniciará la plataforma de automatización n8n
+- Iniciará el servicio de modelos AI Ollama
 
 ### 3. Start the Services
 
@@ -88,42 +121,48 @@ Launch all services using Docker Compose:
 
 ```bash
 docker-compose up -d
+
 ```
 
 This command will:
+
 - Download all required Docker images
 - Create and configure the PostgreSQL database
 - Start the n8n workflow automation platform
-- Start the Ollama AI model service
+- Iniciará el servicio de modelos AI Ollama
 
-### 4. Verify Installation
+### 4. Verificar Instalación
 
-Check that all services are running:
+Verifica que todos los servicios estén ejecutándose:
 
 ```bash
 docker-compose ps
-```
-
-You should see three services running:
-- `postgres` (PostgreSQL database)
-- `n8n` (n8n automation platform)
-- `ollama` (Ollama AI service)
-
-### 5. Access n8n
-
-Open your web browser and navigate to:
 
 ```
+
+Deberías ver tres servicios ejecutándose:
+
+- `postgres` (Base de datos PostgreSQL)
+- `n8n` (Plataforma de automatización n8n)
+- `ollama` (Servicio AI Ollama)
+
+### 5. Acceder a n8n
+
+Abre tu navegador web y navega a:
+
+```sh
 http://localhost:5678
+
 ```
 
-Login with the credentials you set in the `.env` file:
-- **Username**: The value you set for `N8N_BASIC_AUTH_USER`
-- **Password**: The value you set for `N8N_BASIC_AUTH_PASSWORD`
+Inicia sesión con las credenciales que configuraste en el archivo `.env`:
 
-### 6. Initialize Ollama Models
+- __Nombre de Usuario__: El valor que configuraste para `N8N_BASIC_AUTH_USER`
+- __Contraseña__: El valor que configuraste para `N8N_BASIC_AUTH_PASSWORD`
 
-To use Ollama for local AI inference, you need to pull the models:
+### 6. Inicializar Modelos Ollama
+
+Para usar Ollama para inferencia de IA local, necesitas descargar los modelos:
 
 ```bash
 # Pull the llama2 model
@@ -132,91 +171,92 @@ docker exec -it n8n-mcp-automatizaci-n---agentes-de-ia-inteligentes-ollama-1 oll
 # Optional: Pull other models
 docker exec -it n8n-mcp-automatizaci-n---agentes-de-ia-inteligentes-ollama-1 ollama pull mistral
 docker exec -it n8n-mcp-automatizaci-n---agentes-de-ia-inteligentes-ollama-1 ollama pull codellama
+
 ```
 
-### 7. Import Workflows
+### 7. Importar Workflows
 
-The workflows are located in the `workflows/` directory. To import them into n8n:
+Los workflows están ubicados en el directorio `workflows/`. Para importarlos en n8n:
 
-1. Log in to n8n at `http://localhost:5678`
-2. Click on **Workflows** in the left sidebar
-3. Click the **Import from File** button
-4. Select a workflow JSON file from the `workflows/` directory
-5. Repeat for each workflow you want to use
+1. Inicia sesión en n8n en `http://localhost:5678`
+2. Haz clic en **Workflows** en la barra lateral izquierda
+3. Haz clic en el botón **Import from File**
+4. Selecciona un archivo JSON de workflow del directorio `workflows/`
+5. Repite para cada workflow que quieras usar
 
-## Setting Up Integrations
+## Configuración de Integraciones
 
-### Telegram Bot Setup
+### Configuración de Bot de Telegram
 
-1. Create a bot with [@BotFather](https://t.me/botfather) on Telegram
-2. Copy the bot token
-3. Add the token to your `.env` file as `TELEGRAM_BOT_TOKEN`
-4. In n8n, create a new Telegram credential with your bot token
-5. Activate the "Telegram Bot with AI Agent" workflow
+1. Crea un bot con [@BotFather](https://t.me/botfather) en Telegram
+2. Copia el token del bot
+3. Agrega el token a tu archivo `.env` como `TELEGRAM_BOT_TOKEN`
+4. En n8n, crea una nueva credencial de Telegram con tu token de bot
+5. Activa el workflow "Telegram Bot with AI Agent"
 
-### WhatsApp Setup
+### Configuración de WhatsApp
 
-You have two options:
+Tienes dos opciones:
 
-#### Option A: WhatsApp Business API (Meta)
+#### Opción A: WhatsApp Business API (Meta)
 
-1. Set up a [Meta Business Account](https://business.facebook.com/)
-2. Create a WhatsApp Business App
-3. Get your Phone Number ID and Access Token
-4. Configure the webhook URL in Meta Dashboard to point to your n8n instance
-5. Add credentials to `.env` file
+1. Configura una [Cuenta de Negocio Meta](https://business.facebook.com/)
+2. Crea una App de WhatsApp Business
+3. Obtén tu Phone Number ID y Access Token
+4. Configura la URL del webhook en Meta Dashboard para que apunte a tu instancia n8n
+5. Agrega las credenciales al archivo `.env`
 
-#### Option B: Twilio WhatsApp
+#### Opción B: Twilio WhatsApp
 
-1. Create a [Twilio account](https://www.twilio.com/)
-2. Set up WhatsApp sandbox or get approval for production
-3. Configure Twilio credentials in `.env`
-4. Update the WhatsApp workflow to use Twilio endpoints
+1. Crea una [cuenta Twilio](https://www.twilio.com/)
+2. Configura el sandbox de WhatsApp u obtén aprobación para producción
+3. Configura las credenciales de Twilio en `.env`
+4. Actualiza el workflow de WhatsApp para usar endpoints de Twilio
 
-### Google Cloud Setup
+### Configuración de Google Cloud
 
-1. Create a project in [Google Cloud Console](https://console.cloud.google.com/)
-2. Enable required APIs (Cloud Storage, Cloud Functions, etc.)
-3. Create a service account and download the JSON key
-4. Place the JSON file in a secure location
-5. Update `GOOGLE_APPLICATION_CREDENTIALS` in `.env`
+1. Crea un proyecto en [Google Cloud Console](https://console.cloud.google.com/)
+2. Habilita las APIs requeridas (Cloud Storage, Cloud Functions, etc.)
+3. Crea una cuenta de servicio y descarga la clave JSON
+4. Coloca el archivo JSON en una ubicación segura
+5. Actualiza `GOOGLE_APPLICATION_CREDENTIALS` en `.env`
 
-### OpenAI Setup
+### Configuración de OpenAI
 
-1. Create an account at [OpenAI](https://platform.openai.com/)
-2. Generate an API key
-3. Add it to `.env` as `OPENAI_API_KEY`
-4. In n8n, create an OpenAI credential with your API key
+1. Crea una cuenta en [OpenAI](https://platform.openai.com/)
+2. Genera una clave API
+3. Agrégala a `.env` como `OPENAI_API_KEY`
+4. En n8n, crea una credencial de OpenAI con tu clave API
 
-### Gemini Setup
+### Configuración de Gemini
 
-1. Get access to [Google AI Studio](https://makersuite.google.com/)
-2. Generate an API key
-3. Add it to `.env` as `GEMINI_API_KEY`
+1. Obtén acceso a [Google AI Studio](https://makersuite.google.com/)
+2. Genera una clave API
+3. Agrégala a `.env` como `GEMINI_API_KEY`
 
-### ElevenLabs Setup
+### Configuración de ElevenLabs
 
-1. Create an account at [ElevenLabs](https://elevenlabs.io/)
-2. Get your API key from the profile settings
-3. Choose a voice and copy its Voice ID
-4. Add both to your `.env` file
+1. Crea una cuenta en [ElevenLabs](https://elevenlabs.io/)
+2. Obtén tu clave API desde la configuración de perfil
+3. Elige una voz y copia su Voice ID
+4. Agrega ambos a tu archivo `.env`
 
-## Database Setup
+## Configuración de Base de Datos
 
-The PostgreSQL database is automatically initialized with the schema defined in `database/init.sql`. This includes:
+La base de datos PostgreSQL se inicializa automáticamente con el esquema definido en `database/init.sql`. Esto incluye:
 
-- **documents**: For RAG (Retrieval-Augmented Generation) storage
-- **conversations**: Chat history storage
-- **users**: User profiles and preferences
-- **scraped_data**: Web scraping results
-- **agent_tasks**: Autonomous agent task queue
-- **workflows_log**: Workflow execution logs
+- **documents**: Para almacenamiento RAG (Retrieval-Augmented Generation)
+- **conversations**: Almacenamiento de historial de chat
+- **users**: Perfiles de usuario y preferencias
+- __scraped_data__: Resultados de web scraping
+- __agent_tasks__: Cola de tareas de agente autónomo
+- __workflows_log__: Logs de ejecución de workflows
 
-The database uses the **pgvector** extension for vector similarity search, which enables RAG functionality.
+La base de datos usa la extensión **pgvector** para búsqueda de similitud vectorial, lo que habilita la funcionalidad RAG.
 
-## Troubleshooting
+## Solución de Problemas
 
-### Services won't start
+### Los servicios no inician
 
 ```bash
 # Check logs
@@ -225,21 +265,22 @@ docker-compose logs
 # Restart services
 docker-compose down
 docker-compose up -d
+
 ```
 
-### Can't access n8n
+### No puedo acceder a n8n
 
-- Verify the service is running: `docker-compose ps`
-- Check firewall settings
-- Ensure port 5678 is not in use by another application
+- Verifica que el servicio esté ejecutándose: `docker-compose ps`
+- Revisa la configuración del firewall
+- Asegúrate de que el puerto 5678 no esté en uso por otra aplicación
 
-### Database connection errors
+### Errores de conexión a base de datos
 
-- Verify PostgreSQL is healthy: `docker-compose ps postgres`
-- Check database credentials in `.env`
-- View PostgreSQL logs: `docker-compose logs postgres`
+- Verifica que PostgreSQL esté saludable: `docker-compose ps postgres`
+- Revisa las credenciales de base de datos en `.env`
+- Visualiza los logs de PostgreSQL: `docker-compose logs postgres`
 
-### Ollama models not loading
+### Los modelos Ollama no cargan
 
 ```bash
 # Check Ollama service
@@ -247,19 +288,20 @@ docker-compose logs ollama
 
 # Verify model is pulled
 docker exec -it n8n-mcp-automatizaci-n---agentes-de-ia-inteligentes-ollama-1 ollama list
+
 ```
 
-## Next Steps
+## Próximos Pasos
 
-After installation, refer to:
+Después de la instalación, consulta:
 
-- **[Usage Guide](USAGE.md)** - Learn how to use the workflows
-- **[Configuration Guide](CONFIGURATION.md)** - Advanced configuration options
-- **[Workflows Documentation](workflows/README.md)** - Detailed workflow documentation
+- **[Guía de Uso](USAGE.md)** - Aprende cómo usar los workflows
+- **[Guía de Configuración](CONFIGURATION.md)** - Opciones de configuración avanzadas
+- **[Documentación de Workflows](workflows/README.md)** - Documentación detallada de workflows
 
-## Updating
+## Actualización
 
-To update to the latest version:
+Para actualizar a la última versión:
 
 ```bash
 # Pull latest changes
@@ -269,11 +311,12 @@ git pull
 docker-compose down
 docker-compose pull
 docker-compose up -d
+
 ```
 
-## Uninstallation
+## Desinstalación
 
-To completely remove the project:
+Para eliminar completamente el proyecto:
 
 ```bash
 # Stop and remove containers
@@ -285,4 +328,5 @@ docker-compose down -v
 # Remove the project directory
 cd ..
 rm -rf n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
+
 ```
