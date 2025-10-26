@@ -269,7 +269,7 @@ INSERT INTO documents (content, metadata) VALUES
 
 Exit with `\q`
 
-### 2. Test RAG
+### 2. Probar RAG
 
 Message your Telegram bot:
 

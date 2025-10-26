@@ -90,7 +90,7 @@ Si descubres una vulnerabilidad de seguridad, por favor sigue estos pasos:
 
 1. **Environment Variables**
 
-   - Never commit `.env` file
+   - Nunca hagas commit del archivo `.env`
    - Use strong passwords
    - Rotate API keys regularly
    - Restrict API key permissions
@@ -114,7 +114,7 @@ Si descubres una vulnerabilidad de seguridad, por favor sigue estos pasos:
    - Keep images updated
    - Use specific version tags
    - Scan images for vulnerabilities
-   - Run containers as non-root
+   - Ejecuta contenedores como no-root
 
 5. **API Security**
 

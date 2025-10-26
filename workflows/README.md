@@ -309,12 +309,12 @@ Modifica los nodos Schedule Trigger para cambiar la frecuencia de ejecución:
 
 ### 1. Testing
 
-Always test workflows before activating:
+Siempre prueba los workflows antes de activarlos:
 
-- Use the **Execute Workflow** button
-- Test with sample data
-- Verify all credentials
-- Check error handling
+- Usa el boton **Execute Workflow**
+- Prueba con datos de ejemplo
+- Verifica todas las credenciales
+- Revisa el manejo de errores
 
 ### 2. Monitoring
 

@@ -67,6 +67,12 @@ Bot: RAG (Generación Aumentada por Recuperación) combina la recuperación de d
 El bot de WhatsApp proporciona capacidades de IA similares a través de WhatsApp Business API.
 
 ### Requisitos de Configuración
+<VSCode.Cell id="#VSC-8735c6bc" language="markdown">
+## Bot de WhatsApp
+
+El bot de WhatsApp proporciona capacidades de IA similares a través de WhatsApp Business API.
+
+### Requisitos de Configuración
 
 - Cuenta de Meta Business o cuenta de Twilio
 - Número verificado de WhatsApp Business
@@ -77,19 +83,18 @@ El bot de WhatsApp proporciona capacidades de IA similares a través de WhatsApp
 1. Abre el workflow "WhatsApp Bot with AI Agent"
 2. Configura tus credenciales de WhatsApp en las variables de entorno
 3. Configura el webhook en Meta Business Dashboard:
-```
+
+```md
 
 ## WhatsApp Bot
 
 The WhatsApp bot provides similar AI capabilities through WhatsApp Business API.
 
-### Setup Requirements
 
 - Meta Business Account or Twilio account
 - Verified WhatsApp Business number
 - Webhook configured to point to your n8n instance
 
-### Activando el Bot
 
 1. Abre el workflow "WhatsApp Bot with AI Agent"
 2. Configura tus credenciales de WhatsApp en las variables de entorno
@@ -99,13 +104,11 @@ The WhatsApp bot provides similar AI capabilities through WhatsApp Business API.
 
 4. Activa el workflow
 
-### Características
 
 - **Integración con Gemini AI**: Usa Gemini de Google para procesamiento de lenguaje natural
 - **Historial de Mensajes**: Almacena todas las conversaciones de WhatsApp
 - **Soporte Multi-Usuario**: Maneja múltiples conversaciones simultáneamente
 
-### Probando el Bot
 
 Envía un mensaje a tu número de WhatsApp Business. El bot responderá con contenido generado por IA basado en tu mensaje.
 
@@ -113,7 +116,6 @@ Envía un mensaje a tu número de WhatsApp Business. El bot responderá con cont
 
 Este workflow automáticamente extrae páginas web y agrega el contenido a tu base de conocimiento RAG.
 
-### Cómo Funciona
 
 1. Se ejecuta según un horario (cada 6 horas por defecto)
 2. Recupera URLs de la tabla `scraped_data`
@@ -122,7 +124,6 @@ Este workflow automáticamente extrae páginas web y agrega el contenido a tu ba
 5. Crea embeddings usando OpenAI
 6. Almacena todo en la tabla documents para RAG
 
-### Agregando URLs para Extraer
 
 Conéctate a la base de datos PostgreSQL e inserta URLs:
 
@@ -239,9 +240,9 @@ Modifica los nodos del workflow para usar diferentes modelos:
 
 - `gpt-3.5-turbo` (más rápido, más económico)
 - `gpt-4` (más preciso, más lento)
-```
 
-### Usando Modelos Locales de Ollama
+```yaml
+
 
 Cambia a Ollama para privacidad y ahorro de costos:
 
