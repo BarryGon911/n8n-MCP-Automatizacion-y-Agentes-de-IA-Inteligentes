@@ -1,6 +1,73 @@
 # Plantilla de Credenciales
 
-Este archivo proporciona plantillas para configurar credenciales en n8n. Despues de importar workflows, configura estas credenciales en la interfaz de n8n.
+Esta guia explica como manejar credenciales de forma segura sin filtrar informacion sensible.
+
+## IMPORTANTE: Seguridad de Credenciales
+
+**NUNCA** subas credenciales reales a Git. Este repositorio ya tiene configurado `.gitignore` para proteger:
+
+- Archivos `.env*` (variables de entorno)
+- Archivos `.json`, `.key`, `.pem` en `/credentials/`
+- Certificados SSL
+- Archivos temporales y backups
+
+## Paso 1: Configurar Variables de Entorno
+
+Las credenciales SIEMPRE deben ir en el archivo `.env` (que NO se sube a Git):
+
+```bash
+# Copia el archivo de ejemplo
+cp .env.example .env
+
+# Edita el archivo .env con tus credenciales reales
+nano .env  # o usa tu editor preferido
+
+```
+
+### Variables Criticas de Seguridad
+
+Edita estas variables en tu archivo `.env`:
+
+```bash
+# Base de Datos PostgreSQL
+DB_POSTGRESDB_PASSWORD=TU_PASSWORD_SEGURA_AQUI
+
+# n8n Encryption Key (genera una clave unica)
+N8N_ENCRYPTION_KEY=genera_una_clave_segura_de_32_caracteres
+
+# APIs de IA
+OPENAI_API_KEY=sk-tu-clave-openai-aqui
+GEMINI_API_KEY=tu-clave-gemini-aqui
+ELEVENLABS_API_KEY=tu-clave-elevenlabs-aqui
+
+# Telegram Bot
+TELEGRAM_BOT_TOKEN=tu-bot-token-de-botfather
+
+# WhatsApp Business (opcional)
+WHATSAPP_VERIFY_TOKEN=tu-token-verificacion
+WHATSAPP_ACCESS_TOKEN=tu-access-token-whatsapp
+
+```
+
+### Generar Claves Seguras
+
+Para generar claves aleatorias seguras:
+
+```bash
+# En Linux/Mac - Generar clave de 32 caracteres
+openssl rand -hex 32
+
+# En PowerShell (Windows)
+-join ((48..57) + (65..90) + (97..122) | Get-Random -Count 32 | ForEach-Object {[char]$_})
+
+# Copia el resultado y pegalo en N8N_ENCRYPTION_KEY
+
+```
+
+## Paso 2: Configurar Credenciales en n8n
+
+Despues de iniciar n8n, configura las credenciales en la interfaz web.
+Las credenciales en n8n se almacenan ENCRIPTADAS en la base de datos usando N8N_ENCRYPTION_KEY.
 
 ## PostgreSQL
 
