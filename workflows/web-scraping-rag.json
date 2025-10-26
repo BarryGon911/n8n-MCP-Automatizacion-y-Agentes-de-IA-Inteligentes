@@ -1,0 +1,234 @@
+{
+  "name": "Web Scraping to RAG Database",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "table": "scraped_data",
+        "where": "is_processed = false",
+        "limit": 10
+      },
+      "id": "get-urls-to-scrape",
+      "name": "Get URLs to Scrape",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        450,
+        300
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "2",
+          "name": "PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "http-request-scrape",
+      "name": "HTTP Request - Scrape Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const cheerio = require('cheerio');\nconst html = $input.item.json.data;\nconst $ = cheerio.load(html);\n\n// Extract main content\nconst title = $('h1').first().text().trim();\nconst paragraphs = [];\n\n$('p').each((i, elem) => {\n  const text = $(elem).text().trim();\n  if (text.length > 50) {\n    paragraphs.push(text);\n  }\n});\n\nconst content = paragraphs.join('\\n\\n');\n\n// Extract metadata\nconst metadata = {\n  title: title,\n  url: $input.item.json.url,\n  scraped_at: new Date().toISOString(),\n  word_count: content.split(/\\s+/).length\n};\n\nreturn {\n  title,\n  content,\n  metadata,\n  url: $input.item.json.url\n};"
+      },
+      "id": "extract-content",
+      "name": "Extract Content with Cheerio",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-ada-002",
+        "input": "={{ $json.content }}",
+        "options": {}
+      },
+      "id": "create-embedding",
+      "name": "Create Embedding (OpenAI)",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        300
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "3",
+          "name": "OpenAI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "documents",
+        "columns": "content,metadata,embedding",
+        "values": "={{ $('Extract Content with Cheerio').item.json.content }},={{ JSON.stringify($('Extract Content with Cheerio').item.json.metadata) }},={{ '[' + $json.data[0].embedding.join(',') + ']' }}"
+      },
+      "id": "save-to-rag-db",
+      "name": "Save to RAG Database",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        1250,
+        300
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "2",
+          "name": "PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "scraped_data",
+        "updateKey": "url",
+        "columnsUi": {
+          "columnValues": [
+            {
+              "column": "is_processed",
+              "value": "true"
+            },
+            {
+              "column": "content",
+              "value": "={{ $('Extract Content with Cheerio').item.json.content }}"
+            },
+            {
+              "column": "title",
+              "value": "={{ $('Extract Content with Cheerio').item.json.title }}"
+            }
+          ]
+        }
+      },
+      "id": "mark-as-processed",
+      "name": "Mark as Processed",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        1450,
+        300
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "2",
+          "name": "PostgreSQL"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get URLs to Scrape",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get URLs to Scrape": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request - Scrape Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request - Scrape Page": {
+      "main": [
+        [
+          {
+            "node": "Extract Content with Cheerio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Content with Cheerio": {
+      "main": [
+        [
+          {
+            "node": "Create Embedding (OpenAI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Embedding (OpenAI)": {
+      "main": [
+        [
+          {
+            "node": "Save to RAG Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to RAG Database": {
+      "main": [
+        [
+          {
+            "node": "Mark as Processed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "web-scraping-rag",
+  "meta": {
+    "instanceId": "n8n-scraping-rag"
+  },
+  "tags": []
+}
