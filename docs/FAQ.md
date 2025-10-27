@@ -461,5 +461,3 @@ Este es un proyecto comunitario. Para soporte comercial:
 - Considera n8n Cloud (oficial)
 
 ---
-
-**No encontraste tu pregunta? Crea un issue en GitHub!**
