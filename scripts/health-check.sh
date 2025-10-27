@@ -62,11 +62,11 @@ echo ""
 echo "🌐 Salud de Endpoints:"
 
 # Verificacion de salud de n8n
-if curl -f -s -o /dev/null https://n8n.alekarpy.uk/healthz 2>/dev/null; then
-    echo -e "  ${GREEN}✅${NC} https://n8n.alekarpy.uk/healthz"
+if curl -f -s -o /dev/null https://n8n.tudominio.com/healthz 2>/dev/null; then
+    echo -e "  ${GREEN}✅${NC} https://n8n.tudominio.com/healthz"
     ENDPOINT_OK=1
 else
-    echo -e "  ${RED}❌${NC} https://n8n.alekarpy.uk/healthz (Inalcanzable)"
+    echo -e "  ${RED}❌${NC} https://n8n.tudominio.com/healthz (Inalcanzable)"
     ENDPOINT_OK=0
 fi
 
