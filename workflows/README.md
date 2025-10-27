@@ -199,7 +199,6 @@ cp workflows/*.json /path/to/n8n/.n8n/workflows/
 ```
 
 2. Reinicia n8n
-
 3. Los workflows apareceran en la lista de workflows
 
 ### Metodo 3: Via Volumen Docker
@@ -489,4 +488,3 @@ Para problemas especificos de workflows:
 - Revisa la guia [USAGE.md](../docs/USAGE.md)
 - Consulta [INSTALLATION.md](../docs/INSTALLATION.md)
 - Consulta la [documentacion de n8n](https://docs.n8n.io/)
-- Abre un issue en GitHub

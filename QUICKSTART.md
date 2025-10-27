@@ -357,7 +357,6 @@ docker-compose up -d
 
 - Consulta el [FAQ](docs/FAQ.md)
 - Revisa la [seccion de solucion de problemas](docs/INSTALLATION.md#troubleshooting)
-- Abre un issue en GitHub
 
 ---
 
