@@ -20,6 +20,6 @@ docker-compose exec -T postgres pg_dump -U n8n n8n > "$BACKUP_FILE"
 echo "Respaldo completado exitosamente!"
 echo "Archivo guardado en: $BACKUP_FILE"
 
-# Eliminar respaldos mayores a 30 dias
-find "$BACKUP_DIR" -name "*.sql" -mtime +30 -delete
-echo "Respaldos antiguos (>30 dias) eliminados"
+# Eliminar respaldos mayores a 60 dias
+find "$BACKUP_DIR" -name "*.sql" -mtime +60 -delete
+echo "Respaldos antiguos (>60 dias) eliminados"
