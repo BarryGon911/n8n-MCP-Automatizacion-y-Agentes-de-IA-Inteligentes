@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes/issues"
   },
-  "homepage": "https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes#readme"
+  "homepage": "https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes#readme",
+  "devDependencies": {
+    "markdownlint-cli": "^0.40.0"
+  }
 }
