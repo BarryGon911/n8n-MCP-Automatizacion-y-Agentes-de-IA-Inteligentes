@@ -243,78 +243,9 @@ El bot usara tu base de conocimiento para responder!
 
 Necesitaras estas para funcionalidad completa:
 
-| Servicio | Para que es | Consiguelo aqui |
-
-## 📚 Agregar Conocimiento a tu Bot (RAG)
-
-### 1. Add Sample Documents
-
-Connect to the database:
-
-```bash
-docker-compose exec postgres psql -U n8n -d n8n
-
-```
-
-Insert knowledge:
-
-```sql
-INSERT INTO documents (content, metadata) VALUES 
-  ('n8n is a workflow automation tool that connects different services.', 
-   '{"source": "documentation", "category": "general"}'),
-  ('To create a webhook in n8n, use the Webhook node and activate the workflow.', 
-   '{"source": "documentation", "category": "tutorial"}');
-
-```
-
-Exit with `\q`
-
-### 2. Probar RAG
-
-Message your Telegram bot:
-
-```sh
-What is n8n?
-
-```
-
-The bot will use your knowledge base to answer!
-
----
-
-## 🎯 Next Steps
-
-### Explorar Mas Funcionalidades
-
-1. **WhatsApp Bot**: Set up business messaging
-
-   - See [docs/INSTALLATION.md](docs/INSTALLATION.md#whatsapp-setup)
-
-2. **Web Scraping**: Automatically gather content
-
-   - Import `workflows/web-scraping-rag.json`
-   - Add URLs to scrape
-
-3. **Text-to-Speech**: Generate audio
-
-   - Get ElevenLabs API key
-   - Import `workflows/elevenlabs-tts.json`
-
-4. **Autonomous Agents**: Background task processing
-
-   - Import `workflows/ai-agent-executor.json`
-
-### Aprender Mas
-
-- **[Full Installation Guide](docs/INSTALLATION.md)** - Detailed setup
-- **[Usage Guide](docs/USAGE.md)** - How to use all features
-- **[FAQ](docs/FAQ.md)** - Common questions
-- **[Workflows](workflows/README.md)** - Workflow documentation
-
 ### Get API Keys
 
 You'll need these for full functionality:
-
 
 | Servicio | Para que es | Consiguelo aqui |
 |---------|---------------|-------------|
