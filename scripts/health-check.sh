@@ -2,7 +2,7 @@
 
 # ============================================================
 # VERIFICACION DE SALUD Y MONITOREO DE PRODUCCION
-# Servidor: https://n8n.alekarpy.uk/
+# Servidor: https://n8n.tudominio.com/
 # ============================================================
 
 set -e

@@ -2,14 +2,14 @@
 
 # ============================================================
 # SCRIPT DE DESPLIEGUE EN PRODUCCION
-# Servidor: https://n8n.alekarpy.uk/
+# Servidor: https://n8n.tudominio.com/
 # ============================================================
 
 set -e
 
 echo "============================================================"
 echo "  🚀 Despliegue de n8n en Produccion"
-echo "  Servidor: https://n8n.alekarpy.uk/"
+echo "  Servidor: https://n8n.tudominio.com/"
 echo "============================================================"
 echo ""
 
@@ -184,7 +184,7 @@ echo "📊 Estado de Servicios:"
 docker-compose -f docker-compose.production.yml ps
 echo ""
 echo "🌐 Informacion de Acceso:"
-echo "  URL:      https://n8n.alekarpy.uk/"
+echo "  URL:      https://n8n.tudominio.com/"
 echo "  Usuario: $(grep N8N_BASIC_AUTH_USER .env | cut -d '=' -f2)"
 echo "  Contrasena: [Revisar archivo .env]"
 echo ""
@@ -201,7 +201,7 @@ echo "2. Reiniciar servicios despues de actualizar .env:"
 echo "   docker-compose -f docker-compose.production.yml restart n8n"
 echo ""
 echo "3. Importar workflows:"
-echo "   - Acceder a n8n en https://n8n.alekarpy.uk/"
+echo "   - Acceder a n8n en https://n8n.tudominio.com/"
 echo "   - Ir a Workflows > Import"
 echo "   - Importar desde ./workflows/*.json"
 echo ""
