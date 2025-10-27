@@ -1,0 +1,24 @@
+{
+  "name": "n8n-mcp-automatizacion-y-agentes-de-ia-inteligentes",
+  "version": "1.0.0",
+  "description": "Una plataforma integral de automatizacion construida con n8n, que incluye agentes de IA inteligentes, bots de mensajeria, RAG (Generacion Aumentada por Recuperacion) y capacidades de web scraping.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes/issues"
+  },
+  "homepage": "https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes#readme"
+}
