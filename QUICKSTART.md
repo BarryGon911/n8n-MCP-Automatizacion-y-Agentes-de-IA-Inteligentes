@@ -315,7 +315,7 @@ The bot will use your knowledge base to answer!
 
 You'll need these for full functionality:
 
-<VSCode.Cell id="#VSC-1d7213f6" language="markdown">
+
 | Servicio | Para que es | Consiguelo aqui |
 |---------|---------------|-------------|
 | OpenAI | Respuestas de IA | [platform.openai.com](https://platform.openai.com/) |
