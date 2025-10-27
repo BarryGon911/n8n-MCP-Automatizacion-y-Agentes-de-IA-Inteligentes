@@ -10,23 +10,23 @@ Bienvenido a la documentacion completa de la plataforma n8n con Agentes de IA.
 
 | Documento | Descripcion | Audiencia | Tiempo |
 |-----------|-------------|-----------|--------|
-| **[QUICKSTART.md](../QUICKSTART.md)** | Inicio rapido (5 minutos) | Todos | 5-30 min |
-| **[DEPLOYMENT_COMPARISON.md](DEPLOYMENT_COMPARISON.md)** | Local vs Cloud: cual elegir? | Todos | 10 min lectura |
+| __[QUICKSTART.md](../QUICKSTART.md)__ | Inicio rapido (5 minutos) | Todos | 5-30 min |
+| __[DEPLOYMENT_COMPARISON.md](DEPLOYMENT_COMPARISON.md)__ | Local vs Cloud: cual elegir? | Todos | 10 min lectura |
 
 ### Deployment Local
 
 | Documento | Descripcion | Audiencia | Tiempo |
 |-----------|-------------|-----------|--------|
-| **[DEPLOYMENT_LOCAL.md](DEPLOYMENT_LOCAL.md)** | Guia completa de instalacion local | Desarrolladores, Aprendices | 30 min |
-| **[INSTALLATION.md](INSTALLATION.md)** | Instrucciones detalladas de instalacion | Tecnicos | 45 min |
+| __[DEPLOYMENT_LOCAL.md](DEPLOYMENT_LOCAL.md)__ | Guia completa de instalacion local | Desarrolladores, Aprendices | 30 min |
+| __[INSTALLATION.md](INSTALLATION.md)__ | Instrucciones detalladas de instalacion | Tecnicos | 45 min |
 
 ### Deployment en Cloud
 
 | Documento | Descripcion | Audiencia | Tiempo |
 |-----------|-------------|-----------|--------|
-| **[DEPLOYMENT_CLOUD.md](DEPLOYMENT_CLOUD.md)** | Guia completa para servidor en la nube | DevOps, SysAdmins | 1-2 horas |
-| **[PRODUCTION.md](PRODUCTION.md)** | Configuracion avanzada de produccion | DevOps | 1 hora |
-| **[DEPLOYMENT.md](../DEPLOYMENT.md)** | Resumen de opciones de deployment | Todos | 5 min |
+| __[DEPLOYMENT_CLOUD.md](DEPLOYMENT_CLOUD.md)__ | Guia completa para servidor en la nube | DevOps, SysAdmins | 1-2 horas |
+| __[PRODUCTION.md](PRODUCTION.md)__ | Configuracion avanzada de produccion | DevOps | 1 hora |
+| __[DEPLOYMENT.md](../DEPLOYMENT.md)__ | Resumen de opciones de deployment | Todos | 5 min |
 
 ---
 
@@ -34,8 +34,8 @@ Bienvenido a la documentacion completa de la plataforma n8n con Agentes de IA.
 
 | Documento | Descripcion | Audiencia | Tiempo |
 |-----------|-------------|-----------|--------|
-| **[SECURITY_PRODUCTION.md](SECURITY_PRODUCTION.md)** | Hardening y seguridad del servidor | DevOps, SysAdmins | 1 hora |
-| **[SECURITY.md](../SECURITY.md)** | Politicas de seguridad del proyecto | Todos | 15 min |
+| __[SECURITY_PRODUCTION.md](SECURITY_PRODUCTION.md)__ | Hardening y seguridad del servidor | DevOps, SysAdmins | 1 hora |
+| __[SECURITY.md](../SECURITY.md)__ | Politicas de seguridad del proyecto | Todos | 15 min |
 
 ---
 
@@ -100,5 +100,3 @@ Bienvenido a la documentacion completa de la plataforma n8n con Agentes de IA.
 4. [LICENSE](../LICENSE) - Licencia del proyecto
 
 ---
-
-**No encuentras lo que buscas?** Consulta el [FAQ](FAQ.md) o abre un issue en GitHub.
