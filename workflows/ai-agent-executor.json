@@ -95,51 +95,8 @@
       "position": [
         850,
         300
-      ],
-      "parameters": {
-        "mode": "rules",
-        "rules": {
-          "rules": [
-            {
-              "conditions": {
-                "string": [
-                  {
-                    "value1": "={{ $json.task_type }}",
-                    "value2": "web_scraping"
-                  }
-                ]
-              },
-              "renameOutput": true,
-              "outputKey": "web_scraping"
-            },
-            {
-              "conditions": {
-                "string": [
-                  {
-                    "value1": "={{ $json.task_type }}",
-                    "value2": "ai_analysis"
-                  }
-                ]
-              },
-              "renameOutput": true,
-              "outputKey": "ai_analysis"
-            },
-            {
-              "conditions": {
-                "string": [
-                  {
-                    "value1": "={{ $json.task_type }}",
-                    "value2": "notification"
-                  }
-                ]
-              },
-              "renameOutput": true,
-              "outputKey": "notification"
-            }
-          ]
-        },
-        "fallbackOutput": "extra"
-      }
+        ]
+      
     },
     {
       "parameters": {
