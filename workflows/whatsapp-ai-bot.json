@@ -75,19 +75,6 @@
     },
     {
       "parameters": {
-        "model": "gemini-pro",
-        "prompt": "=You are a helpful AI assistant. User message: {{ $json.text }}\n\nProvide a helpful and concise response.",
-        "options": {}
-      },
-      "id": "gemini-response",
-      "name": "Generate Response (Gemini)",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 3,
-      "position": [
-        1050,
-        200
-      ],
-      "parameters": {
         "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent",
         "method": "POST",
         "authentication": "genericCredentialType",
@@ -111,7 +98,15 @@
           ]
         },
         "options": {}
-      }
+      },
+      "id": "gemini-response",
+      "name": "Generate Response (Gemini)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1050,
+        200
+      ]
     },
     {
       "parameters": {
