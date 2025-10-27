@@ -66,22 +66,24 @@ Elige el tipo de deployment que necesitas:
 
 | Tipo | Descripcion | Guia Completa | Tiempo Estimado |
 |------|-------------|---------------|-----------------|
-| **🏠 Local** | Desarrollo en tu computadora | [DEPLOYMENT_LOCAL.md](docs/DEPLOYMENT_LOCAL.md) | 30 minutos |
-| **☁️ Cloud** | Produccion en servidor remoto | [DEPLOYMENT_CLOUD.md](docs/DEPLOYMENT_CLOUD.md) | 1-2 horas |
+| __🏠 Local__ | Desarrollo en tu computadora | [DEPLOYMENT_LOCAL.md](docs/DEPLOYMENT_LOCAL.md) | 30 minutos |
+| __☁️ Cloud__ | Produccion en servidor remoto | [DEPLOYMENT_CLOUD.md](docs/DEPLOYMENT_CLOUD.md) | 1-2 horas |
 
 ### Requisitos Previos
 
 **Para Deployment Local:**
+
 - Docker Desktop (version 20.10+)
 - Docker Compose (version 2.0+)
 - Git
 - 8GB RAM minimo
 
 **Para Deployment en Cloud:**
+
 - Servidor VPS/Cloud (AWS, DigitalOcean, GCP, etc.)
 - Ubuntu 22.04 LTS
 - 4GB RAM minimo (8GB recomendado)
-- Dominio configurado (ejemplo: n8n.alekarpy.uk)
+- Dominio configurado (ejemplo: n8n.tudominio.com)
 - Certificado SSL (Let's Encrypt gratis)
 
 ### Inicio Rapido - Local (5 Minutos)
@@ -132,26 +134,29 @@ docker-compose up -d
 ### Guias Completas de Deployment
 
 **📖 Deployment Local (Desarrollo):**
+
 - [Guia Completa de Deployment Local](docs/DEPLOYMENT_LOCAL.md)
-  - Instalacion paso a paso
-  - Configuracion de APIs
-  - Importacion de workflows
-  - Solucion de problemas comunes
+   - Instalacion paso a paso
+   - Configuracion de APIs
+   - Importacion de workflows
+   - Solucion de problemas comunes
 
 **🌐 Deployment en Cloud (Produccion):**
+
 - [Guia Completa de Deployment en Cloud](docs/DEPLOYMENT_CLOUD.md)
-  - Preparacion de servidor (AWS, DigitalOcean, GCP)
-  - Configuracion de DNS y SSL/HTTPS
-  - Seguridad y firewall
-  - Backups automaticos
-  - Monitoreo y mantenimiento
+   - Preparacion de servidor (AWS, DigitalOcean, GCP)
+   - Configuracion de DNS y SSL/HTTPS
+   - Seguridad y firewall
+   - Backups automaticos
+   - Monitoreo y mantenimiento
 
 **🔒 Seguridad en Produccion:**
+
 - [Guia de Seguridad](docs/SECURITY_PRODUCTION.md)
-  - Hardening del servidor
-  - Configuracion de firewall (UFW)
-  - Fail2ban contra ataques
-  - Rotacion de credenciales
+   - Hardening del servidor
+   - Configuracion de firewall (UFW)
+   - Fail2ban contra ataques
+   - Rotacion de credenciales
 
 Para mas detalles, consulta [docs/INSTALLATION.md](docs/INSTALLATION.md).
 
@@ -159,14 +164,14 @@ Para mas detalles, consulta [docs/INSTALLATION.md](docs/INSTALLATION.md).
 
 ### Guias de Deployment
 
-- **[🏠 Deployment Local](docs/DEPLOYMENT_LOCAL.md)** - Instalacion en tu computadora (desarrollo)
-- **[☁️ Deployment en Cloud](docs/DEPLOYMENT_CLOUD.md)** - Instalacion en servidor remoto (produccion)
+- __[🏠 Deployment Local](docs/DEPLOYMENT_LOCAL.md)__ - Instalacion en tu computadora (desarrollo)
+- __[☁️ Deployment en Cloud](docs/DEPLOYMENT_CLOUD.md)__ - Instalacion en servidor remoto (produccion)
 
 ### Documentacion Tecnica
 
 - **[📋 Guia de Instalacion](docs/INSTALLATION.md)** - Instrucciones completas de configuracion
 - **[🎯 Guia de Uso](docs/USAGE.md)** - Como usar los workflows y funciones
-- **[🔒 Seguridad en Produccion](docs/SECURITY_PRODUCTION.md)** - Hardening y mejores practicas
+- __[🔒 Seguridad en Produccion](docs/SECURITY_PRODUCTION.md)__ - Hardening y mejores practicas
 - **[⚙️ Workflows](workflows/README.md)** - Explicaciones detalladas de workflows
 - **[🗄️ Base de Datos](database/README.md)** - Esquema y documentacion de BD
 - **[❓ FAQ](docs/FAQ.md)** - Preguntas frecuentes
