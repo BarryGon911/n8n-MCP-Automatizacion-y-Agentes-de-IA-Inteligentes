@@ -17,7 +17,7 @@ Antes de comenzar, asegurate de tener:
 
 ```bash
 git clone https://github.com/BarryGon911/n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes.git
-cd n8n-MCP-Automatizaci-n---Agentes-de-IA-Inteligentes
+cd "n8n-MCP-Automatizacion-y-Agentes-de-IA-Inteligentes"
 
 ```
 
