@@ -6,6 +6,8 @@
 /build/
 
 # Dependencies
+
+# Node modules and dependency files
 /node_modules/
 /package-lock.json
 /yarn.lock
@@ -19,6 +21,9 @@
 
 # TypeScript cache
 *.tsbuildinfo
+/.env.production
+/.env.local
+/.env.*.local
 
 # Logs
 npm-debug.log*
@@ -59,3 +64,48 @@ ollama-data/
 *.backup
 *.bak
 backups/
+=======
+*.log
+
+# Production volumes and data
+/volumes/
+/backups/*.sql
+!backups/.gitkeep
+
+# Credentials directory (except documentation)
+/credentials/*.json
+/credentials/*.key
+/credentials/*.pem
+!credentials/CREDENTIALS.md
+
+# Docker volumes
+n8n_data/
+postgres_data/
+ollama_data/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/*
+!.vscode/*.example
+.idea/
+*.swp
+*.swo
+
+# SSL Certificates
+*.crt
+*.key
+*.pem
+*.p12
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Production secrets
+secrets/
+.secrets

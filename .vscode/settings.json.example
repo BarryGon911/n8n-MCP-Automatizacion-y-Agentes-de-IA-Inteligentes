@@ -1,0 +1,13 @@
+{
+  "files.associations": {
+    "*.md": "markdown"
+  },
+  "yaml.validate": false,
+  "yaml.format.enable": true,
+  "[markdown]": {
+    "files.trimTrailingWhitespace": true
+  },
+  "notebook.cellToolbarLocation": {
+    "default": "right"
+  }
+}

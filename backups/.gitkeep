@@ -1,0 +1,33 @@
+# This directory stores automated backups
+
+## Backup Configuration
+
+- **Frequency**: Daily at 2 AM (production)
+- **Retention**: 30 days (configurable)
+- **Format**: PostgreSQL SQL dump
+
+## Manual Backup
+
+```bash
+./scripts/backup.sh
+```
+
+## Restore
+
+```bash
+# Stop n8n
+docker-compose -f docker-compose.production.yml stop n8n
+
+# Restore
+cat backups/n8n_backup_YYYYMMDD_HHMMSS.sql | \
+  docker exec -i n8n-postgres-prod psql -U n8n_prod n8n_production
+
+# Restart
+docker-compose -f docker-compose.production.yml start n8n
+```
+
+## Important
+
+- Backup files are **NOT** committed to Git (see .gitignore)
+- Store backups securely off-site
+- Test restore procedures regularly

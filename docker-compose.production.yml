@@ -1,0 +1,238 @@
+version: '3.8'
+
+# ============================================================
+# CONFIGURACION DE DOCKER COMPOSE PARA PRODUCCION
+# Servidor: https://n8n.tudominio.com/
+# ============================================================
+
+services:
+  # ============================================================
+  # Base de Datos PostgreSQL con pgvector (PRODUCCION)
+  # ============================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: n8n-postgres-prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_POSTGRESDB_USER:-n8n_prod}
+      POSTGRES_PASSWORD: ${DB_POSTGRESDB_PASSWORD}
+      POSTGRES_DB: ${DB_POSTGRESDB_DATABASE:-n8n_production}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --lc-collate=en_US.UTF-8 --lc-ctype=en_US.UTF-8"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./backups:/backups
+    networks:
+      - n8n-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_POSTGRESDB_USER:-n8n_prod}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # No exponer puerto 5432 publicamente en produccion
+    # ports:
+    #   - "5432:5432"
+
+  # ============================================================
+  # n8n Automatizacion de Workflows (PRODUCCION)
+  # ============================================================
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n-app-prod
+    restart: unless-stopped
+    environment:
+      # Base de Datos
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=${DB_POSTGRESDB_DATABASE:-n8n_production}
+      - DB_POSTGRESDB_USER=${DB_POSTGRESDB_USER:-n8n_prod}
+      - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD}
+      - DB_POSTGRESDB_SCHEMA=public
+      
+      # Configuracion de n8n
+      - N8N_HOST=${N8N_HOST:-n8n.tudominio.com}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-https}
+      - WEBHOOK_URL=${WEBHOOK_URL:-https://n8n.tudominio.com}
+      - N8N_EDITOR_BASE_URL=${N8N_EDITOR_BASE_URL:-https://n8n.tudominio.com}
+      
+      # Seguridad
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      - N8N_USER_MANAGEMENT_JWT_SECRET=${N8N_JWT_SECRET}
+      
+      # Rendimiento
+      - EXECUTIONS_PROCESS=main
+      - EXECUTIONS_TIMEOUT=${EXECUTIONS_TIMEOUT:-300}
+      - EXECUTIONS_TIMEOUT_MAX=${EXECUTIONS_TIMEOUT_MAX:-600}
+      - EXECUTIONS_DATA_SAVE_ON_ERROR=all
+      - EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
+      - EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS=true
+      
+      # Zona Horaria y Localidad
+      - GENERIC_TIMEZONE=${TIMEZONE:-America/Mexico_City}
+      - TZ=${TIMEZONE:-America/Mexico_City}
+      
+      # Entorno
+      - NODE_ENV=production
+      
+      # Logging
+      - N8N_LOG_LEVEL=${LOG_LEVEL:-info}
+      - N8N_LOG_OUTPUT=console,file
+      - N8N_LOG_FILE_LOCATION=/home/node/.n8n/logs/
+      
+      # Metricas
+      - N8N_METRICS=true
+      
+      # CORS
+      - N8N_CORS_ENABLED=true
+      - N8N_CORS_ORIGIN=${N8N_HOST:-https://n8n.tudominio.com}
+      
+      # Claves API (pasadas desde .env.production)
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - WHATSAPP_ACCESS_TOKEN=${WHATSAPP_ACCESS_TOKEN}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+    
+    ports:
+      - "5678:5678"
+    
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./workflows:/home/node/.n8n/workflows:ro
+      - ./credentials:/home/node/.n8n/credentials
+      - n8n_logs:/home/node/.n8n/logs
+    
+    depends_on:
+      postgres:
+        condition: service_healthy
+    
+    networks:
+      - n8n-network
+    
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:5678/healthz || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  # ============================================================
+  # Ollama (Modelos de IA Locales) - PRODUCCION
+  # ============================================================
+  ollama:
+    image: ollama/ollama:latest
+    container_name: n8n-ollama-prod
+    restart: unless-stopped
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_NUM_PARALLEL=${OLLAMA_NUM_PARALLEL:-4}
+      - OLLAMA_NUM_GPU=${OLLAMA_NUM_GPU:-1}
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - n8n-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+    # Opcional: exponer puerto para debugging
+    # ports:
+    #   - "11434:11434"
+
+  # ============================================================
+  # Servicio de Respaldo (Respaldos Automatizados de PostgreSQL)
+  # ============================================================
+  postgres-backup:
+    image: prodrigestivill/postgres-backup-local:15-alpine
+    container_name: n8n-backup-prod
+    restart: unless-stopped
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=${DB_POSTGRESDB_DATABASE:-n8n_production}
+      - POSTGRES_USER=${DB_POSTGRESDB_USER:-n8n_prod}
+      - POSTGRES_PASSWORD=${DB_POSTGRESDB_PASSWORD}
+      - SCHEDULE=@daily
+      - BACKUP_KEEP_DAYS=${BACKUP_RETENTION_DAYS:-30}
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
+    volumes:
+      - ./backups:/backups
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - n8n-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
+
+# ============================================================
+# Volumenes (Almacenamiento Persistente)
+# ============================================================
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/volumes/postgres
+  
+  n8n_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/volumes/n8n
+  
+  n8n_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/volumes/logs
+  
+  ollama_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/volumes/ollama
+
+# ============================================================
+# Redes
+# ============================================================
+networks:
+  n8n-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
