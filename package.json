@@ -1,4 +1,4 @@
-{
+
   "name": "n8n-mcp-automatizacion-y-agentes-de-ia-inteligentes",
   "version": "1.0.0",
   "description": "Una plataforma integral de automatizacion construida con n8n, que incluye agentes de IA inteligentes, bots de mensajeria, RAG (Generacion Aumentada por Recuperacion) y capacidades de web scraping.",

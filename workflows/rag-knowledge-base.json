@@ -1,0 +1,114 @@
+{
+  "name": "RAG Knowledge Base Query",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "rag-query",
+        "method": "POST"
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "rag-query-webhook"
+    },
+    {
+      "parameters": {
+        "url": "http://mcp-server:3000/mcp/tools/execute",
+        "method": "POST",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "search_knowledge_base"
+            },
+            {
+              "name": "parameters",
+              "value": "={{ { query: $json.query, limit: 5 } }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Search Knowledge Base",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://mcp-server:3000/agents/execute",
+        "method": "POST",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "agentType",
+              "value": "rag"
+            },
+            {
+              "name": "task",
+              "value": "={{ $node['Webhook'].json.query }}"
+            },
+            {
+              "name": "context",
+              "value": "={{ { retrievedDocuments: $json } }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Generate RAG Response",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}"
+      },
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Search Knowledge Base",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Knowledge Base": {
+      "main": [
+        [
+          {
+            "node": "Generate RAG Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate RAG Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "id": "2"
+}

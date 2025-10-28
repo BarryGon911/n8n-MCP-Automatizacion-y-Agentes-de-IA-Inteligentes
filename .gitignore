@@ -1,10 +1,26 @@
+# Build outputs
+/dist/
+/out-tsc/
+/tmp/
+/coverage/
+/build/
+
+# Dependencies
+
 # Node modules and dependency files
 /node_modules/
 /package-lock.json
 /yarn.lock
+/.pnp
+.pnp.js
 
 # Environment files
 /.env
+.env.local
+.env.*.local
+
+# TypeScript cache
+*.tsbuildinfo
 /.env.production
 /.env.local
 /.env.*.local
@@ -13,6 +29,42 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# WhatsApp session data
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Credentials and secrets
+credentials/*.json
+!credentials/README.md
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Docker volumes
+postgres-data/
+n8n-data/
+ollama-data/
+
+# Backup files
+*.backup
+*.bak
+backups/
+=======
 *.log
 
 # Production volumes and data

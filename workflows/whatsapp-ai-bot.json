@@ -1,6 +1,13 @@
-{
-  "name": "WhatsApp Bot with AI Agent",
+"name": "AI Agent WhatsApp Bot",
   "nodes": [
+    {
+      "parameters": {},
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+  "name": "WhatsApp Bot with AI Agent",
+   "nodes": [
     {
       "parameters": {
         "httpMethod": "POST",
@@ -19,9 +26,32 @@
       "webhookId": "whatsapp-webhook"
     },
     {
+      "functionCode": "// Process incoming WhatsApp message\nconst message = items[0].json.message;\nconst sender = items[0].json.sender;\n\nreturn [\n  {\n    json: {\n      sender,\n      message,\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
+      },
+      "name": "Process Message",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
       "parameters": {
-        "conditions": {
-          "string": [
+        "url": "http://mcp-server:3000/agents/execute",
+        "method": "POST",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "agentType",
+              "value": "conversational"
+            },
+            {
+              "name": "task",
+              "value": "={{ $json.message }}"
+            },
+            {
+              "name": "context",
+              "value": "={{ { sender: $json.sender } }}"
+          "conditions": {
+              "string": [
             {
               "value1": "={{ $json.body.object }}",
               "value2": "whatsapp_business_account"
@@ -94,11 +124,30 @@
             {
               "name": "contents",
               "value": "={{ [{\"parts\": [{\"text\": $('Extract Message Data').item.json.text}]}] }}"
+
             }
           ]
         },
         "options": {}
       },
+      "name": "Call AI Agent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://mcp-server:3000/mcp/tools/execute",
+        "method": "POST",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "name",
+              "value": "send_whatsapp_message"
+            },
+            {
+              "name": "parameters",
+              "value": "={{ { recipient: $node['Process Message'].json.sender, message: $json.output.content } }}"
       "id": "gemini-response",
       "name": "Generate Response (Gemini)",
       "type": "n8n-nodes-base.httpRequest",
@@ -150,6 +199,18 @@
         },
         "options": {}
       },
+     "name": "Send WhatsApp Response",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Process Message",
       "id": "send-whatsapp-message",
       "name": "Send WhatsApp Reply",
       "type": "n8n-nodes-base.httpRequest",
@@ -219,6 +280,11 @@
         ]
       ]
     },
+    "Process Message": {
+      "main": [
+        [
+          {
+            "node": "Call AI Agent",
     "Generate Response (Gemini)": {
       "main": [
         [
@@ -230,6 +296,11 @@
         ]
       ]
     },
+    "Call AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp Response",
     "Send WhatsApp Reply": {
       "main": [
         [
@@ -242,6 +313,10 @@
       ]
     }
   },
+  "active": true,
+  "settings": {},
+  "id": "1"
+}
   "active": false,
   "settings": {
     "executionOrder": "v1"
