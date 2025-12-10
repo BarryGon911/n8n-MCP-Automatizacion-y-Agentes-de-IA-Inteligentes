@@ -1,6 +1,6 @@
 # [Plataforma de Automatizacion n8n y Agentes de IA](https://www.udemy.com/course/n8n-mcp-agentes/)
 
-Una plataforma integral de automatizacion construida con n8n, que incluye agentes de IA inteligentes, bots de mensajeria, RAG (Generacion Aumentada por Recuperacion) y capacidades de web scraping.
+Whatsapp, Telegram, Bots, Ollama, Gemini, OpenAI, Google Cloud, ElevenLabs, RAG, Agentes, PostgreSQL, Ollama, Scraping
 
 ![n8n](https://img.shields.io/badge/n8n-Automatizacion%20de%20Workflows-orange)
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue)
