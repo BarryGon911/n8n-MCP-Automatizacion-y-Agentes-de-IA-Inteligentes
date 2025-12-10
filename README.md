@@ -1,4 +1,4 @@
-# Plataforma de Automatizacion n8n y Agentes de IA
+# [Plataforma de Automatizacion n8n y Agentes de IA](https://www.udemy.com/course/n8n-mcp-agentes/)
 
 Una plataforma integral de automatizacion construida con n8n, que incluye agentes de IA inteligentes, bots de mensajeria, RAG (Generacion Aumentada por Recuperacion) y capacidades de web scraping.
 
