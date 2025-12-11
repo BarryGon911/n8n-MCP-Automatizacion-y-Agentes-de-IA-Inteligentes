@@ -124,11 +124,55 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 
 ---
 
-## 📚 Referencias
+[## 📚 Referencias
 
-- Aun por definir
+Requisitos
 
----
+    No se necesita experiencia previa en automatización o IA, el curso comienza desde lo básico y avanza paso a paso.
+    Conocimientos básicos de informática y manejo de aplicaciones en la web son recomendables, pero no obligatorios.
+    Contar con un ordenador e internet estable para instalar n8n localmente o trabajar en su versión web.
+
+Descripción
+
+n8n + MCP: Automatización y Agentes de IA Inteligentes
+
+
+En este curso aprenderás a automatizar procesos, integrar servicios y construir agentes de inteligencia artificial usando n8n y el Model Context Protocol (MCP). A lo largo de las secciones verás desde los fundamentos hasta escenarios avanzados con aplicaciones reales.
+
+
+Comenzaremos con la instalación y primeros flujos en n8n, explorando nodos esenciales como Google Sheets, Gmail, HTTP Request y filtros. Luego, trabajaremos con formularios, validaciones, ciclos (loops) y bases de datos PostgreSQL, creando automatizaciones sólidas y escalables.
+
+
+Más adelante, descubrirás cómo extraer información de la web (scraping), integrarla con Google Docs y Sheets, y conectar modelos de IA como OpenAI, Gemini y Modelos locales mediante Ollama para crear chatbots, asistentes y flujos inteligentes.
+
+
+El curso también cubre la integración de MCP Servers y herramientas personalizadas (Custom Tools), permitiéndote construir agentes con conexión a servicios personalizados vía MCP. Aprenderás a crear sistemas RAG (Retrieval Augmented Generation) con PostgreSQL y Google Drive para realizar consultas a bases de conocimiento.
+
+
+Además, implementaremos agentes de voz, bots en Telegram y WhatsApp, y flujos que interactúan con servicios en tiempo real. Finalmente, verás estrategias de despliegue en la nube con Render y Railway, junto con consideraciones de seguridad y autenticación (Basic Auth, JWT, headers).
+
+
+Al terminar, tendrás las habilidades para:
+
+
+    Diseñar y desplegar flujos automatizados complejos en n8n.
+
+    Construir agentes de IA que interactúan con datos, usuarios y herramientas externas.
+
+    Integrar MCP como estándar para comunicación entre clientes, servidores y herramientas.
+
+    Llevar tus proyectos de automatización a producción con despliegues seguros y confiables.
+
+    Comprender y utilizar flujos de la comunidad.
+
+
+
+Este curso es tanto para desarrolladores técnicos como para usuarios que buscan potenciar sus flujos de trabajo, combinando lo mejor de la automatización y la inteligencia artificial.
+¿Para quién es este curso?
+
+    Desarrolladores y programadores que desean integrar automatización e inteligencia artificial en sus proyectos.
+    Profesionales de negocio o tecnología que buscan optimizar procesos repetitivos y ahorrar tiempo mediante flujos automatizados.
+    Entusiastas de la IA y la productividad interesados en aprender a crear chatbots, asistentes virtuales y agentes inteligentes sin depender de código complejo.---
 
 <div align="center">
 
