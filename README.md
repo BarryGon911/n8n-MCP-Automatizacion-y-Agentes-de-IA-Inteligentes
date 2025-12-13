@@ -18,6 +18,10 @@
 
 ---
 
+<img width="330" height="184" alt="image" src="https://github.com/user-attachments/assets/a1f11ff7-e125-490c-b20c-a41a0e838b11" />
+
+---
+
 ## ✨ Que aprenderas?
 
 - Disenar y automatizar **flujos de trabajo completos** en **n8n** integrando **Google Sheets, Gmail, APIs externas y bases de datos**.
