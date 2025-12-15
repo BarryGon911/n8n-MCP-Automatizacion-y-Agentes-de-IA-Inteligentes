@@ -77,24 +77,19 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 
 ## ⚡ Quickstart (modo local)
 
-1. **Requisitos**
-
+1. **Requisitos:**
 - Node.js LTS, Docker (opcional), cuenta(s) de las APIs necesarias.
 
-2. **n8n**
-
+2. **N8N:**
 - Auto-hospedaje (Docker) o npx: `npx n8n`
 
-3. **Variables de entorno**
-
+3. **Variables de entorno:**
 - Agrega tus claves: `OPENAI_API_KEY`, `TELEGRAM_BOT_TOKEN`, `ELEVENLABS_API_KEY`, etc.
 
-4. **Flujos base**
-
+4. **Flujos base:**
 - Importa plantillas de: **Telegram Bot**, **WhatsApp webhook**, **RAG index/query**, **Gmail/Sheets automations**.
 
-5. **Prueba**
-
+5. **Prueba:**
 - Ejecuta nodos por seccion, verifica logs y tokens de rate limit.
 
 > Tip: empieza por un **flujo minimo** (canal → IA → respuesta) y luego anade **RAG** y **MCP**.
@@ -127,7 +122,7 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 
 ---
 
-##📚 Referencias
+## 📚 Referencias
 
 ### Requisitos:
 - **No se necesita experiencia previa en automatización o IA, el curso comienza desde lo básico y avanza paso a paso.**
@@ -148,7 +143,7 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 - Llevar tus proyectos de automatización a producción con despliegues seguros y confiables.
 - Comprender y utilizar flujos de la comunidad.
 
-<div align="center">
+<div align="left">
 
 **© Erick S. Ruiz — 2025** · MIT
 
