@@ -33,9 +33,9 @@
 
 ---
 
-## 🧩 Casos de uso (reales y vendibles)
+## 🧩 Casos de Uso (Reales & Vendibles)
 
-| Caso | Descripcion | Stack recomendado |
+| Caso | Descripción | Stack Recomendado |
 |---|---|---|
 | Chatbot FAQ empresarial | Responde politicas, soporte y ventas | n8n + RAG (PostgreSQL/Drive) + OpenAI/Ollama |
 | Bot de WhatsApp | Atencion 24/7 y seguimiento de leads | n8n + WhatsApp API + RAG |
@@ -143,8 +143,9 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 - Llevar tus proyectos de automatización a producción con despliegues seguros y confiables.
 - Comprender y utilizar flujos de la comunidad.
 
+
 <div align="left">
 
-**© Erick S. Ruiz — 2025** · MIT
+**© Erick S. Ruiz — 2025**
 
 </div>
