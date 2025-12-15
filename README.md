@@ -1,6 +1,6 @@
 # [🚀 n8n + MCP - Automatizacion y Agentes de IA Inteligentes](https://www.udemy.com/course/n8n-mcp-agentes/)
 ## **WhatsApp · Telegram · Bots de Voz · Ollama · Gemini · OpenAI · Google Cloud · ElevenLabs · RAG · PostgreSQL · Web Scraping**
-## 20 secciones • 203 clases • 17 h 12 m de duración total
+## [20 secciones • 203 clases • 17 h 12 m de duración total](https://www.udemy.com/course/n8n-mcp-agentes/)
 ---
 
 <!-- Badges -->
