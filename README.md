@@ -127,7 +127,7 @@ Usuarios ──> Canales (WhatsApp/Telegram/Voz)
 
 ---
 
-[## 📚 Referencias
+##📚 Referencias
 
 ### Requisitos:
 - **No se necesita experiencia previa en automatización o IA, el curso comienza desde lo básico y avanza paso a paso.**
